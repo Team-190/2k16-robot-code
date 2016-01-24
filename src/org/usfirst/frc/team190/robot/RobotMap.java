@@ -17,8 +17,11 @@ public class RobotMap {
 	public static int collectorRollerVictor = 3;
 	
 	// INVERSIONS
-	public static boolean invertDriveLeft = true;
-	public static boolean invertDriveRight = true;
+	public static boolean invertLeftDrive = true;
+	public static boolean invertRightDrive = true;
+	
+	public static boolean invertLeftEncoder = true;
+	public static boolean invertRightEncoder = false;
 	
 	// ENCODERS
 	public static int leftEncoderA = 0;
