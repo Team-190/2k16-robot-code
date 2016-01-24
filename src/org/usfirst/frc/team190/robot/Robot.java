@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team190.robot;
 
+import org.usfirst.frc.team190.robot.commands.AutonomousGroup;
 import org.usfirst.frc.team190.robot.subsystems.Collector;
 import org.usfirst.frc.team190.robot.subsystems.Drivetrain;
 
@@ -35,9 +36,11 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
+        
+        autonomousCommand = new AutonomousGroup();
         //chooser.addDefault("Default Auto", new ExampleCommand());
         //chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+        //SmartDashboard.putData("Auto mode", chooser);
     }
 	
 	/**
@@ -63,7 +66,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        // autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {

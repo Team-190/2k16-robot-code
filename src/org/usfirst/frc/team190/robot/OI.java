@@ -67,4 +67,3 @@ public class OI {
 		return rightJoystick.getY();
 	}
 }
-

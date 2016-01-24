@@ -3,13 +3,14 @@ package org.usfirst.frc.team190.robot.commands;
 import org.usfirst.frc.team190.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class Drive extends Command {
+public class OperatorDrive extends Command {
 
-    public Drive() {
+    public OperatorDrive() {
         requires(Robot.drive);
     }
 
@@ -19,7 +20,13 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.tankDrive(Robot.oi.getLeftJoystickY(), Robot.oi.getRightJoystickY());
+    	double left = Robot.oi.getLeftJoystickY();
+    	double right = Robot.oi.getRightJoystickY();
+    	
+    	SmartDashboard.putNumber("Left Joystick Y", left);
+    	SmartDashboard.putNumber("Right Joystick Y", right);
+    	
+    	Robot.drive.tankDrive(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
