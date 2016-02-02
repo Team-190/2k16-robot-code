@@ -70,42 +70,7 @@ public class Drivetrain extends Subsystem {
     	return (RobotMap.invertRightEncoder) ? -rightEncoder.getDistance() : rightEncoder.getDistance();
     }
     
-    // Records min/max data from encoders to estimate tolerances.
-    // Waits 150 ticks before starting to record data.
-    public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
-    public double minRightEncoderRate = 999999, maxRightEncoderRate = -999999;
-    public int buffer = 150;
-    void outputSensorData() {    	
-    	double leftEncoderRate = leftEncoder.getRate();
-    	double rightEncoderRate = rightEncoder.getRate();
-    	
-    	double leftEncoderDistance = getLeftEncoderDistance();
-    	double rightEncoderDistance = getRightEncoderDistance();
-    	
-    	if (buffer-- <= 0) {
-    		buffer = 0;
-
-	    	minLeftEncoderRate = (leftEncoderRate < minLeftEncoderRate) ? leftEncoderRate : minLeftEncoderRate;
-	    	maxLeftEncoderRate = (leftEncoderRate > maxLeftEncoderRate) ? leftEncoderRate : maxLeftEncoderRate;
-	    	
-	    	minRightEncoderRate = (rightEncoderRate < minRightEncoderRate) ? rightEncoderRate : minRightEncoderRate;
-	    	maxRightEncoderRate = (rightEncoderRate > maxRightEncoderRate) ? rightEncoderRate : maxRightEncoderRate;
-    	}
-    	
-    	SmartDashboard.putNumber("Left Encoder Distance", leftEncoderDistance);
-    	SmartDashboard.putNumber("Right Encoder Distance", rightEncoderDistance);
-    	
-    	SmartDashboard.putNumber("Robot Drift", leftEncoderDistance - rightEncoderDistance);
-    	
-    	SmartDashboard.putNumber("Left Encoder Rate", leftEncoderRate);
-    	SmartDashboard.putNumber("Right Encoder Rate", rightEncoderRate);
-    	
-    	SmartDashboard.putNumber("Left Encoder Min Rate", minLeftEncoderRate);
-    	SmartDashboard.putNumber("Left Encoder Max Rate", maxLeftEncoderRate);
-    	
-    	SmartDashboard.putNumber("Right Encoder Min Rate", minRightEncoderRate);
-    	SmartDashboard.putNumber("Right Encoder Max Rate", maxRightEncoderRate);
-    }
+    
     
     public void idle() {
     	tankDrive(0, 0);
