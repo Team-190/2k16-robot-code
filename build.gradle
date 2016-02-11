@@ -24,7 +24,7 @@ sourceSets {
   }
 }
 
-gradlerio.robotClass = 'org.usfirst.frc190.BloopBot.Robot'
+gradlerio.robotClass = 'org.usfirst.frc190.frc2k16.Robot'
 gradlerio.team = 190
 
 def robotManifest = {
