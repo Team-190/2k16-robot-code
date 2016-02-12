@@ -65,11 +65,11 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive(double speed, double rotate) {
-    	Robot.driveTrain.arcadeDrive(speed, rotate);
+    	robotDrive.arcadeDrive(speed, rotate);
     }
     
     public void tankDrive(double left, double right) {
-    	Robot.driveTrain.tankDrive(left, right);
+    	robotDrive.tankDrive(left, right);
     }
     
     double getLeftEncoderDistance() {
