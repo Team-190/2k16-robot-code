@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CameraLightOn extends Command {
+public class CameraLightOff extends Command {
 
-    public CameraLightOn() {
+    public CameraLightOff() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,9 +21,9 @@ public class CameraLightOn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	RobotMap.lightRelay.set(Relay.Value.kReverse);
+    	RobotMap.lightRelay.set(Relay.Value.kForward);
     }
-    
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return true;
