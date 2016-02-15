@@ -30,6 +30,8 @@ public class OI {
     JoystickButton vision;
     JoystickButton shifter;
     JoystickButton load;
+    JoystickButton unload;
+    JoystickButton shoot;
 
     public OI() { 
         joystick1 = new Joystick(0);
@@ -49,6 +51,15 @@ public class OI {
         vision.whenPressed(new VisionAlignWithGoal());
         
 /******* Joystick 2 *******/
+        
+        shoot = new JoystickButton(joystick2, 1);
+        shoot.toggleWhenPressed(new Shoot());
+        
+        load = new JoystickButton(joystick2, 2);
+        load.toggleWhenPressed(new CollectorLoad());
+        
+        unload = new JoystickButton(joystick2, 3);
+        unload.toggleWhenPressed(new CollectorUnload());
 
 /******* SmartDashboard Buttons *******/
         
