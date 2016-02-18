@@ -29,25 +29,24 @@ public class DriveStraightForDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.driveTrainGyro.reset();
-    	RobotMap.driveTrainleftEncoder.reset();
-    	RobotMap.driveTrainrightEncoder.reset();
+    	Robot.driveTrain.resetGyro();
+    	Robot.driveTrain.resetEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double angle = RobotMap.driveTrainGyro.getAngle();
-    	System.out.println("Encoders: " + (RobotMap.driveTrainleftEncoder.getDistance() + RobotMap.driveTrainrightEncoder.getDistance())/2);
+    	double angle = Robot.driveTrain.getGyroAngle();
+    	System.out.println("Encoders: " + (Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2);
     	
-    	double error = (((RobotMap.driveTrainleftEncoder.get() + RobotMap.driveTrainrightEncoder.get())/2) - m_distance) * kP;
+    	double error = (((Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2) - m_distance) * kP;
     	System.out.println("Error: " + error);
     	Robot.driveTrain.arcadeDrive(error, -angle*Kp);
    }
     	
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return ((RobotMap.driveTrainleftEncoder.get() + RobotMap.driveTrainrightEncoder.get())/2)>= m_distance;
+    	return ((Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2)>= m_distance;
     }
 
     // Called once after isFinished returns true

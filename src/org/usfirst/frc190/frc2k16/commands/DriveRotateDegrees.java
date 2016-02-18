@@ -23,13 +23,13 @@ public class DriveRotateDegrees extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.driveTrainGyro.reset();
+    	Robot.driveTrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double angle = RobotMap.driveTrainGyro.getAngle();
+    	double angle = Robot.driveTrain.getGyroAngle();
     	double error = (m_heading - angle) * Kp;
     	
     	double rotationalSpeed = error;
@@ -42,7 +42,7 @@ public class DriveRotateDegrees extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(m_heading - RobotMap.driveTrainGyro.getAngle()) <= threshold;
+        return Math.abs(m_heading - Robot.driveTrain.getGyroAngle()) <= threshold;
     }
 
     // Called once after isFinished returns true

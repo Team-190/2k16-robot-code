@@ -3,6 +3,7 @@ package org.usfirst.frc190.frc2k16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc190.frc2k16.Robot;
+import org.usfirst.frc190.frc2k16.RobotMap;
 
 /**
  *
@@ -11,9 +12,9 @@ public class CollectorPositionDown extends Command {
 
     private double m_setpoint;
     
-    public CollectorPositionDown(double setpoint) {
+    public CollectorPositionDown() {
     	
-        m_setpoint = setpoint;
+        m_setpoint = RobotMap.COLLECTOR_SETPOINT_DOWN;
         
         requires(Robot.collector);
         
@@ -22,8 +23,8 @@ public class CollectorPositionDown extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-       // Robot.collector.enable();
-       // Robot.collector.setSetpoint(m_setpoint);
+       Robot.collector.enable();
+       Robot.collector.setSetpoint(m_setpoint);
 
     }
 
@@ -34,7 +35,7 @@ public class CollectorPositionDown extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	
-        return false; //Robot.collector.onTarget();
+        return Robot.collector.onTarget();
 
     }
 

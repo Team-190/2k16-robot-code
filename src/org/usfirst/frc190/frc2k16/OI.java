@@ -36,7 +36,7 @@ public class OI {
         lightButton.toggleWhenPressed(new CameraLight());
         
         shifter = new JoystickButton(joystick1, 2);
-        shifter.toggleWhenPressed(new Shifter());
+        //shifter.toggleWhenPressed(new Shifter());
         
         vision = new JoystickButton(joystick1, 3);
         vision.whenPressed(new VisionAlignWithGoal());

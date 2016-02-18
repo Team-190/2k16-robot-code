@@ -3,6 +3,7 @@ package org.usfirst.frc190.frc2k16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc190.frc2k16.Robot;
+import org.usfirst.frc190.frc2k16.RobotMap;
 
 /**
  *
@@ -11,9 +12,9 @@ public class ManipulatorPositionDown extends Command {
 
     private double m_setpoint;
  
-    public ManipulatorPositionDown(double setpoint) {
+    public ManipulatorPositionDown() {
 
-        m_setpoint = setpoint;
+        m_setpoint = RobotMap.MANIPULATOR_SETPOINT_DOWN;
 
         requires(Robot.manipulator);
 

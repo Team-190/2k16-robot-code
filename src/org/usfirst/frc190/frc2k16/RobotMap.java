@@ -24,125 +24,76 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
-
-    public static Encoder driveTrainleftEncoder;
-    public static Encoder driveTrainrightEncoder;
-    
-    public static SpeedController driveTrainleftMotor1;
-    public static SpeedController driveTrainleftMotor2;
-    public static SpeedController driveTrainrightMotor1;
-    public static SpeedController driveTrainrightMotor2;
-    public static RobotDrive driveTrainrobotDrive;
-    public static SpeedController blooperblooperMotor;
-    public static SpeedController manipulatormanipulatorActuationMotor;
-    public static SpeedController collectorcollectorActuationMotor;
-    public static SpeedController collectorcollectorMotor;
-    
-    public static DoubleSolenoid shooteractuationSolenoid;
-    public static DoubleSolenoid shootertriggerSolenoid;
-    public static Solenoid shootershooterSolenoid;
-    public static DoubleSolenoid driveTrainshiftingSolenoid;
-    
-    public static AnalogPotentiometer collectorcollectorPot;
-    public static AnalogPotentiometer manipulatormanipulatorPot;
-    public static AnalogPotentiometer blooperblooperPot;
-    
-    public static DigitalInput pistonReedSensor;
-    
-    public static AnalogGyro driveTrainGyro;
-    
+public class RobotMap {    
     public static Relay lightRelay;
     
-    // Inversions
-    public static boolean invertLeftMotor1 = true;
-    public static boolean invertLeftMotor2 = false;
-    public static boolean invertRightMotor1 = true;
-    public static boolean invertRightMotor2 = false;
+    /* Drive Train */
+    // PWM
+    public static final int DRIVE_MOTOR_LEFT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
+    		DRIVE_MOTOR_RIGHT1 = 1, DRIVE_MOTOR_RIGHT2 = 3;
     
-	public static boolean invertLeftEncoder = false;
-	public static boolean invertRightEncoder = true;
+    // Encoders
+    public static final int DRIVE_ENCODER_LEFT_A = 0, DRIVE_ENCODER_LEFT_B = 1,
+    		DRIVE_ENCODER_RIGHT_A = 2, DRIVE_ENCODER_RIGHT_B = 3;
+    
+    // Solenoids
+    public static final int DRIVE_SOLENOID_SHIFTING_F = 5, DRIVE_SOLENOID_SHIFTING_B = 6;
+    
+    // Inversions
+    public static final boolean DRIVE_INVERT_LEFTMOTOR1 = true, DRIVE_INVERT_LEFTMOTOR2 = false,
+    		DRIVE_INVERT_RIGHTMOTOR1 = true, DRIVE_INVERT_RIGHTMOTOR2 = false;
+    
+	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
+	
+	/* BLOOPERS */
+	// PWM
+	public static final int BLOOPERS_MOTOR = 4;
+	
+	// Sensors
+	public static final int BLOOPERS_POTENTIOMETER = 1;
+	
+	// Setpoints
+	public static final int BLOOPERS_SETPOINT_UP = 0,
+			BLOOPERS_SETPOINT_FORWARD = 0, BLOOPERS_SETPOINT_REVERSE = 0;
+	
+	/* Manipulator */
+	// PWM
+	public static final int MANIPULATOR_MOTOR = 7;
+	
+	// Sensors
+	public static final int MANIPULATOR_POT = 3;
+	
+	// Setpoints
+	public static final double MANIPULATOR_SETPOINT_UP = 0, MANIPULATOR_SETPOINT_DOWN = 0;
+	
+	/* Collector */
+	// PWM
+	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 9;
+	
+	// Sensors
+	public static final int COLLECTOR_POT = 2;
+	public static final int COLLECTOR_BOULDER_SWITCH = 0;
+	
+	// Setpoints
+	public static final double COLLECTOR_SETPOINT_UP = 0, COLLECTOR_SETPOINT_DOWN = 0;
+	
+	/* Shooter */
+	// Solenoids
+	public static final int SHOOTER_SOLENOID_AIRSPRING = 2,
+			SHOOTER_SOLENOID_TRIGGER_F = 3, SHOOTER_SOLENOID_TRIGGER_B = 4,
+			SHOOTER_SOLENOID_ACTUATION_F = 0, SHOOTER_SOLENOID_ACTUATION_B = 1;
 	
 	public static String visionNetworkTableName = "GRIP/myContoursReport";
 	
 	public static final double ticksToInches = 10000/117.5;
 	
     public static void init() {
-        driveTrainleftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-        LiveWindow.addSensor("Drive Train", "leftEncoder", driveTrainleftEncoder);
-       // driveTrainleftEncoder.setPIDSourceType(PIDSourceType.kRate);
-       // driveTrainleftEncoder.setDistancePerPulse(ticksToInches);
-       // driveTrainleftEncoder.setReverseDirection(invertLeftEncoder);
-        
-        driveTrainrightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
-        LiveWindow.addSensor("Drive Train", "rightEncoder", driveTrainrightEncoder);
-       // driveTrainrightEncoder.setDistancePerPulse(1.0);
-       // driveTrainrightEncoder.setPIDSourceType(PIDSourceType.kRate);
-       // driveTrainleftEncoder.setDistancePerPulse(ticksToInches);
-
-        driveTrainleftMotor1 = new Talon(0);
-        LiveWindow.addActuator("Drive Train", "leftMotor1", (Talon) driveTrainleftMotor1);
-        
-        driveTrainleftMotor2 = new Talon(2);
-        LiveWindow.addActuator("Drive Train", "leftMotor2", (Talon) driveTrainleftMotor2);
-        
-        driveTrainrightMotor1 = new Talon(1);
-        LiveWindow.addActuator("Drive Train", "rightMotor1", (Talon) driveTrainrightMotor1);
-        
-        driveTrainrightMotor2 = new Talon(3);
-        LiveWindow.addActuator("Drive Train", "rightMotor2", (Talon) driveTrainrightMotor2);
-        
-        driveTrainrobotDrive = new RobotDrive(driveTrainleftMotor2, driveTrainleftMotor1,
-        					   driveTrainrightMotor2, driveTrainrightMotor1);
-        driveTrainrobotDrive.setInvertedMotor(MotorType.kRearLeft, invertLeftMotor1);
-        driveTrainrobotDrive.setInvertedMotor(MotorType.kFrontLeft, invertLeftMotor2);
-        driveTrainrobotDrive.setInvertedMotor(MotorType.kRearRight, invertRightMotor1);
-        driveTrainrobotDrive.setInvertedMotor(MotorType.kFrontRight, invertRightMotor2);
-        driveTrainrobotDrive.setSafetyEnabled(true);
-        driveTrainrobotDrive.setExpiration(0.1);
-        driveTrainrobotDrive.setSensitivity(0.5);
-        driveTrainrobotDrive.setMaxOutput(1.0);
-
-        driveTrainshiftingSolenoid = new DoubleSolenoid(0, 5, 6);
-        LiveWindow.addActuator("Drive Train", "shiftingSolenoid", driveTrainshiftingSolenoid);
-        
-        blooperblooperPot = new AnalogPotentiometer(1, 1.0, 0.0);
-        LiveWindow.addSensor("Blooper", "blooperPot", blooperblooperPot);
-        
-        blooperblooperMotor = new Victor(4);
-        LiveWindow.addActuator("Blooper", "blooperMotor", (Victor) blooperblooperMotor);
-        
-        collectorcollectorActuationMotor = new VictorSP(6);
-        LiveWindow.addActuator("Collector", "collectorActuationMotor", (VictorSP) collectorcollectorActuationMotor);
-        
-        collectorcollectorPot = new AnalogPotentiometer(2, 1.0, 0.0);
-        LiveWindow.addSensor("Collector", "collectorPot", collectorcollectorPot);
-        
-        collectorcollectorMotor = new VictorSP(9);
-        LiveWindow.addActuator("Collector", "collectorMotor", (VictorSP) collectorcollectorMotor);
-        
-        manipulatormanipulatorPot = new AnalogPotentiometer(3, 1.0, 0.0);
-        LiveWindow.addSensor("Manipulator", "manipulatorPot", manipulatormanipulatorPot);
-        
-        manipulatormanipulatorActuationMotor = new VictorSP(7);
-        LiveWindow.addActuator("Manipulator", "manipulatorActuationMotor", (VictorSP) manipulatormanipulatorActuationMotor);
-        
-        shooteractuationSolenoid = new DoubleSolenoid(0, 0, 1);
-        LiveWindow.addActuator("Shooter", "actuationSolenoid", shooteractuationSolenoid);
-        
-        shootertriggerSolenoid = new DoubleSolenoid(0, 3, 4);
-        LiveWindow.addActuator("Shooter", "triggerSolenoid", shootertriggerSolenoid);
-        
-        shootershooterSolenoid = new Solenoid(0, 2);
-        LiveWindow.addActuator("Shooter", "shooterSolenoid", shootershooterSolenoid);
-
-        driveTrainGyro = new AnalogGyro(0);
-        LiveWindow.addSensor("Drive Train", "Gyro", driveTrainGyro);
+        /*
         
         lightRelay = new Relay(1);
         LiveWindow.addActuator("Drive Train", "Light", lightRelay);
         
         pistonReedSensor = new DigitalInput(5);
-        LiveWindow.addSensor("Shooter", "reedSensor", pistonReedSensor);
+        LiveWindow.addSensor("Shooter", "reedSensor", pistonReedSensor);*/
     }
 }

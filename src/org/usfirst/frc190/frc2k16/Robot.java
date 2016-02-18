@@ -22,11 +22,13 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
 
     public static OI oi;
+    
     public static DriveTrain driveTrain;
-    public static Blooper blooper;
+    public static Bloopers blooper;
     public static Collector collector;
     public static Manipulator manipulator;
     public static Shooter shooter;
+    
     Compressor compressor;
     
     /**
@@ -36,11 +38,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	
     RobotMap.init();
-    
         driveTrain = new DriveTrain();
-        blooper = new Blooper();
-        collector = new Collector();
-        manipulator = new Manipulator();
+        blooper = new Bloopers();
+        collector = new Collector(RobotMap.COLLECTOR_MOTOR, RobotMap.COLLECTOR_POT);
+        manipulator = new Manipulator(RobotMap.MANIPULATOR_MOTOR, RobotMap.MANIPULATOR_POT);
         shooter = new Shooter();
 
         oi = new OI();  //OI must be created after subsystems. 
