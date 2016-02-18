@@ -25,8 +25,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * floating around.
  */
 public class RobotMap {    
-    public static Relay lightRelay;
-    
     /* Drive Train */
     // PWM
     public static final int DRIVE_MOTOR_LEFT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
@@ -45,7 +43,7 @@ public class RobotMap {
     
 	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
 	
-	/* BLOOPERS */
+	/* Bloopers */
 	// PWM
 	public static final int BLOOPERS_MOTOR = 4;
 	
@@ -83,8 +81,14 @@ public class RobotMap {
 			SHOOTER_SOLENOID_TRIGGER_F = 3, SHOOTER_SOLENOID_TRIGGER_B = 4,
 			SHOOTER_SOLENOID_ACTUATION_F = 0, SHOOTER_SOLENOID_ACTUATION_B = 1;
 	
-	public static String visionNetworkTableName = "GRIP/myContoursReport";
+	// Sensors
+	public static final int SHOOTER_REEDSENSOR = 5;
 	
+	/* Camera */
+	public static final int CAMERA_RELAY_LIGHT = 1;
+	
+	/* Misc */
+	public static String NETWORKTABLE_VISION = "GRIP/myContoursReport";
 	public static final double ticksToInches = 10000/117.5;
 	
     public static void init() {

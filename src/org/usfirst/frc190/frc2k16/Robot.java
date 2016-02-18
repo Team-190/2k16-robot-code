@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
     public static Collector collector;
     public static Manipulator manipulator;
     public static Shooter shooter;
+    public static Camera camera;
     
     Compressor compressor;
     
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
         collector = new Collector(RobotMap.COLLECTOR_MOTOR, RobotMap.COLLECTOR_POT);
         manipulator = new Manipulator(RobotMap.MANIPULATOR_MOTOR, RobotMap.MANIPULATOR_POT);
         shooter = new Shooter();
+        camera = new Camera();
 
         oi = new OI();  //OI must be created after subsystems. 
         

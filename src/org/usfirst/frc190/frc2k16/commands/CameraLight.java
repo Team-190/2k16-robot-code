@@ -1,5 +1,6 @@
 package org.usfirst.frc190.frc2k16.commands;
 
+import org.usfirst.frc190.frc2k16.Robot;
 import org.usfirst.frc190.frc2k16.RobotMap;
 
 import edu.wpi.first.wpilibj.Relay;
@@ -12,12 +13,12 @@ public class CameraLight extends Command {
 
     public CameraLight() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.lightRelay.set(Relay.Value.kReverse);
+    	Robot.camera.lightOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,6 +38,6 @@ public class CameraLight extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	RobotMap.lightRelay.set(Relay.Value.kForward);
+    	Robot.camera.lightOff();
     }
 }
