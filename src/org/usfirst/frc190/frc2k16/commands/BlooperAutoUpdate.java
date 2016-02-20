@@ -30,15 +30,15 @@ public class BlooperAutoUpdate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(	Robot.driveTrain.getLeftEncoderRate() > mForwardsThreshold &&
+    	if (Robot.driveTrain.getLeftEncoderRate() > mForwardsThreshold &&
     		Robot.driveTrain.getRightEncoderRate() > mForwardsThreshold &&
-    		mCurrentPosition != Bloopers.BlooperPosition.FORWARDS)
+    		mCurrentPosition != Bloopers.BlooperPosition.FORWARD) {    		
     		Robot.blooper.setSetpoint(RobotMap.BLOOPERS_SETPOINT_FORWARD);
-    	
-    	else if(Robot.driveTrain.getLeftEncoderRate() < mBackwardsThreshold &&
+    	} else if(Robot.driveTrain.getLeftEncoderRate() < mBackwardsThreshold &&
     			Robot.driveTrain.getRightEncoderRate() < mBackwardsThreshold &&
-    			mCurrentPosition != Bloopers.BlooperPosition.BACKWARDS)
-    			Robot.blooper.setSetpoint(RobotMap.BLOOPERS_SETPOINT_REVERSE);
+    			mCurrentPosition != Bloopers.BlooperPosition.BACKWARD) {
+			Robot.blooper.setSetpoint(RobotMap.BLOOPERS_SETPOINT_BACKWARD);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

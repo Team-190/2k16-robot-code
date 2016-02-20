@@ -43,6 +43,9 @@ public class RobotMap {
     
 	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
 	
+	// Constants
+	public static final double cimShiftingSpeed = 4600, highGearE = 4.8, lowGearE = 8.6;
+	
 	/* Bloopers */
 	// PWM
 	public static final int BLOOPERS_MOTOR = 4;
@@ -52,7 +55,7 @@ public class RobotMap {
 	
 	// Setpoints
 	public static final int BLOOPERS_SETPOINT_UP = 0,
-			BLOOPERS_SETPOINT_FORWARD = 0, BLOOPERS_SETPOINT_REVERSE = 0;
+			BLOOPERS_SETPOINT_FORWARD = 0, BLOOPERS_SETPOINT_BACKWARD = 0;
 	
 	/* Manipulator */
 	// PWM

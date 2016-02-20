@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class Bloopers extends PIDSubsystem {
 	public enum BlooperPosition{
-		BACKWARDS, FORWARDS, NEUTRAL
+		BACKWARD, FORWARD, NEUTRAL
 	}
 
     private final AnalogPotentiometer potentiometer;

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import org.usfirst.frc190.frc2k16.Robot;
 import org.usfirst.frc190.frc2k16.RobotMap;
@@ -22,11 +23,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
-/**
- *
- */
 public class DriveTrain extends Subsystem {
+	
+	public enum DriveTrainGearing {
+		HIGH, LOW
+	}
 	
 	private final Encoder leftEncoder;
 	private final Encoder rightEncoder;
@@ -41,6 +42,8 @@ public class DriveTrain extends Subsystem {
     
     private final ADXRS450_Gyro gyro;
     
+    private DriveTrainGearing gearing = DriveTrainGearing.LOW;
+    
     public DriveTrain() {
     	shiftingSolenoid = new DoubleSolenoid(0, RobotMap.DRIVE_SOLENOID_SHIFTING_F, RobotMap.DRIVE_SOLENOID_SHIFTING_B);
         LiveWindow.addActuator("Drive Train", "shiftingSolenoid", shiftingSolenoid);
@@ -48,17 +51,21 @@ public class DriveTrain extends Subsystem {
         gyro = new ADXRS450_Gyro();
         LiveWindow.addSensor("Drive Train", "Gyro", gyro);
         
+        double wheelDiameter = 2.35;
+        double gearRatio = 18/20;
+        double encoderDistancePerPulse = Math.PI * wheelDiameter / 360 / gearRatio;
+        
     	leftEncoder = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_A, RobotMap.DRIVE_ENCODER_LEFT_B, false, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "leftEncoder", leftEncoder);
-        // driveTrainleftEncoder.setPIDSourceType(PIDSourceType.kRate);
-        // driveTrainleftEncoder.setDistancePerPulse(ticksToInches);
-        // driveTrainleftEncoder.setReverseDirection(invertLeftEncoder);
+        // leftEncoder.setPIDSourceType(PIDSourceType.kRate);
+        // leftEncoder.setReverseDirection(invertLeftEncoder);
+        leftEncoder.setDistancePerPulse(encoderDistancePerPulse);
         
         rightEncoder = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_A, RobotMap.DRIVE_ENCODER_RIGHT_B, false, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "rightEncoder", rightEncoder);
-        // driveTrainrightEncoder.setDistancePerPulse(1.0);
-        // driveTrainrightEncoder.setPIDSourceType(PIDSourceType.kRate);
-        // driveTrainleftEncoder.setDistancePerPulse(ticksToInches);
+        // rightEncoder.setDistancePerPulse(1.0);
+        // rightEncoder.setPIDSourceType(PIDSourceType.kRate);
+        rightEncoder.setDistancePerPulse(encoderDistancePerPulse);
         
     	leftMotor1 = new Talon(RobotMap.DRIVE_MOTOR_LEFT1);
         LiveWindow.addActuator("Drive Train", "leftMotor1", (Talon) leftMotor1);
@@ -77,10 +84,10 @@ public class DriveTrain extends Subsystem {
         robotDrive.setInvertedMotor(MotorType.kFrontLeft, RobotMap.DRIVE_INVERT_LEFTMOTOR2);
         robotDrive.setInvertedMotor(MotorType.kRearRight, RobotMap.DRIVE_INVERT_RIGHTMOTOR1);
         robotDrive.setInvertedMotor(MotorType.kFrontRight, RobotMap.DRIVE_INVERT_RIGHTMOTOR2);
-      //  robotDrive.setSafetyEnabled(true);
-      //  robotDrive.setExpiration(0.1);
-     //   robotDrive.setSensitivity(0.5);
-     //   robotDrive.setMaxOutput(1.0);
+        //robotDrive.setSafetyEnabled(true);
+        //robotDrive.setExpiration(0.1);
+        //robotDrive.setSensitivity(0.5);
+        //robotDrive.setMaxOutput(1.0);
     }
 
     public void initDefaultCommand() {
@@ -100,12 +107,46 @@ public class DriveTrain extends Subsystem {
     	robotDrive.tankDrive(left, right);
     }
     
+    public double getLeftEncoderRate() {
+    	return leftEncoder.getRate();
+    }
+    
+    public double getRightEncoderRate() {
+    	return rightEncoder.getRate();
+    }
+    
     public double getLeftEncoderDistance() {
     	return (RobotMap.DRIVE_INVERT_LEFTENCODER) ? -leftEncoder.getDistance() : leftEncoder.getDistance();
     }
     
     public double getRightEncoderDistance() {
     	return (RobotMap.DRIVE_INVERT_RIGHTENCODER) ? -rightEncoder.getDistance() : rightEncoder.getDistance();
+    }
+    
+    void shiftLow() {
+    	shiftingSolenoid.set(Value.kForward);
+    	gearing = DriveTrainGearing.LOW;
+    }
+    
+    void shiftHigh() {
+    	shiftingSolenoid.set(Value.kReverse);
+    	gearing = DriveTrainGearing.HIGH;
+    }
+    
+    void updateShifterStatus() {
+    	double avgEncoderRate = (leftEncoder.getRate() + rightEncoder.getRate()) / 2;
+    	double realCimSpeed = 0;
+    	
+    	// Ndrv/Ndrs = n_out/n_in
+    	// n_in = n_out / (Ndrv / Ndrs)
+    	// n_out = n_in * (Ndrv / Ndrs)
+    	if (gearing == DriveTrainGearing.HIGH) {
+    		realCimSpeed = avgEncoderRate / RobotMap.highGearE;
+    		
+    	} else if (gearing == DriveTrainGearing.LOW) {
+    		realCimSpeed = avgEncoderRate / RobotMap.lowGearE;
+    		
+    	}
     }
     
     public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
