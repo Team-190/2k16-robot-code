@@ -27,8 +27,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class RobotMap {    
     /* Drive Train */
     // PWM
-    public static final int DRIVE_MOTOR_LEFT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
-    		DRIVE_MOTOR_RIGHT1 = 1, DRIVE_MOTOR_RIGHT2 = 3;
+    public static final int DRIVE_MOTOR_RIGHT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
+    		DRIVE_MOTOR_LEFT1 = 1, DRIVE_MOTOR_RIGHT2 = 3;
     
     // Encoders
     public static final int DRIVE_ENCODER_LEFT_A = 0, DRIVE_ENCODER_LEFT_B = 1,
@@ -38,8 +38,8 @@ public class RobotMap {
     public static final int DRIVE_SOLENOID_SHIFTING_F = 5, DRIVE_SOLENOID_SHIFTING_B = 6;
     
     // Inversions
-    public static final boolean DRIVE_INVERT_LEFTMOTOR1 = true, DRIVE_INVERT_LEFTMOTOR2 = false,
-    		DRIVE_INVERT_RIGHTMOTOR1 = true, DRIVE_INVERT_RIGHTMOTOR2 = false;
+    public static final boolean DRIVE_INVERT_LEFTMOTOR1 = false, DRIVE_INVERT_LEFTMOTOR2 = false,
+    		DRIVE_INVERT_RIGHTMOTOR1 = false, DRIVE_INVERT_RIGHTMOTOR2 = true;
     
 	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
 	
@@ -70,7 +70,7 @@ public class RobotMap {
 	
 	// Sensors
 	public static final int COLLECTOR_POT = 2;
-	public static final int COLLECTOR_BOULDER_SWITCH = 0;
+	public static final int COLLECTOR_BOULDER_SWITCH = 4;
 	
 	// Setpoints
 	public static final double COLLECTOR_SETPOINT_UP = 0, COLLECTOR_SETPOINT_DOWN = 0;

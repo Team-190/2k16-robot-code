@@ -66,21 +66,21 @@ public class DriveTrain extends Subsystem {
         leftMotor2 = new Talon(RobotMap.DRIVE_MOTOR_LEFT2);
         LiveWindow.addActuator("Drive Train", "leftMotor2", (Talon) leftMotor2);
         
-        rightMotor1 = new Talon(RobotMap.DRIVE_ENCODER_RIGHT_A);
+        rightMotor1 = new Talon(RobotMap.DRIVE_MOTOR_RIGHT1);
         LiveWindow.addActuator("Drive Train", "rightMotor1", (Talon) rightMotor1);
         
-        rightMotor2 = new Talon(RobotMap.DRIVE_ENCODER_RIGHT_B);
+        rightMotor2 = new Talon(RobotMap.DRIVE_MOTOR_RIGHT2);
         LiveWindow.addActuator("Drive Train", "rightMotor2", (Talon) rightMotor2);
         
-        robotDrive = new RobotDrive(leftMotor2, leftMotor1, rightMotor2, rightMotor1);
+        robotDrive = new RobotDrive(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
         robotDrive.setInvertedMotor(MotorType.kRearLeft, RobotMap.DRIVE_INVERT_LEFTMOTOR1);
         robotDrive.setInvertedMotor(MotorType.kFrontLeft, RobotMap.DRIVE_INVERT_LEFTMOTOR2);
         robotDrive.setInvertedMotor(MotorType.kRearRight, RobotMap.DRIVE_INVERT_RIGHTMOTOR1);
         robotDrive.setInvertedMotor(MotorType.kFrontRight, RobotMap.DRIVE_INVERT_RIGHTMOTOR2);
-        robotDrive.setSafetyEnabled(true);
-        robotDrive.setExpiration(0.1);
-        robotDrive.setSensitivity(0.5);
-        robotDrive.setMaxOutput(1.0);
+      //  robotDrive.setSafetyEnabled(true);
+      //  robotDrive.setExpiration(0.1);
+     //   robotDrive.setSensitivity(0.5);
+     //   robotDrive.setMaxOutput(1.0);
     }
 
     public void initDefaultCommand() {
@@ -93,7 +93,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive(double speed, double rotate) {
-    	robotDrive.arcadeDrive(speed, rotate);
+    	robotDrive.arcadeDrive(-speed, -rotate);
     }
     
     public void tankDrive(double left, double right) {

@@ -26,7 +26,7 @@ public class Collector extends Manipulator {
 	public Collector(int motorPort, int potentiometerPort) {
 		super(motorPort, potentiometerPort);
 		
-		rollersMotor = new Victor(RobotMap.COLLECTOR_MOTOR);
+		rollersMotor = new Victor(RobotMap.COLLECTOR_ROLLER_MOTOR);
 		limitSwitch = new DigitalInput(RobotMap.COLLECTOR_BOULDER_SWITCH);
 	}
 
