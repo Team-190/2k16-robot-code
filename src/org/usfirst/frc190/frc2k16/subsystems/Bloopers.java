@@ -14,11 +14,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 /**
  *
  */
+
 public class Bloopers extends PIDSubsystem {
+	public enum BlooperPosition{
+		BACKWARDS, FORWARDS, NEUTRAL
+	}
 
     private final AnalogPotentiometer potentiometer;
     private final SpeedController actuationMotor;
-
+    
     // Initialize your subsystem here
     public Bloopers() {
         super("Blooper", 1.0, 0.0, 0.0);

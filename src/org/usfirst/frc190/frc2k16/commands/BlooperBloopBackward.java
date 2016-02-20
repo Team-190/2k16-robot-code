@@ -3,6 +3,7 @@ package org.usfirst.frc190.frc2k16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc190.frc2k16.Robot;
+import org.usfirst.frc190.frc2k16.RobotMap;
 
 /**
  *
@@ -10,8 +11,8 @@ import org.usfirst.frc190.frc2k16.Robot;
 public class BlooperBloopBackward extends Command {
     private double m_setpoint;
 
-    public BlooperBloopBackward(double setpoint) {
-        m_setpoint = setpoint;
+    public BlooperBloopBackward() {
+        m_setpoint = RobotMap.BLOOPERS_SETPOINT_BACKWARDS;
         requires(Robot.blooper);
 
     }
