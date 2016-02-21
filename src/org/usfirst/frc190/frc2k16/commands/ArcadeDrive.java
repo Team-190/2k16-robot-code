@@ -24,6 +24,7 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.driveTrain.outputSensorData();
     	Robot.driveTrain.arcadeDrive(Robot.oi.getJoystick1().getY(), Robot.oi.getJoystick1().getX());
     }
 

@@ -1,4 +1,3 @@
-
 package org.usfirst.frc190.frc2k16;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -24,18 +23,42 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {    
-    /* Drive Train */
-    // PWM
-    public static final int DRIVE_MOTOR_RIGHT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
+public class RobotMap {  
+	// PWM
+	public static final int DRIVE_MOTOR_RIGHT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
     		DRIVE_MOTOR_LEFT1 = 1, DRIVE_MOTOR_RIGHT2 = 3;
-    
-    // Encoders
-    public static final int DRIVE_ENCODER_LEFT_A = 0, DRIVE_ENCODER_LEFT_B = 1,
+	
+	public static final int BLOOPERS_MOTOR = 4;
+	
+	public static final int MANIPULATOR_MOTOR = 5;
+	
+	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 7;
+	
+	
+	// DIO
+	public static final int DRIVE_ENCODER_LEFT_A = 0, DRIVE_ENCODER_LEFT_B = 1,
     		DRIVE_ENCODER_RIGHT_A = 2, DRIVE_ENCODER_RIGHT_B = 3;
-    
-    // Solenoids
-    public static final int DRIVE_SOLENOID_SHIFTING_F = 5, DRIVE_SOLENOID_SHIFTING_B = 6;
+	
+	public static final int COLLECTOR_BOULDER_SWITCH = 4;
+	
+	public static final int SHOOTER_REEDSENSOR = 5;
+	
+	// ANALOG IN
+	public static final int BLOOPERS_POT = 0;
+	
+	public static final int COLLECTOR_POT = 1;
+	
+	public static final int MANIPULATOR_POT = 2;
+	
+	// RELAY
+	public static final int CAMERA_RELAY_LIGHT = 0;
+	
+	// PCM
+	public static final int SHOOTER_SOLENOID_ACTUATION_F = 0, SHOOTER_SOLENOID_ACTUATION_B = 1,
+			SHOOTER_SOLENOID_AIRSPRING = 2,
+			SHOOTER_SOLENOID_TRIGGER_F = 3, SHOOTER_SOLENOID_TRIGGER_B = 4;			
+	
+	public static final int DRIVE_SOLENOID_SHIFTING_F = 5, DRIVE_SOLENOID_SHIFTING_B = 6;
     
     // Inversions
     public static final boolean DRIVE_INVERT_LEFTMOTOR1 = false, DRIVE_INVERT_LEFTMOTOR2 = false,
@@ -44,53 +67,17 @@ public class RobotMap {
 	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
 	
 	// Constants
-	public static final double cimShiftingSpeed = 4600, highGearE = 4.8, lowGearE = 8.6;
-	
-	/* Bloopers */
-	// PWM
-	public static final int BLOOPERS_MOTOR = 4;
-	
-	// Sensors
-	public static final int BLOOPERS_POTENTIOMETER = 1;
+	public static final double cimLowShiftingSpeed = 4600, highGearE = 4.8, lowGearE = 8.6;
 	
 	// Setpoints
 	public static final int BLOOPERS_SETPOINT_UP = 0,
 			BLOOPERS_SETPOINT_FORWARD = 0, BLOOPERS_SETPOINT_BACKWARD = 0;
 	
-	/* Manipulator */
-	// PWM
-	public static final int MANIPULATOR_MOTOR = 7;
-	
-	// Sensors
-	public static final int MANIPULATOR_POT = 3;
-	
-	// Setpoints
-	public static final double MANIPULATOR_SETPOINT_UP = 0, MANIPULATOR_SETPOINT_DOWN = 0;
-	
-	/* Collector */
-	// PWM
-	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 9;
-	
-	// Sensors
-	public static final int COLLECTOR_POT = 2;
-	public static final int COLLECTOR_BOULDER_SWITCH = 4;
-	
-	// Setpoints
 	public static final double COLLECTOR_SETPOINT_UP = 0, COLLECTOR_SETPOINT_DOWN = 0;
 	
-	/* Shooter */
-	// Solenoids
-	public static final int SHOOTER_SOLENOID_AIRSPRING = 2,
-			SHOOTER_SOLENOID_TRIGGER_F = 3, SHOOTER_SOLENOID_TRIGGER_B = 4,
-			SHOOTER_SOLENOID_ACTUATION_F = 0, SHOOTER_SOLENOID_ACTUATION_B = 1;
+	public static final double MANIPULATOR_SETPOINT_UP = 0, MANIPULATOR_SETPOINT_DOWN = 0;
 	
-	// Sensors
-	public static final int SHOOTER_REEDSENSOR = 5;
-	
-	/* Camera */
-	public static final int CAMERA_RELAY_LIGHT = 1;
-	
-	/* Misc */
+	// Misc
 	public static String NETWORKTABLE_VISION = "GRIP/myContoursReport";
 	public static final double ticksToInches = 10000/117.5;
 	

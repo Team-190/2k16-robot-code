@@ -24,11 +24,11 @@ public class Camera extends Subsystem {
     }
     
     public void lightOn() {
-    	lightRelay.set(Relay.Value.kReverse);
+    	lightRelay.set(Relay.Value.kForward);
     }
     
     public void lightOff() {
-    	lightRelay.set(Relay.Value.kForward);
+    	lightRelay.set(Relay.Value.kOff);
     }
 }
 
