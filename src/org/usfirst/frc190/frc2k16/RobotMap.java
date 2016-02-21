@@ -32,7 +32,7 @@ public class RobotMap {
 	
 	public static final int MANIPULATOR_MOTOR = 5;
 	
-	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 9;
+	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 7;
 	
 	
 	// DIO
@@ -46,9 +46,9 @@ public class RobotMap {
 	// ANALOG IN
 	public static final int BLOOPERS_POT = 0;
 	
-	public static final int MANIPULATOR_POT = 1;
+	public static final int COLLECTOR_POT = 1;
 	
-	public static final int COLLECTOR_POT = 2;
+	public static final int MANIPULATOR_POT = 2;
 	
 	// RELAY
 	public static final int CAMERA_RELAY_LIGHT = 0;
@@ -67,7 +67,7 @@ public class RobotMap {
 	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
 	
 	// Constants
-	public static final double cimShiftingSpeed = 4600, highGearE = 4.8, lowGearE = 8.6;
+	public static final double cimLowShiftingSpeed = 4600, highGearE = 4.8, lowGearE = 8.6;
 	
 	// Setpoints
 	public static final int BLOOPERS_SETPOINT_UP = 0,

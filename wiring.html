@@ -1,0 +1,193 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>Wiring</title>
+  <style type="text/css" media="screen">
+    table {
+      text-align: left;
+      width: 400px;
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      border-collapse: collapse;
+      border-spacing: 0px;
+    }
+
+    th {
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+    }
+
+    .pound {
+      width: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>FRC 2k16 - Wiring Guide</h1>
+  <h2>DIO</h2>
+  <table>
+    <tr>
+      <th class="pound">#</th>
+      <th>Sensor</th>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Drive Train Left Encoder A</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Drive Train Left Encoder B</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Drive Train Right Encoder A</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Drive Train Right Encoder B</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Collector Boulder Switch</td>
+      <td></td>
+    </tr>
+  </table>
+  <h2>PWMs</h2>
+  <table>
+    <tr>
+      <th class="pound">#</th>
+      <th>Motor</th>
+      <th>Type</th>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Drive Train Righ Motor 1</td>
+      <td>Talon</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Drive Train Left Motor 2</td>
+      <td>Talon</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Drive Train Left Motor 1</td>
+      <td>Talon</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Drive Train Right Motor 2</td>
+      <td>Talon</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Blooper Motor</td>
+      <td>Victor</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Manipulator Actuation Motor</td>
+      <td>VictorSP</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Collector Actuation Motor</td>
+      <td>VictorSP</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Collector Roller Motor</td>
+      <td>Victor</td>
+    </tr>
+  </table>
+
+
+  <h2>Relays</h2>
+  <table>
+    <tr>
+      <th class="pound">#</th>
+      <th>Relay</th>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Camera Relay Light</td>
+      <td></td>
+    </tr>
+  </table>
+
+  <h2>Analog Inputs</h2>
+  <table>
+    <tr>
+      <th class="pound">#</th>
+      <th>Sensor</th>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Blooper blooperPot</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Collector collectorPot</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Manipulator manipulatorPot</td>
+      <td></td>
+    </tr>
+  </table>
+  <h4>NOTE: The Blooper and Manipulator Pots should be plugged into the TalonSRXs
+    once we have the proper breakout boards.</h4>
+
+  <h2>PCM 0</h2>
+  <table>
+    <tr>
+      <th class="pound">#</th>
+      <th>Solenoid</th>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Shooter Actuation Solenoid Forward </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Shooter Actuation Solenoid Reverse </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Shooter Airspring Solenoid Output </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Shooter Trigger Solenoid Forward </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Shooter Trigger Solenoid Reverse </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Drive Train Shifting Solenoid Forward </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Drive Train Shifting Solenoid Reverse </td>
+      <td></td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

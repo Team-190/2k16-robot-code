@@ -54,8 +54,8 @@ public class DriveTrain extends Subsystem {
         double wheelDiameter = 2.864; // Measured
         double gearRatio = 18.0 / 20.0; // Ratio between encoder and pulley
         double CPR = 1024.0;
-        double encoderPulleyRation = (0.925 - (1/8)) / (0.877 - (1/8));
-        double encoderDistancePerPulse = Math.PI * wheelDiameter / CPR / gearRatio / encoderPulleyRation;
+        double encoderPulleyRatio = (0.925 - (1/8)) / (0.877 - (1/8));
+        double encoderDistancePerPulse = Math.PI * wheelDiameter / CPR / gearRatio / encoderPulleyRatio;
         
     	leftEncoder = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_A, RobotMap.DRIVE_ENCODER_LEFT_B, false, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "leftEncoder", leftEncoder);
@@ -155,9 +155,15 @@ public class DriveTrain extends Subsystem {
     	if (gearing == DriveTrainGearing.HIGH) {
     		realCimSpeed = avgEncoderRate / RobotMap.highGearE;
     		
+    		if (realCimSpeed < RobotMap.cimLowShiftingSpeed) {
+    			shiftLow();
+    		}
     	} else if (gearing == DriveTrainGearing.LOW) {
     		realCimSpeed = avgEncoderRate / RobotMap.lowGearE;
     		
+    		if (realCimSpeed < 1) {
+    			shiftHigh();
+    		}
     	}
     }
     
