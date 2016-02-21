@@ -12,7 +12,7 @@ public class BlooperBloopUp extends Command {
 
     private double m_setpoint;
 
-    public BlooperBloopUp(double setpoint) {
+    public BlooperBloopUp() {
 
         m_setpoint = RobotMap.BLOOPERS_SETPOINT_UP;
 
@@ -22,13 +22,14 @@ public class BlooperBloopUp extends Command {
 
     protected void initialize() {
     	
-        Robot.blooper.enable();
-        Robot.blooper.setSetpoint(m_setpoint);
+        //Robot.blooper.enable();
+        //Robot.blooper.setSetpoint(m_setpoint);
         
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.blooper.manualControl(Robot.oi.getJoystick2().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

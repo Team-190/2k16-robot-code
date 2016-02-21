@@ -28,16 +28,17 @@ public class RobotMap {
 	public static final int DRIVE_MOTOR_RIGHT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
     		DRIVE_MOTOR_LEFT1 = 1, DRIVE_MOTOR_RIGHT2 = 3;
 	
-	public static final int BLOOPERS_MOTOR = 4;
+	public static final int BLOOPERS_MOTOR = 5;
 	
-	public static final int MANIPULATOR_MOTOR = 5;
+	public static final int MANIPULATOR_MOTOR = 7;
 	
-	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 7;
+	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 4;
 	
 	
 	// DIO
-	public static final int DRIVE_ENCODER_LEFT_A = 0, DRIVE_ENCODER_LEFT_B = 1,
-    		DRIVE_ENCODER_RIGHT_A = 2, DRIVE_ENCODER_RIGHT_B = 3;
+	public static final int DRIVE_ENCODER_RIGHT_A = 0, DRIVE_ENCODER_RIGHT_B = 1,
+			DRIVE_ENCODER_LEFT_A = 2, DRIVE_ENCODER_LEFT_B = 3;
+    		
 	
 	public static final int COLLECTOR_BOULDER_SWITCH = 4;
 	
@@ -67,7 +68,7 @@ public class RobotMap {
 	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
 	
 	// Constants
-	public static final double cimLowShiftingSpeed = 4600, highGearE = 4.8, lowGearE = 8.6;
+	public static final double shiftToHighPoint = 8, shiftToLowPoint = 5, highGearE = 4.8, lowGearE = 8.6;
 	
 	// Setpoints
 	public static final int BLOOPERS_SETPOINT_UP = 0,

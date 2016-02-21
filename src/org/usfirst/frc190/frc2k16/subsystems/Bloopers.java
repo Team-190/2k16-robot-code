@@ -21,7 +21,7 @@ public class Bloopers extends PIDSubsystem {
 	}
 
     private final AnalogPotentiometer potentiometer;
-    private final SpeedController actuationMotor;
+    private final VictorSP actuationMotor;
     
     // Initialize your subsystem here
     public Bloopers() {
@@ -33,9 +33,13 @@ public class Bloopers extends PIDSubsystem {
         actuationMotor = new VictorSP(RobotMap.BLOOPERS_MOTOR);
         potentiometer = new AnalogPotentiometer( RobotMap.BLOOPERS_POT, 1, 0);
     }
+    
+    public void manualControl(double speed) {
+    	actuationMotor.set(speed);
+    }
 
     public void initDefaultCommand() {
-    	
+    	setDefaultCommand(new BlooperBloopUp());
     }
 
     protected double returnPIDInput() {

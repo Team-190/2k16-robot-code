@@ -54,20 +54,21 @@ public class DriveTrain extends Subsystem {
         double wheelDiameter = 2.864; // Measured
         double gearRatio = 18.0 / 20.0; // Ratio between encoder and pulley
         double CPR = 1024.0;
-        double encoderPulleyRatio = (0.925 - (1/8)) / (0.877 - (1/8));
-        double encoderDistancePerPulse = Math.PI * wheelDiameter / CPR / gearRatio / encoderPulleyRatio;
+        double leftEncoderPulleyRatio = (0.925 - (1/8)) / (0.877 - (1/8));
+        double rightEncoderPulleyRatio = (0.94 - (1/8)) / (0.892 - (1/8));
+        double encoderDistancePerPulse = Math.PI * wheelDiameter / CPR / gearRatio;
         
     	leftEncoder = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_A, RobotMap.DRIVE_ENCODER_LEFT_B, false, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "leftEncoder", leftEncoder);
         // leftEncoder.setPIDSourceType(PIDSourceType.kRate);
         // leftEncoder.setReverseDirection(invertLeftEncoder);
-        leftEncoder.setDistancePerPulse(encoderDistancePerPulse);
+        leftEncoder.setDistancePerPulse(encoderDistancePerPulse / leftEncoderPulleyRatio);
         
         rightEncoder = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_A, RobotMap.DRIVE_ENCODER_RIGHT_B, false, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "rightEncoder", rightEncoder);
         // rightEncoder.setDistancePerPulse(1.0);
         // rightEncoder.setPIDSourceType(PIDSourceType.kRate);
-        rightEncoder.setDistancePerPulse(encoderDistancePerPulse);
+        rightEncoder.setDistancePerPulse(encoderDistancePerPulse / rightEncoderPulleyRatio);
         
     	leftMotor1 = new Talon(RobotMap.DRIVE_MOTOR_LEFT1);
         LiveWindow.addActuator("Drive Train", "leftMotor1", (Talon) leftMotor1);
@@ -102,10 +103,12 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive(double speed, double rotate) {
+    	updateShifterStatus();
     	robotDrive.arcadeDrive(-speed, -rotate);
     }
     
     public void tankDrive(double left, double right) {
+    	updateShifterStatus();
     	robotDrive.tankDrive(left, right);
     }
     
@@ -147,23 +150,11 @@ public class DriveTrain extends Subsystem {
     
     void updateShifterStatus() {
     	double avgEncoderRate = (leftEncoder.getRate() + rightEncoder.getRate()) / 2;
-    	double realCimSpeed = 0;
     	
-    	// Ndrv/Ndrs = n_out/n_in
-    	// n_in = n_out / (Ndrv / Ndrs)
-    	// n_out = n_in * (Ndrv / Ndrs)
-    	if (gearing == DriveTrainGearing.HIGH) {
-    		realCimSpeed = avgEncoderRate / RobotMap.highGearE;
-    		
-    		if (realCimSpeed < RobotMap.cimLowShiftingSpeed) {
-    			shiftLow();
-    		}
-    	} else if (gearing == DriveTrainGearing.LOW) {
-    		realCimSpeed = avgEncoderRate / RobotMap.lowGearE;
-    		
-    		if (realCimSpeed < 1) {
-    			shiftHigh();
-    		}
+    	if ((gearing == DriveTrainGearing.LOW) && (avgEncoderRate > RobotMap.shiftToHighPoint)) {
+    		shiftHigh();
+    	} else if ((gearing == DriveTrainGearing.HIGH) && (avgEncoderRate < RobotMap.shiftToLowPoint)) {
+    		shiftLow();
     	}
     }
     
@@ -181,6 +172,13 @@ public class DriveTrain extends Subsystem {
     	
     	if (rightEncoderRate < minRightEncoderRate) minRightEncoderRate = rightEncoderRate;
     	if (rightEncoderRate > maxRightEncoderRate) maxRightEncoderRate = rightEncoderRate;
+    	
+    	if (gearing == DriveTrainGearing.LOW) {
+    		SmartDashboard.putString("Drive Train Gearing", "Low Gear");
+    	} else {
+    		SmartDashboard.putString("Drive Train Gearing", "High Gear");
+    	}
+    	SmartDashboard.putNumber("Avg Encoder Rate", (leftEncoderRate + leftEncoderRate) / 2);
     	
     	SmartDashboard.putNumber("Left Encoder Distance", leftEncoderDistance);
     	SmartDashboard.putNumber("Right Encoder Distance", rightEncoderDistance);
