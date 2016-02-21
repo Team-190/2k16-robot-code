@@ -31,7 +31,7 @@ public class Bloopers extends PIDSubsystem {
         LiveWindow.addActuator("Blooper", "PIDSubsystem Controller", getPIDController());
         
         actuationMotor = new VictorSP(RobotMap.BLOOPERS_MOTOR);
-        potentiometer = new AnalogPotentiometer( RobotMap.BLOOPERS_POTENTIOMETER, 1, 0);
+        potentiometer = new AnalogPotentiometer( RobotMap.BLOOPERS_POT, 1, 0);
     }
 
     public void initDefaultCommand() {

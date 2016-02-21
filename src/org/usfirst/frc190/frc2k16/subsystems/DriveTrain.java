@@ -51,9 +51,11 @@ public class DriveTrain extends Subsystem {
         gyro = new ADXRS450_Gyro();
         LiveWindow.addSensor("Drive Train", "Gyro", gyro);
         
-        double wheelDiameter = 2.35;
-        double gearRatio = 18/20;
-        double encoderDistancePerPulse = Math.PI * wheelDiameter / 360 / gearRatio;
+        double wheelDiameter = 2.864; // Measured
+        double gearRatio = 18.0 / 20.0; // Ratio between encoder and pulley
+        double CPR = 1024.0;
+        double encoderPulleyRation = (0.925 - (1/8)) / (0.877 - (1/8));
+        double encoderDistancePerPulse = Math.PI * wheelDiameter / CPR / gearRatio / encoderPulleyRation;
         
     	leftEncoder = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_A, RobotMap.DRIVE_ENCODER_LEFT_B, false, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "leftEncoder", leftEncoder);
@@ -107,12 +109,22 @@ public class DriveTrain extends Subsystem {
     	robotDrive.tankDrive(left, right);
     }
     
+    /**
+     * Get the current rate of the left encoder.
+     * 
+     * @return The current rate of the left encoder in ft/s
+     */
     public double getLeftEncoderRate() {
-    	return leftEncoder.getRate();
+    	return leftEncoder.getRate() / 12.0;
     }
     
+    /**
+     * Get the current rate of the right encoder.
+     * 
+     * @return The current rate of the right encoder in ft/s
+     */
     public double getRightEncoderRate() {
-    	return rightEncoder.getRate();
+    	return rightEncoder.getRate() / 12.0;
     }
     
     public double getLeftEncoderDistance() {
@@ -151,12 +163,18 @@ public class DriveTrain extends Subsystem {
     
     public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
     public double minRightEncoderRate = 999999, maxRightEncoderRate = -999999;
-    void outputSensorData() {    	
-    	double leftEncoderRate = leftEncoder.getRate();
-    	double rightEncoderRate = rightEncoder.getRate();
+    public void outputSensorData() {    	
+    	double leftEncoderRate = getLeftEncoderRate();
+    	double rightEncoderRate = getRightEncoderRate();
     	
     	double leftEncoderDistance = getLeftEncoderDistance();
     	double rightEncoderDistance = getRightEncoderDistance();
+    	
+    	if (leftEncoderRate < minLeftEncoderRate) minLeftEncoderRate = leftEncoderRate;
+    	if (leftEncoderRate > maxLeftEncoderRate) maxLeftEncoderRate = leftEncoderRate;
+    	
+    	if (rightEncoderRate < minRightEncoderRate) minRightEncoderRate = rightEncoderRate;
+    	if (rightEncoderRate > maxRightEncoderRate) maxRightEncoderRate = rightEncoderRate;
     	
     	SmartDashboard.putNumber("Left Encoder Distance", leftEncoderDistance);
     	SmartDashboard.putNumber("Right Encoder Distance", rightEncoderDistance);
