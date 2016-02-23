@@ -22,8 +22,7 @@ public class OI {
     JoystickButton shifter;
     JoystickButton load;
     JoystickButton unload;
-    JoystickButton shoot;
-    
+    JoystickButton shoot;  
     JoystickButton bloopForward;
     JoystickButton bloopBack;
     JoystickButton bloopMiddle;

@@ -5,10 +5,12 @@ import org.usfirst.frc190.frc2k16.commands.*;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +32,10 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
     public static Camera camera;
     
+    public static double autoSelect;
+    
     Compressor compressor;
+    DriverStation ds;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -50,8 +55,20 @@ public class Robot extends IterativeRobot {
         
         compressor = new Compressor(0);
     	compressor.setClosedLoopControl(true);
+    	
+    	ds = DriverStation.getInstance();
+    	autoSelect = SmartDashboard.getNumber("DB/Slider 0", 0.0);
 
-        autonomousCommand = new TestAutoNavigation();
+/***** Autonomous Selection *****/
+    	
+    	if(autoSelect == 0){
+    		autonomousCommand = new AutoDoNothing();
+    	}
+    	
+    	if(autoSelect > 0 && autoSelect < 1){
+    		autonomousCommand  = new TestAutoNavigation();
+    	}
+    	
     }
 
     /**
