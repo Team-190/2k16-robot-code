@@ -23,6 +23,10 @@ public class OI {
     JoystickButton load;
     JoystickButton unload;
     JoystickButton shoot;
+    
+    JoystickButton bloopForward;
+    JoystickButton bloopBack;
+    JoystickButton bloopMiddle;
 
     public OI() { 
         joystick1 = new Joystick(0);
@@ -36,10 +40,19 @@ public class OI {
         lightButton.toggleWhenPressed(new CameraLight());
         
         shifter = new JoystickButton(joystick1, 2);
-        //shifter.toggleWhenPressed(new Shifter());
+        shifter.toggleWhenPressed(new Shifter());
         
-        vision = new JoystickButton(joystick1, 3);
-        vision.whenPressed(new VisionAlignWithGoal());
+       // vision = new JoystickButton(joystick1, 3);
+       // vision.whenPressed(new VisionAlignWithGoal());
+        
+        bloopForward = new JoystickButton(joystick1, 4);
+        bloopForward.whenPressed(new BlooperBloopForward());
+        
+        bloopBack = new JoystickButton(joystick1, 5);
+        bloopBack.whenPressed(new BlooperBloopBackward());
+        
+      //  bloopMiddle = new JoystickButton(joystick1, 3);
+      //  bloopMiddle.whenPressed(new BlooperBloopUp());
         
 /******* Joystick 2 *******/
   /*      

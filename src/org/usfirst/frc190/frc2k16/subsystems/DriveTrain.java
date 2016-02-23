@@ -95,7 +95,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
     	
-    	setDefaultCommand(new ArcadeDrive());
+    	setDefaultCommand(new TankDrive());
     }
     
     public void stop() {
@@ -103,12 +103,12 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive(double speed, double rotate) {
-    	updateShifterStatus();
+    	//updateShifterStatus();
     	robotDrive.arcadeDrive(-speed, -rotate);
     }
     
     public void tankDrive(double left, double right) {
-    	updateShifterStatus();
+    	//updateShifterStatus();
     	robotDrive.tankDrive(left, right);
     }
     
@@ -138,16 +138,16 @@ public class DriveTrain extends Subsystem {
     	return (RobotMap.DRIVE_INVERT_RIGHTENCODER) ? -rightEncoder.getDistance() : rightEncoder.getDistance();
     }
     
-    void shiftLow() {
+   public void shiftLow() {
     	shiftingSolenoid.set(Value.kForward);
     	gearing = DriveTrainGearing.LOW;
     }
     
-    void shiftHigh() {
+    public void shiftHigh() {
     	shiftingSolenoid.set(Value.kReverse);
     	gearing = DriveTrainGearing.HIGH;
     }
-    
+  /*  
     void updateShifterStatus() {
     	double avgEncoderRate = (leftEncoder.getRate() + rightEncoder.getRate()) / 2;
     	
@@ -157,7 +157,7 @@ public class DriveTrain extends Subsystem {
     		shiftLow();
     	}
     }
-    
+   */ 
     public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
     public double minRightEncoderRate = 999999, maxRightEncoderRate = -999999;
     public void outputSensorData() {    	

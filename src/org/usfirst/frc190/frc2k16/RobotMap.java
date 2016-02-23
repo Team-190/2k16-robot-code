@@ -24,62 +24,111 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * floating around.
  */
 public class RobotMap {  
-	// PWM
-	public static final int DRIVE_MOTOR_RIGHT1 = 0, DRIVE_MOTOR_LEFT2 = 2,
-    		DRIVE_MOTOR_LEFT1 = 1, DRIVE_MOTOR_RIGHT2 = 3;
 	
-	public static final int BLOOPERS_MOTOR = 5;
+/***** PWM *****/
 	
-	public static final int MANIPULATOR_MOTOR = 7;
+	public static final int 
+		DRIVE_MOTOR_RIGHT1 = 0, 
+		DRIVE_MOTOR_LEFT1 = 1, 
+		DRIVE_MOTOR_LEFT2 = 2,
+    	DRIVE_MOTOR_RIGHT2 = 3;
 	
-	public static final int COLLECTOR_MOTOR = 6, COLLECTOR_ROLLER_MOTOR = 4;
+	public static final int 
+		BLOOPERS_MOTOR = 5;
 	
+	public static final int 
+		MANIPULATOR_MOTOR = 7;
 	
-	// DIO
-	public static final int DRIVE_ENCODER_RIGHT_A = 0, DRIVE_ENCODER_RIGHT_B = 1,
-			DRIVE_ENCODER_LEFT_A = 2, DRIVE_ENCODER_LEFT_B = 3;
+	public static final int 
+		COLLECTOR_MOTOR = 6, 
+		COLLECTOR_ROLLER_MOTOR = 4;
+	
+/***** DIO *****/
+	
+	public static final int 
+		DRIVE_ENCODER_RIGHT_A = 0, 
+		DRIVE_ENCODER_RIGHT_B = 1,
+		DRIVE_ENCODER_LEFT_A = 2, 
+		DRIVE_ENCODER_LEFT_B = 3;
     		
+	public static final int 
+		COLLECTOR_BOULDER_SWITCH = 6;
 	
-	public static final int COLLECTOR_BOULDER_SWITCH = 4;
+	public static final int 
+		SHOOTER_REEDSENSOR = 7;
 	
-	public static final int SHOOTER_REEDSENSOR = 5;
+	public static final int 
+		BLOOP_UP_LIMIT = 4,
+		BLOOP_DOWN_LIMIT = 5;
 	
-	// ANALOG IN
-	public static final int BLOOPERS_POT = 0;
+/***** Analog In *****/
 	
-	public static final int COLLECTOR_POT = 1;
+	public static final int 
+		BLOOPERS_POT = 0;
 	
-	public static final int MANIPULATOR_POT = 2;
+	public static final int 
+		COLLECTOR_POT = 1;
 	
-	// RELAY
-	public static final int CAMERA_RELAY_LIGHT = 0;
+	public static final int 
+		MANIPULATOR_POT = 2;
 	
-	// PCM
-	public static final int SHOOTER_SOLENOID_ACTUATION_F = 0, SHOOTER_SOLENOID_ACTUATION_B = 1,
-			SHOOTER_SOLENOID_AIRSPRING = 2,
-			SHOOTER_SOLENOID_TRIGGER_F = 3, SHOOTER_SOLENOID_TRIGGER_B = 4;			
+/***** Relay *****/
 	
-	public static final int DRIVE_SOLENOID_SHIFTING_F = 5, DRIVE_SOLENOID_SHIFTING_B = 6;
+	public static final int 
+		CAMERA_RELAY_LIGHT = 0;
+	
+/***** PCM *****/
+	
+	public static final int 
+		SHOOTER_SOLENOID_ACTUATION_F = 0, 
+		SHOOTER_SOLENOID_ACTUATION_B = 1,
+		SHOOTER_SOLENOID_AIRSPRING = 2,
+		SHOOTER_SOLENOID_TRIGGER_F = 3, 
+		SHOOTER_SOLENOID_TRIGGER_B = 4;			
+	
+	public static final int 
+		DRIVE_SOLENOID_SHIFTING_F = 6, 
+		DRIVE_SOLENOID_SHIFTING_B = 7;
     
-    // Inversions
-    public static final boolean DRIVE_INVERT_LEFTMOTOR1 = false, DRIVE_INVERT_LEFTMOTOR2 = false,
-    		DRIVE_INVERT_RIGHTMOTOR1 = false, DRIVE_INVERT_RIGHTMOTOR2 = true;
+/***** Inversions *****/
+	
+    public static final boolean 
+    	DRIVE_INVERT_LEFTMOTOR1 = false, 
+    	DRIVE_INVERT_LEFTMOTOR2 = false,
+    	DRIVE_INVERT_RIGHTMOTOR1 = false, 
+    	DRIVE_INVERT_RIGHTMOTOR2 = true;
     
-	public static final boolean DRIVE_INVERT_LEFTENCODER = false, DRIVE_INVERT_RIGHTENCODER = true;
+	public static final boolean 
+		DRIVE_INVERT_LEFTENCODER = false, 
+		DRIVE_INVERT_RIGHTENCODER = true;
 	
-	// Constants
-	public static final double shiftToHighPoint = 8, shiftToLowPoint = 5, highGearE = 4.8, lowGearE = 8.6;
+/***** Constants *****/
 	
-	// Setpoints
-	public static final int BLOOPERS_SETPOINT_UP = 0,
-			BLOOPERS_SETPOINT_FORWARD = 0, BLOOPERS_SETPOINT_BACKWARD = 0;
+	public static final double 
+		shiftToHighPoint = 8, 
+		shiftToLowPoint = 5, 
+		highGearE = 4.8, 
+		lowGearE = 8.6;
 	
-	public static final double COLLECTOR_SETPOINT_UP = 0, COLLECTOR_SETPOINT_DOWN = 0;
+/***** Setpoints *****/
 	
-	public static final double MANIPULATOR_SETPOINT_UP = 0, MANIPULATOR_SETPOINT_DOWN = 0;
+	public static final double 
+		BLOOPERS_SETPOINT_UP = 0.45,
+		BLOOPERS_SETPOINT_FORWARD = 0.1, 
+		BLOOPERS_SETPOINT_BACKWARD = 0.8;
 	
-	// Misc
+	public static final double 
+		COLLECTOR_SETPOINT_UP = 0, 
+		COLLECTOR_SETPOINT_DOWN = 0;
+	
+	public static final double 
+		MANIPULATOR_SETPOINT_UP = 0, 
+		MANIPULATOR_SETPOINT_DOWN = 0;
+	
+/***** Misc. *****/
+	
 	public static String NETWORKTABLE_VISION = "GRIP/myContoursReport";
+	
 	public static final double ticksToInches = 10000/117.5;
 	
     public static void init() {
