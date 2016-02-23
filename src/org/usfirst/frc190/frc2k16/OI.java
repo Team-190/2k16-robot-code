@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    public Joystick joystick1;
-    public Joystick joystick2;
+    private Joystick joystick1;
+    private Joystick joystick2;
     
     JoystickButton lightButton;
     JoystickButton vision;

@@ -1,6 +1,7 @@
 
 package org.usfirst.frc190.frc2k16.subsystems;
 
+import org.usfirst.frc190.frc2k16.Robot;
 import org.usfirst.frc190.frc2k16.RobotMap;
 import org.usfirst.frc190.frc2k16.commands.*;
 
@@ -23,7 +24,8 @@ public class Bloopers extends PIDSubsystem {
 
     private final AnalogPotentiometer potentiometer;
     private final VictorSP actuationMotor;
-   
+    
+    private final DigitalInput up_limit, down_limit;
     
     // Initialize your subsystem here
     public Bloopers() {
@@ -38,20 +40,21 @@ public class Bloopers extends PIDSubsystem {
         potentiometer = new AnalogPotentiometer(RobotMap.BLOOPERS_POT, 1, 0);
         LiveWindow.addSensor("Blooper", "Potentiometer", potentiometer);
         
-        DigitalInput up_limit = new DigitalInput(RobotMap.BLOOP_UP_LIMIT);
+        up_limit = new DigitalInput(RobotMap.BLOOP_UP_LIMIT);
         LiveWindow.addSensor("Blooper", "PIDSubsystem Controller", up_limit);
         
-        DigitalInput down_limit = new DigitalInput(RobotMap.BLOOP_DOWN_LIMIT);
+        down_limit = new DigitalInput(RobotMap.BLOOP_DOWN_LIMIT);
         LiveWindow.addSensor("Blooper", "PIDSubsystem", down_limit);
         
     }
     
     public void manualControl(double speed) {
-    	actuationMotor.set(speed);
+    	if(!(up_limit.get() && speed > 0) || (down_limit.get() && speed < 0)) actuationMotor.set(speed);
     }
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new BlooperBloopUp());
+    	//setDefaultCommand(new BlooperBloopUp());
+    	setDefaultCommand(new ManualBloop(Robot.oi.getJoystick2()));
     }
 
     protected double returnPIDInput() {
@@ -59,6 +62,6 @@ public class Bloopers extends PIDSubsystem {
     }
 
     protected void usePIDOutput(double output) {
-        actuationMotor.pidWrite(output);
+    	manualControl(output);
     }
 }
