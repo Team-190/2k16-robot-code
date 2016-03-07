@@ -1,4 +1,4 @@
-package org.usfirst.frc190.frc2k16;
+package org.usfirst.frc190.frc2k16.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 

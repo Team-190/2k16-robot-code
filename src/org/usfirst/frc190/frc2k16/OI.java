@@ -17,6 +17,17 @@ public class OI {
     private Joystick joystick1;
     private Joystick joystick2;
     
+    private Joystick panel;
+    
+    JoystickButton lowBar;
+    JoystickButton CVF;
+    JoystickButton stow;
+    JoystickButton collect;
+    JoystickButton highGoal;
+    JoystickButton lowGoal;
+    JoystickButton scalar;
+    JoystickButton latch;
+    
     JoystickButton lightButton;
     JoystickButton vision;
     JoystickButton shifter;
@@ -65,6 +76,31 @@ public class OI {
         unload.toggleWhenPressed(new CollectorUnload());
         */
 
+/******* Panel *******/
+        
+        lowBar = new JoystickButton(panel, 0);
+        lowBar.whenPressed(new PrepareForLowBar());
+        
+        CVF = new JoystickButton(panel, 1);
+        CVF.whenPressed(new PrepareForCVF());
+        
+        stow = new JoystickButton(panel, 2);
+        stow.whenPressed(new StowManipulators());
+        
+        collect = new JoystickButton(panel, 3);
+        collect.whenPressed(new CollectorCollect());
+        
+        highGoal = new JoystickButton(panel, 4);
+        highGoal.whenPressed(new ShootHighGoal());
+        
+        lowGoal = new JoystickButton(panel, 5);
+        lowGoal.whenPressed(new ShootLowGoal());
+        
+        scalar = new JoystickButton(panel, 6);
+        
+        latch = new JoystickButton(panel, 7);
+        latch.whenPressed(new ShooterLatchToggle());
+        
 /******* SmartDashboard Buttons *******/
         
         SmartDashboard.putData("VisionAlignWithGoal", new VisionAlignWithGoal());

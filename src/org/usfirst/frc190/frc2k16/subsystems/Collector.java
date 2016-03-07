@@ -45,5 +45,9 @@ public class Collector extends Manipulator {
     public void release(){
     	rollersMotor.set(1);
     }
+    
+    public boolean hasBall(){
+    	return limitSwitch.get();
+    }
 
 }
