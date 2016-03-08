@@ -9,23 +9,14 @@ import org.usfirst.frc190.frc2k16.RobotMap;
  *
  */
 public class CollectorPositionDown extends Command {
-
-    private double m_setpoint;
     
     public CollectorPositionDown() {
-    	
-        m_setpoint = RobotMap.COLLECTOR_SETPOINT_DOWN;
-        
         requires(Robot.collector);
-        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
-       Robot.collector.enable();
-       Robot.collector.setSetpoint(m_setpoint);
-
+    	Robot.collector.goDown();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,13 +25,12 @@ public class CollectorPositionDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
-        return Robot.collector.onTarget();
-
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.collector.goDown();
     }
 
     // Called when another command which requires one or more of the same

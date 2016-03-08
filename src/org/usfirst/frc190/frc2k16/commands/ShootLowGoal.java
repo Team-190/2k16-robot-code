@@ -19,7 +19,7 @@ public class ShootLowGoal extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	setTimeout(2000);
-    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_DOWN);
+    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_LOWBAR);
     }
 
     // Called repeatedly when this Command is scheduled to run

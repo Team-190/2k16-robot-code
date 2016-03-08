@@ -43,6 +43,8 @@ public class RobotMap {
 		COLLECTOR_MOTOR = 6, 
 		COLLECTOR_ROLLER_MOTOR = 4;
 	
+	public static final int
+		SHOOTER_MOTOR = 8;
 /***** DIO *****/
 	
 	public static final int 
@@ -55,12 +57,12 @@ public class RobotMap {
 		COLLECTOR_BOULDER_SWITCH = 6;
 	
 	public static final int 
-		SHOOTER_REEDSENSOR = 7;
+		SHOOTER_REEDSENSOR = 7,
+		SHOOTER_LIMIT_SWITCH = 8;
 	
 	public static final int 
 		BLOOP_UP_LIMIT = 4,
 		BLOOP_DOWN_LIMIT = 5;
-	
 /***** Analog In *****/
 	
 	public static final int 
@@ -72,6 +74,8 @@ public class RobotMap {
 	public static final int 
 		MANIPULATOR_POT = 2;
 	
+	public static final int
+		SHOOTER_POT = 3;
 /***** Relay *****/
 	
 	public static final int 
@@ -118,15 +122,11 @@ public class RobotMap {
 		BLOOPERS_SETPOINT_BACKWARD = 0.8;
 	
 	public static final double 
-		COLLECTOR_SETPOINT_UP = 0, 
-		COLLECTOR_SETPOINT_DOWN = 0,
 		COLLECTOR_SETPOINT_STOW = 0,
 		COLLECTOR_SETPOINT_CVF = 0,
 		COLLECTOR_SETPOINT_LOWBAR = 0;
 	
 	public static final double 
-		MANIPULATOR_SETPOINT_UP = 0, 
-		MANIPULATOR_SETPOINT_DOWN = 0,
 		MANIPULATOR_SETPOINT_STOW = 0,
 		MANIPULATOR_SETPOINT_CVF = 0,
 		MANIPULATOR_SETPOINT_LOWBAR = 0;

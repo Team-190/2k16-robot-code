@@ -27,6 +27,16 @@ public class OI {
     JoystickButton lowGoal;
     JoystickButton scalar;
     JoystickButton latch;
+    JoystickButton frontUp;
+    JoystickButton frontDown;
+    JoystickButton backUp;
+    JoystickButton backDown;
+    JoystickButton shooterUp;
+    JoystickButton shooterDown;
+    JoystickButton rollersIn;
+    JoystickButton rollersOut;
+    JoystickButton pistonExtend;
+    JoystickButton pistonRetract;
     
     JoystickButton lightButton;
     JoystickButton vision;
@@ -97,9 +107,41 @@ public class OI {
         lowGoal.whenPressed(new ShootLowGoal());
         
         scalar = new JoystickButton(panel, 6);
+        //scalar.whenPressed(new ScalerScale());
+        //ADD COMMAND FOR SCALING
         
         latch = new JoystickButton(panel, 7);
         latch.whenPressed(new ShooterLatchToggle());
+        
+        frontUp = new JoystickButton(panel, 8);
+        frontUp.whileHeld(new CollectorPositionUp());
+        
+        frontDown = new JoystickButton(panel, 9);
+        frontDown.whileHeld(new CollectorPositionDown());
+        
+        backUp = new JoystickButton(panel, 10);
+        backUp.whileHeld(new ManipulatorPositionUp());
+        
+        backDown = new JoystickButton(panel, 11);
+        backDown.whileHeld(new ManipulatorPositionDown());
+        
+        shooterUp = new JoystickButton(panel, 12);
+        shooterUp.whileHeld(new ShooterGoUp());
+        
+        shooterDown =  new JoystickButton(panel, 13);
+        shooterDown.whileHeld(new ShooterGoDown());
+        
+        rollersIn = new JoystickButton(panel, 14);
+        rollersIn.whileHeld(new CollectorRollIn());
+        
+        rollersOut = new JoystickButton(panel, 15);
+        rollersOut.whileHeld(new CollectorRollOut());
+        
+        pistonExtend = new JoystickButton(panel, 16);
+        pistonExtend.whenPressed(new ShooterExtend());
+        
+        pistonRetract = new JoystickButton(panel, 17);
+        pistonRetract.whenPressed(new ShooterRetract());
         
 /******* SmartDashboard Buttons *******/
         

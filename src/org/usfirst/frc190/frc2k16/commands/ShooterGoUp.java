@@ -7,15 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CollectorRollOut extends Command {
+public class ShooterGoUp extends Command {
 
-    public CollectorRollOut() {
-        requires(Robot.collector);
+    public ShooterGoUp() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.collector.release();
+    	Robot.shooter.raise();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +31,7 @@ public class CollectorRollOut extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.stop();
+    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same

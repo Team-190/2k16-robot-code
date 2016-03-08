@@ -43,4 +43,16 @@ public class Manipulator extends PIDSubsystem {
     	actuationMotor.pidWrite(output);
 
     }
+    
+    public void goUp(){
+    	actuationMotor.set(1);
+    }
+    
+    public void goDown(){
+    	actuationMotor.set(-1);
+    }
+    
+    public void stop(){
+    	actuationMotor.set(0);
+    }
 }
