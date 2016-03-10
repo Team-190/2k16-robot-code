@@ -54,7 +54,7 @@ public class Bloopers extends PIDSubsystem {
 
     public void initDefaultCommand() {
     	//setDefaultCommand(new BlooperBloopUp());
-    	setDefaultCommand(new ManualBloop(Robot.oi.getJoystick2()));
+    	//setDefaultCommand(new ManualBloop(Robot.oi.getJoystick2()));
     }
 
     protected double returnPIDInput() {

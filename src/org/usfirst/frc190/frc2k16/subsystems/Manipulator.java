@@ -5,6 +5,7 @@ import org.usfirst.frc190.frc2k16.RobotMap;
 import org.usfirst.frc190.frc2k16.commands.*;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -16,7 +17,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Manipulator extends PIDSubsystem {
 	
     private final AnalogPotentiometer potentiometer;
-    private final TalonSRX actuationMotor;
+    private final CANTalon actuationMotor;
 
     public Manipulator(int motorPort, int potentiometerPort) {
         super("Manipulator", 1.0, 0.0, 0.0);
@@ -25,11 +26,11 @@ public class Manipulator extends PIDSubsystem {
         LiveWindow.addActuator("Manipulator", "PIDSubsystem Controller", getPIDController());
         
         potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);
-        actuationMotor = new TalonSRX(motorPort);
+        actuationMotor = new CANTalon(motorPort);
     }
 
     public void initDefaultCommand() {
-    	
+    	setDefaultCommand(new ManipulatorManualActuation());
     }
 
     protected double returnPIDInput() {
@@ -42,6 +43,10 @@ public class Manipulator extends PIDSubsystem {
     	
     	actuationMotor.pidWrite(output);
 
+    }
+    
+    public void move(double speed){
+    	actuationMotor.set(speed);
     }
     
     public void goUp(){

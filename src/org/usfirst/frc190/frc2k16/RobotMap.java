@@ -37,10 +37,10 @@ public class RobotMap {
 		BLOOPERS_MOTOR = 5;
 	
 	public static final int 
-		MANIPULATOR_MOTOR = 7;
+		MANIPULATOR_MOTOR = 1;
 	
 	public static final int 
-		COLLECTOR_MOTOR = 6, 
+		COLLECTOR_MOTOR = 2, 
 		COLLECTOR_ROLLER_MOTOR = 4;
 	
 	public static final int

@@ -51,10 +51,11 @@ public class OI {
     public OI() { 
         joystick1 = new Joystick(0);
         joystick2 = new Joystick(1);
+        panel = new Joystick(2);
         
 /******* Joystick 1 *******/  
         
-        Robot.driveTrain.arcadeDrive(joystick1.getY(), joystick1.getX());
+        //Robot.driveTrain.arcadeDrive(joystick1.getY(), joystick1.getX());
         
         lightButton = new JoystickButton(joystick1, 1);
         lightButton.toggleWhenPressed(new CameraLight());
@@ -153,10 +154,10 @@ public class OI {
         //SmartDashboard.putData("ClooperAutomaticControl", new ClooperAutomaticControl());
         //SmartDashboard.putData("CollectorPositionUp", new CollectorPositionUp());
         //SmartDashboard.putData("CollectorPositionDown", new CollectorPositionDown());
-        SmartDashboard.putData("CollectorManualControl", new CollectorManualControl());
+        SmartDashboard.putData("CollectorManualControl", new CollectorManualActuation());
         //SmartDashboard.putData("ManipulatorPositionUp", new ManipulatorPositionUp());
         //SmartDashboard.putData("ManipulatorPositionDown", new ManipulatorPositionDown());
-        SmartDashboard.putData("ManipulatorManualControl", new ManipulatorManualControl());
+        SmartDashboard.putData("ManipulatorManualControl", new ManipulatorManualActuation());
         SmartDashboard.putData("PrepareForLowBar", new PrepareForLowBar());
         SmartDashboard.putData("CollectorLoad", new CollectorLoad());
         SmartDashboard.putData("CollectorUnload", new CollectorUnload());

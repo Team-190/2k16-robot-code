@@ -31,7 +31,7 @@ public class Collector extends Manipulator {
 	}
 
     public void initDefaultCommand() {
-    	
+    	setDefaultCommand(new CollectorManualActuation());
     }
     
     public void stop(){
