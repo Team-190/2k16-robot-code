@@ -69,10 +69,10 @@ public class RobotMap {
 		BLOOPERS_POT = 0;
 	
 	public static final int 
-		COLLECTOR_POT = 1;
+		COLLECTOR_POT = 2;
 	
 	public static final int 
-		MANIPULATOR_POT = 2;
+		MANIPULATOR_POT = 1;
 	
 	public static final int
 		SHOOTER_POT = 3;
@@ -118,7 +118,7 @@ public class RobotMap {
 	
 	public static final double 
 		BLOOPERS_SETPOINT_UP = 0.45,
-		BLOOPERS_SETPOINT_FORWARD = 0.1, 
+		BLOOPERS_SETPOINT_FORWARD = 0.0555, 
 		BLOOPERS_SETPOINT_BACKWARD = 0.8;
 	
 	public static final double 

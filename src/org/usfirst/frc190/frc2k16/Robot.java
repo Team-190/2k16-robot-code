@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 /***** Autonomous Selection *****/
     	
     	if(autoSelect == 0){
-    		autonomousCommand = new AutoDoNothing();
+    		//autonomousCommand = new AutoDoNothing();
     	}
     	
     	if(autoSelect > 0 && autoSelect < 1){

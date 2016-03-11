@@ -45,6 +45,10 @@ public class Manipulator extends PIDSubsystem {
 
     }
     
+    public double getPot() {
+    	return potentiometer.get();
+    }
+    
     public void move(double speed){
     	actuationMotor.set(speed);
     }

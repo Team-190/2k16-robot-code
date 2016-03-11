@@ -50,11 +50,12 @@ public class Bloopers extends PIDSubsystem {
     
     public void manualControl(double speed) {
     	if(!(up_limit.get() && speed > 0) || (down_limit.get() && speed < 0)) actuationMotor.set(speed);
+    	System.out.println("Blooper: " + potentiometer.get());
     }
 
     public void initDefaultCommand() {
     	//setDefaultCommand(new BlooperBloopUp());
-    	//setDefaultCommand(new ManualBloop(Robot.oi.getJoystick2()));
+    	setDefaultCommand(new ManualBloop(Robot.oi.getJoystick1()));
     }
 
     protected double returnPIDInput() {

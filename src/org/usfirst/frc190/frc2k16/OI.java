@@ -14,68 +14,55 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+    private Joystick joystick0;
     private Joystick joystick1;
-    private Joystick joystick2;
     
-    private Joystick panel;
+    private Joystick panelA;
+    private Joystick panelB;
     
-    JoystickButton lowBar;
-    JoystickButton CVF;
-    JoystickButton stow;
-    JoystickButton collect;
-    JoystickButton highGoal;
-    JoystickButton lowGoal;
-    JoystickButton scalar;
-    JoystickButton latch;
-    JoystickButton frontUp;
-    JoystickButton frontDown;
-    JoystickButton backUp;
-    JoystickButton backDown;
-    JoystickButton shooterUp;
-    JoystickButton shooterDown;
-    JoystickButton rollersIn;
-    JoystickButton rollersOut;
-    JoystickButton pistonExtend;
-    JoystickButton pistonRetract;
+    JoystickButton lowBarPositionButton;
+    JoystickButton chivalDeFrisePositionButton;
+    JoystickButton stowArmsPositionButton;
+    JoystickButton collectPositionButton;
+    JoystickButton shootHighGoalButton;
+    JoystickButton shootLowGoalButton;
+    JoystickButton scalerButton;
+    JoystickButton pistonLatchButton;
+    JoystickButton collectorUpButton;
+    JoystickButton collectorDownButton;
+    JoystickButton manipulatorUpBitton;
+    JoystickButton manipulatorDownButton;
+    JoystickButton shooterUpButton;
+    JoystickButton shooterDownButton;
+    JoystickButton rollersInButton;
+    JoystickButton rollersOutButton;
+    JoystickButton pistonExtendButton;
+    JoystickButton pistonRetractButton;
     
     JoystickButton lightButton;
-    JoystickButton vision;
-    JoystickButton shifter;
-    JoystickButton load;
-    JoystickButton unload;
-    JoystickButton shoot;  
-    JoystickButton bloopForward;
-    JoystickButton bloopBack;
-    JoystickButton bloopMiddle;
+    
+    JoystickButton shiftHighButton;
+    JoystickButton shiftLowButton; 
+    
+    JoystickButton bloopForwardButton;
+    JoystickButton bloopBackButton;
+    JoystickButton bloopMiddleButton;
+    
+    JoystickButton bloopAutoButton;
 
     public OI() { 
-        joystick1 = new Joystick(0);
-        joystick2 = new Joystick(1);
-        panel = new Joystick(2);
+        joystick0 = new Joystick(0);
+        joystick1 = new Joystick(1);
         
-/******* Joystick 1 *******/  
+        panelA = new Joystick(2);
+        panelB = new Joystick(2);
         
-        //Robot.driveTrain.arcadeDrive(joystick1.getY(), joystick1.getX());
+/******* Joystick 0 *******/  
         
-        lightButton = new JoystickButton(joystick1, 1);
-        lightButton.toggleWhenPressed(new CameraLight());
+        //lightButton = new JoystickButton(joystick1, 1);
+        //lightButton.toggleWhenPressed(new CameraLight());
         
-        shifter = new JoystickButton(joystick1, 2);
-        shifter.toggleWhenPressed(new Shifter());
-        
-       // vision = new JoystickButton(joystick1, 3);
-       // vision.whenPressed(new VisionAlignWithGoal());
-        
-        bloopForward = new JoystickButton(joystick1, 4);
-        bloopForward.whenPressed(new BlooperBloopForward());
-        
-        bloopBack = new JoystickButton(joystick1, 5);
-        bloopBack.whenPressed(new BlooperBloopBackward());
-        
-      //  bloopMiddle = new JoystickButton(joystick1, 3);
-      //  bloopMiddle.whenPressed(new BlooperBloopUp());
-        
-/******* Joystick 2 *******/
+/******* Joystick 1 *******/
   /*      
         shoot = new JoystickButton(joystick2, 1);
         shoot.toggleWhenPressed(new Shoot());
@@ -86,63 +73,82 @@ public class OI {
         unload = new JoystickButton(joystick2, 3);
         unload.toggleWhenPressed(new CollectorUnload());
         */
+        
+        bloopAutoButton = new JoystickButton(joystick1, 2);
+        bloopAutoButton.whenPressed(new BlooperAutoUpdate());
+        
+        bloopMiddleButton = new JoystickButton(joystick1, 3);
+        bloopMiddleButton.whenPressed(new BlooperBloopUp());
+        
+        bloopBackButton = new JoystickButton(joystick1, 4);
+        bloopBackButton.whenPressed(new BlooperBloopBackward());
+        
+        bloopForwardButton = new JoystickButton(joystick1, 5);
+        bloopForwardButton.whenPressed(new BlooperBloopForward());
+        
+        shiftLowButton = new JoystickButton(joystick1, 10);
+        shiftLowButton.toggleWhenPressed(new Shifter());
+        
+        shiftHighButton = new JoystickButton(joystick1, 11);
+        shiftHighButton.toggleWhenPressed(new Shifter());
 
-/******* Panel *******/
+/******* Panel A *******/
         
-        lowBar = new JoystickButton(panel, 0);
-        lowBar.whenPressed(new PrepareForLowBar());
+        pistonExtendButton = new JoystickButton(panelA, 1);
+        pistonExtendButton.whenPressed(new ShooterExtend());
         
-        CVF = new JoystickButton(panel, 1);
-        CVF.whenPressed(new PrepareForCVF());
+        pistonRetractButton = new JoystickButton(panelA, 2);
+        pistonRetractButton.whenPressed(new ShooterRetract());
         
-        stow = new JoystickButton(panel, 2);
-        stow.whenPressed(new StowManipulators());
+        manipulatorDownButton = new JoystickButton(panelA, 3);
+        manipulatorDownButton.whileHeld(new ManipulatorPositionDown());
         
-        collect = new JoystickButton(panel, 3);
-        collect.whenPressed(new CollectorCollect());
+        manipulatorUpBitton = new JoystickButton(panelA, 4);
+        manipulatorUpBitton.whileHeld(new ManipulatorPositionUp());
         
-        highGoal = new JoystickButton(panel, 4);
-        highGoal.whenPressed(new ShootHighGoal());
-        
-        lowGoal = new JoystickButton(panel, 5);
-        lowGoal.whenPressed(new ShootLowGoal());
-        
-        scalar = new JoystickButton(panel, 6);
-        //scalar.whenPressed(new ScalerScale());
+        scalerButton = new JoystickButton(panelA, 5);
+        //scaler.whenPressed(new ScalerScale());
         //ADD COMMAND FOR SCALING
         
-        latch = new JoystickButton(panel, 7);
-        latch.whenPressed(new ShooterLatchToggle());
+        shootLowGoalButton = new JoystickButton(panelA, 6);
+        shootLowGoalButton.whenPressed(new ShootLowGoal());
         
-        frontUp = new JoystickButton(panel, 8);
-        frontUp.whileHeld(new CollectorPositionUp());
+        shootHighGoalButton = new JoystickButton(panelA, 7);
+        shootHighGoalButton.whenPressed(new ShootHighGoal());
         
-        frontDown = new JoystickButton(panel, 9);
-        frontDown.whileHeld(new CollectorPositionDown());
+        collectPositionButton = new JoystickButton(panelA, 8);
+        collectPositionButton.whenPressed(new CollectorCollect());
         
-        backUp = new JoystickButton(panel, 10);
-        backUp.whileHeld(new ManipulatorPositionUp());
+        stowArmsPositionButton = new JoystickButton(panelA, 9);
+        stowArmsPositionButton.whenPressed(new StowManipulators());
         
-        backDown = new JoystickButton(panel, 11);
-        backDown.whileHeld(new ManipulatorPositionDown());
+        chivalDeFrisePositionButton = new JoystickButton(panelA, 10);
+        chivalDeFrisePositionButton.whenPressed(new PrepareForCVF());
         
-        shooterUp = new JoystickButton(panel, 12);
-        shooterUp.whileHeld(new ShooterGoUp());
+        lowBarPositionButton = new JoystickButton(panelA, 11);
+        lowBarPositionButton.whenPressed(new PrepareForLowBar());
         
-        shooterDown =  new JoystickButton(panel, 13);
-        shooterDown.whileHeld(new ShooterGoDown());
+/******* Panel B *******/
+        collectorDownButton = new JoystickButton(panelB, 3);
+        collectorDownButton.whileHeld(new CollectorPositionDown());
         
-        rollersIn = new JoystickButton(panel, 14);
-        rollersIn.whileHeld(new CollectorRollIn());
+        collectorUpButton = new JoystickButton(panelB, 4);
+        collectorUpButton.whileHeld(new CollectorPositionUp());
         
-        rollersOut = new JoystickButton(panel, 15);
-        rollersOut.whileHeld(new CollectorRollOut());
+        pistonLatchButton = new JoystickButton(panelB, 5);
+        pistonLatchButton.whenPressed(new ShooterLatchToggle());
         
-        pistonExtend = new JoystickButton(panel, 16);
-        pistonExtend.whenPressed(new ShooterExtend());
+        shooterDownButton =  new JoystickButton(panelB, 6);
+        shooterDownButton.whileHeld(new ShooterGoDown());
         
-        pistonRetract = new JoystickButton(panel, 17);
-        pistonRetract.whenPressed(new ShooterRetract());
+        shooterUpButton = new JoystickButton(panelB, 7);
+        shooterUpButton.whileHeld(new ShooterGoUp());
+        
+        rollersOutButton = new JoystickButton(panelB, 8);
+        rollersOutButton.whileHeld(new CollectorRollOut());
+        
+        rollersInButton = new JoystickButton(panelB, 9);
+        rollersInButton.whileHeld(new CollectorRollIn());
         
 /******* SmartDashboard Buttons *******/
         
@@ -171,11 +177,11 @@ public class OI {
     }
 
     public Joystick getJoystick1() {
-        return joystick1;
+        return joystick0;
     }
 
     public Joystick getJoystick2() {
-        return joystick2;
+        return joystick1;
     }
 
 }

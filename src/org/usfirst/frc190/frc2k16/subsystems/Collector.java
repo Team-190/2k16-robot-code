@@ -34,7 +34,7 @@ public class Collector extends Manipulator {
     	setDefaultCommand(new CollectorManualActuation());
     }
     
-    public void stop(){
+    public void stopRollers(){
     	rollersMotor.set(0);
     }
     
