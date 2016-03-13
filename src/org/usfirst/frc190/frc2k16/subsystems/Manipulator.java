@@ -16,17 +16,35 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Manipulator extends PIDSubsystem {
 	
-    private final AnalogPotentiometer potentiometer;
-    private final CANTalon actuationMotor;
+    protected final AnalogPotentiometer potentiometer;
+    protected final CANTalon actuationMotor;
 
     public Manipulator(int motorPort, int potentiometerPort) {
-        super("Manipulator", 1.0, 0.0, 0.0);
-        setAbsoluteTolerance(0.2);
+        super("Manipulator", 12.0, 0.0, 10.0);
+        setAbsoluteTolerance(0.05);
         getPIDController().setContinuous(false);
+        
         LiveWindow.addActuator("Manipulator", "PIDSubsystem Controller", getPIDController());
         
         potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);
         actuationMotor = new CANTalon(motorPort);
+        
+        LiveWindow.addActuator("Manipulator", "actuationMotor", actuationMotor);
+        LiveWindow.addSensor("Manipulator", "potentiometer", potentiometer);
+    }
+    
+    public Manipulator(double kP, double kI, double kD,
+    		int motorPort, int potentiometerPort, String subsystemName) {
+        super(subsystemName, kP, kI, kD);
+        setAbsoluteTolerance(0.01);
+        getPIDController().setContinuous(false);
+        
+        potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);
+        actuationMotor = new CANTalon(motorPort);
+        
+        LiveWindow.addActuator(subsystemName, "PIDSubsystem Controller", getPIDController());
+        LiveWindow.addActuator(subsystemName, "actuationMotor", actuationMotor);
+        LiveWindow.addSensor(subsystemName, "potentiometer", potentiometer);
     }
 
     public void initDefaultCommand() {

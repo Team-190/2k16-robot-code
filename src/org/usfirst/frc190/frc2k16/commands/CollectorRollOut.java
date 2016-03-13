@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class CollectorRollOut extends Command {
 
     public CollectorRollOut() {
-        requires(Robot.collector);
+        //requires(Robot.collector);
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class CollectorRollOut extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.stop();
+    	Robot.collector.stopRollers();
     }
 
     // Called when another command which requires one or more of the same

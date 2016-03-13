@@ -17,7 +17,8 @@ public class ManipulatorPositionDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.manipulator.goDown();
+    	Robot.manipulator.setSetpoint(RobotMap.MANIPULATOR_SETPOINT_LOWBAR);
+    	Robot.manipulator.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,6 +32,7 @@ public class ManipulatorPositionDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.manipulator.disable();
     	Robot.manipulator.stop();
     }
 

@@ -7,9 +7,9 @@ import org.usfirst.frc190.frc2k16.subsystems.*;
 /**
  *
  */
-public class TestAutoNavigation extends CommandGroup {
+public class AutoNavigationTest extends CommandGroup {
 
-    public TestAutoNavigation() {
+    public AutoNavigationTest() {
 
     	addParallel(new PrepareForLowBar());
     	addParallel(new CameraLight());

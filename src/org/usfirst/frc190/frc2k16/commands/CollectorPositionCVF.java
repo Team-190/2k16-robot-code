@@ -8,15 +8,15 @@ import org.usfirst.frc190.frc2k16.RobotMap;
 /**
  *
  */
-public class CollectorPositionDown extends Command {
+public class CollectorPositionCVF extends Command {
     
-    public CollectorPositionDown() {
+    public CollectorPositionCVF() {
         requires(Robot.collector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_LOWBAR);
+    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_CVF);
         Robot.collector.enable();
     }
 
@@ -26,7 +26,7 @@ public class CollectorPositionDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.collector.onTarget();
+    	return false;
     }
 
     // Called once after isFinished returns true

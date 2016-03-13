@@ -27,10 +27,8 @@ public class PrepareForCVF extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	requires(Robot.manipulator);
-    	requires(Robot.collector);
     	
-    	addParallel(new ManipulatorToSetpoint(RobotMap.MANIPULATOR_SETPOINT_CVF));
-    	addParallel(new ManipulatorToSetpoint(RobotMap.COLLECTOR_SETPOINT_CVF));
+    	addParallel(new CollectorPositionCVF());
+    	addSequential(new ManipulatorPositionCVF());
     }
 }

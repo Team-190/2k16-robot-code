@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class StowManipulators extends CommandGroup {
+public class StoreManipulators extends CommandGroup {
     
-    public  StowManipulators() {
+    public  StoreManipulators() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,10 +28,7 @@ public class StowManipulators extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	requires(Robot.manipulator);
-    	requires(Robot.collector);
-    	
-    	addParallel(new ManipulatorToSetpoint(RobotMap.MANIPULATOR_SETPOINT_STOW));
-    	addParallel(new CollectorToSetpoint(RobotMap.COLLECTOR_SETPOINT_STOW));
+    	addParallel(new CollectorPositionStore(), 1);
+    	addSequential(new ManipulatorPositionStore(), 1);
     }
 }

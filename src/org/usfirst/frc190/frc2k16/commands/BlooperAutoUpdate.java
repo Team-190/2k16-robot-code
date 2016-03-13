@@ -12,9 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class BlooperAutoUpdate extends Command {
 
-	private double mBackwardsThreshold = 0;
-	private double mForwardsThreshold = 0;
-	private BlooperPosition mCurrentPosition = Bloopers.BlooperPosition.NEUTRAL;
+	private double mBackwardsThreshold = -3;
+	private double mForwardsThreshold = 3;
 
     public BlooperAutoUpdate() {
         // Use requires() here to declare subsystem dependencies
@@ -32,12 +31,17 @@ public class BlooperAutoUpdate extends Command {
     protected void execute() {
     	if (Robot.driveTrain.getLeftEncoderRate() > mForwardsThreshold &&
     		Robot.driveTrain.getRightEncoderRate() > mForwardsThreshold &&
-    		mCurrentPosition != Bloopers.BlooperPosition.FORWARD) {    		
-    		Robot.blooper.setSetpoint(RobotMap.BLOOPERS_SETPOINT_FORWARD);
-    	} else if(Robot.driveTrain.getLeftEncoderRate() < mBackwardsThreshold &&
+    		Robot.blooper.getBlooperPosition() != Bloopers.BlooperPosition.FORWARD) {    		
+    		Robot.blooper.bloopForward();
+    	} else if (Robot.driveTrain.getLeftEncoderRate() < mBackwardsThreshold &&
     			Robot.driveTrain.getRightEncoderRate() < mBackwardsThreshold &&
-    			mCurrentPosition != Bloopers.BlooperPosition.BACKWARD) {
-			Robot.blooper.setSetpoint(RobotMap.BLOOPERS_SETPOINT_BACKWARD);
+    			Robot.blooper.getBlooperPosition() != Bloopers.BlooperPosition.BACKWARD) {
+    		Robot.blooper.bloopBackward();
+    	} else if (Robot.driveTrain.getLeftEncoderRate() < mForwardsThreshold &&
+ 			   	   Robot.driveTrain.getLeftEncoderRate() > mBackwardsThreshold &&
+ 			   	   Robot.driveTrain.getRightEncoderRate() < mForwardsThreshold &&
+ 			   	   Robot.driveTrain.getRightEncoderRate() > mBackwardsThreshold) {
+    		Robot.blooper.bloopUp();
     	}
     }
 

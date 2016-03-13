@@ -36,15 +36,22 @@ public class RobotMap {
 	public static final int 
 		BLOOPERS_MOTOR = 5;
 	
+	// Victor888 port 4
+	
+	public static final int
+		COLLECTOR_ROLLER_MOTOR = 6;
+	
+	public static final int
+		SHOOTER_MOTOR = 8;
+
+/***** CAN *****/
+	
 	public static final int 
 		MANIPULATOR_MOTOR = 1;
 	
 	public static final int 
-		COLLECTOR_MOTOR = 2, 
-		COLLECTOR_ROLLER_MOTOR = 4;
+		COLLECTOR_MOTOR = 2;
 	
-	public static final int
-		SHOOTER_MOTOR = 8;
 /***** DIO *****/
 	
 	public static final int 
@@ -61,8 +68,9 @@ public class RobotMap {
 		SHOOTER_LIMIT_SWITCH = 8;
 	
 	public static final int 
-		BLOOP_UP_LIMIT = 4,
-		BLOOP_DOWN_LIMIT = 5;
+		BLOOP_UP_LIMIT = 5,
+		BLOOP_DOWN_LIMIT = 4;
+	
 /***** Analog In *****/
 	
 	public static final int 
@@ -76,6 +84,7 @@ public class RobotMap {
 	
 	public static final int
 		SHOOTER_POT = 3;
+	
 /***** Relay *****/
 	
 	public static final int 
@@ -103,33 +112,38 @@ public class RobotMap {
     	DRIVE_INVERT_RIGHTMOTOR2 = true;
     
 	public static final boolean 
-		DRIVE_INVERT_LEFTENCODER = false, 
-		DRIVE_INVERT_RIGHTENCODER = true;
+		DRIVE_INVERT_LEFTENCODER = true, 
+		DRIVE_INVERT_RIGHTENCODER = false;
 	
 /***** Constants *****/
 	
-	public static final double 
-		shiftToHighPoint = 8, 
-		shiftToLowPoint = 5, 
-		highGearE = 4.8, 
-		lowGearE = 8.6;
+	public static final double
+			lowGearLeftMaxSpeed = 8.7,
+			lowGearRightMaxSpeed = 10.9;
+	
+	public static final double // 8.7 L, 10.9 R 
+		shiftToHighLeftPoint = lowGearLeftMaxSpeed * (0.90), 
+		shiftToLowLeftPoint = lowGearLeftMaxSpeed * (0.70),
+		shiftToHighRightPoint = lowGearRightMaxSpeed * (0.90),
+		shiftToLowRightPoint = lowGearRightMaxSpeed * (0.70);
 	
 /***** Setpoints *****/
 	
 	public static final double 
-		BLOOPERS_SETPOINT_UP = 0.45,
+		BLOOPERS_SETPOINT_UP = 0.412,
 		BLOOPERS_SETPOINT_FORWARD = 0.0555, 
-		BLOOPERS_SETPOINT_BACKWARD = 0.8;
+		BLOOPERS_SETPOINT_BACKWARD = 0.980;
 	
 	public static final double 
-		COLLECTOR_SETPOINT_STOW = 0,
-		COLLECTOR_SETPOINT_CVF = 0,
-		COLLECTOR_SETPOINT_LOWBAR = 0;
+		COLLECTOR_SETPOINT_STOW = 0.318,
+		COLLECTOR_SETPOINT_LOAD = 0.5575,
+		COLLECTOR_SETPOINT_CVF = 0.53,
+		COLLECTOR_SETPOINT_LOWBAR = 0.65;
 	
 	public static final double 
-		MANIPULATOR_SETPOINT_STOW = 0,
-		MANIPULATOR_SETPOINT_CVF = 0,
-		MANIPULATOR_SETPOINT_LOWBAR = 0;
+		MANIPULATOR_SETPOINT_STOW = 0.72,
+		MANIPULATOR_SETPOINT_CVF = 0.53,
+		MANIPULATOR_SETPOINT_LOWBAR = 0.41;
 	
 /***** Misc. *****/
 	
@@ -138,12 +152,5 @@ public class RobotMap {
 	public static final double ticksToInches = 10000/117.5;
 	
     public static void init() {
-        /*
-        
-        lightRelay = new Relay(1);
-        LiveWindow.addActuator("Drive Train", "Light", lightRelay);
-        
-        pistonReedSensor = new DigitalInput(5);
-        LiveWindow.addSensor("Shooter", "reedSensor", pistonReedSensor);*/
     }
 }

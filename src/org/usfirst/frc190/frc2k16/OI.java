@@ -55,12 +55,15 @@ public class OI {
         joystick1 = new Joystick(1);
         
         panelA = new Joystick(2);
-        panelB = new Joystick(2);
+        panelB = new Joystick(3);
         
 /******* Joystick 0 *******/  
         
-        //lightButton = new JoystickButton(joystick1, 1);
-        //lightButton.toggleWhenPressed(new CameraLight());
+        shiftLowButton = new JoystickButton(joystick0, 4);
+        shiftLowButton.whenPressed(new ShiftLow());
+        
+        shiftHighButton = new JoystickButton(joystick0, 5);
+        shiftHighButton.whenPressed(new ShiftHigh());
         
 /******* Joystick 1 *******/
   /*      
@@ -85,12 +88,6 @@ public class OI {
         
         bloopForwardButton = new JoystickButton(joystick1, 5);
         bloopForwardButton.whenPressed(new BlooperBloopForward());
-        
-        shiftLowButton = new JoystickButton(joystick1, 10);
-        shiftLowButton.toggleWhenPressed(new Shifter());
-        
-        shiftHighButton = new JoystickButton(joystick1, 11);
-        shiftHighButton.toggleWhenPressed(new Shifter());
 
 /******* Panel A *******/
         
@@ -104,7 +101,7 @@ public class OI {
         manipulatorDownButton.whileHeld(new ManipulatorPositionDown());
         
         manipulatorUpBitton = new JoystickButton(panelA, 4);
-        manipulatorUpBitton.whileHeld(new ManipulatorPositionUp());
+        manipulatorUpBitton.whileHeld(new ManipulatorPositionStore());
         
         scalerButton = new JoystickButton(panelA, 5);
         //scaler.whenPressed(new ScalerScale());
@@ -120,7 +117,7 @@ public class OI {
         collectPositionButton.whenPressed(new CollectorCollect());
         
         stowArmsPositionButton = new JoystickButton(panelA, 9);
-        stowArmsPositionButton.whenPressed(new StowManipulators());
+        stowArmsPositionButton.whenPressed(new StoreManipulators());
         
         chivalDeFrisePositionButton = new JoystickButton(panelA, 10);
         chivalDeFrisePositionButton.whenPressed(new PrepareForCVF());
@@ -129,11 +126,12 @@ public class OI {
         lowBarPositionButton.whenPressed(new PrepareForLowBar());
         
 /******* Panel B *******/
+        
         collectorDownButton = new JoystickButton(panelB, 3);
         collectorDownButton.whileHeld(new CollectorPositionDown());
         
         collectorUpButton = new JoystickButton(panelB, 4);
-        collectorUpButton.whileHeld(new CollectorPositionUp());
+        collectorUpButton.whileHeld(new CollectorPositionStore());
         
         pistonLatchButton = new JoystickButton(panelB, 5);
         pistonLatchButton.whenPressed(new ShooterLatchToggle());
@@ -158,16 +156,15 @@ public class OI {
         //SmartDashboard.putData("BlooperBloopForward", new BlooperBloopForward());
         //SmartDashboard.putData("BlooperBloopBackward", new BlooperBloopBackward());
         //SmartDashboard.putData("ClooperAutomaticControl", new ClooperAutomaticControl());
-        //SmartDashboard.putData("CollectorPositionUp", new CollectorPositionUp());
-        //SmartDashboard.putData("CollectorPositionDown", new CollectorPositionDown());
+        SmartDashboard.putData("CollectorPositionUp", new CollectorPositionStore());
+        SmartDashboard.putData("CollectorPositionDown", new CollectorPositionDown());
         SmartDashboard.putData("CollectorManualControl", new CollectorManualActuation());
-        //SmartDashboard.putData("ManipulatorPositionUp", new ManipulatorPositionUp());
-        //SmartDashboard.putData("ManipulatorPositionDown", new ManipulatorPositionDown());
+        SmartDashboard.putData("ManipulatorPositionUp", new ManipulatorPositionStore());
+        SmartDashboard.putData("ManipulatorPositionDown", new ManipulatorPositionDown());
         SmartDashboard.putData("ManipulatorManualControl", new ManipulatorManualActuation());
         SmartDashboard.putData("PrepareForLowBar", new PrepareForLowBar());
-        SmartDashboard.putData("CollectorLoad", new CollectorLoad());
         SmartDashboard.putData("CollectorUnload", new CollectorUnload());
-        SmartDashboard.putData("TestAutoNavigation", new TestAutoNavigation());
+        SmartDashboard.putData("TestAutoNavigation", new AutoNavigationTest());
         SmartDashboard.putData("DriveRotateDegrees", new DriveRotateDegrees(90));
         SmartDashboard.putData("ShooterExtend", new ShooterExtend());
         SmartDashboard.putData("ShooterRetract", new ShooterRetract());
@@ -176,11 +173,11 @@ public class OI {
 
     }
 
-    public Joystick getJoystick1() {
+    public Joystick getJoystick0() {
         return joystick0;
     }
 
-    public Joystick getJoystick2() {
+    public Joystick getJoystick1() {
         return joystick1;
     }
 

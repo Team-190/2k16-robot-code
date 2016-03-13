@@ -8,31 +8,32 @@ import org.usfirst.frc190.frc2k16.RobotMap;
 /**
  *
  */
-public class CollectorPositionDown extends Command {
-    
-    public CollectorPositionDown() {
-        requires(Robot.collector);
+public class ManipulatorPositionStore extends Command {
+	
+    public ManipulatorPositionStore() {
+        requires(Robot.manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_LOWBAR);
-        Robot.collector.enable();
+    	Robot.manipulator.setSetpoint(RobotMap.MANIPULATOR_SETPOINT_STOW);
+    	Robot.manipulator.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Storing Manipulator");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.collector.onTarget();
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.disable();
-    	Robot.collector.stop();
+    	Robot.manipulator.disable();
+    	Robot.manipulator.stop();
     }
 
     // Called when another command which requires one or more of the same

@@ -20,30 +20,45 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Collector extends Manipulator {
 	
-	private final Victor rollersMotor;
+	private final VictorSP rollersMotor;
 	private final DigitalInput limitSwitch;
 	
 	public Collector(int motorPort, int potentiometerPort) {
-		super(motorPort, potentiometerPort);
+		super(8.0, 0.0, 6.0, motorPort, potentiometerPort, "Collector");
 		
-		rollersMotor = new Victor(RobotMap.COLLECTOR_ROLLER_MOTOR);
+		rollersMotor = new VictorSP(RobotMap.COLLECTOR_ROLLER_MOTOR);
 		limitSwitch = new DigitalInput(RobotMap.COLLECTOR_BOULDER_SWITCH);
+		
+		actuationMotor.setInverted(true);
+		
+		LiveWindow.addActuator("Collector", "rollersMotor", rollersMotor);
+		LiveWindow.addSensor("Collector", "limitSwitch", limitSwitch);
 	}
 
     public void initDefaultCommand() {
     	setDefaultCommand(new CollectorManualActuation());
     }
     
+    @Override
+    protected void usePIDOutput(double output) {
+    	System.out.println("C Pot: " + potentiometer.get());
+    	super.usePIDOutput(output);
+    }
+    
+    public boolean readLimitSwitch() {
+		return limitSwitch.get();
+	}
+    
     public void stopRollers(){
     	rollersMotor.set(0);
     }
     
     public void collect(){
-    	rollersMotor.set(-1);
+    	rollersMotor.set(1);
     }
     
     public void release(){
-    	rollersMotor.set(1);
+    	rollersMotor.set(-1);
     }
     
     public boolean hasBall(){

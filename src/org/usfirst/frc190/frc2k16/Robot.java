@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -37,6 +38,8 @@ public class Robot extends IterativeRobot {
     Compressor compressor;
     DriverStation ds;
     
+    SendableChooser chooser;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -61,13 +64,13 @@ public class Robot extends IterativeRobot {
 
 /***** Autonomous Selection *****/
     	
-    	if(autoSelect == 0){
-    		//autonomousCommand = new AutoDoNothing();
-    	}
+    	chooser = new SendableChooser();
+    	chooser.addDefault("No Auto", new AutoDoNothing());
+    	chooser.addObject("Lower Arms and Drive Forward", new AutoLowerAndDriveForward());
+    	chooser.addDefault("Raise arms & Drive Forward", new AutoDriveForward());
+    	SmartDashboard.putData("Auto mode chooser", chooser);
     	
-    	if(autoSelect > 0 && autoSelect < 1){
-    		autonomousCommand  = new TestAutoNavigation();
-    	}
+    	autonomousCommand = new AutoDriveForward();
     	
     }
 
@@ -85,6 +88,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+    	autonomousCommand = (Command) chooser.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
     }
 

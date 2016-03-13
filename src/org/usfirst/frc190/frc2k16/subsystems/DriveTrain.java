@@ -58,13 +58,13 @@ public class DriveTrain extends Subsystem {
         double rightEncoderPulleyRatio = (0.94 - (1/8)) / (0.892 - (1/8));
         double encoderDistancePerPulse = Math.PI * wheelDiameter / CPR / gearRatio;
         
-    	leftEncoder = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_A, RobotMap.DRIVE_ENCODER_LEFT_B, false, EncodingType.k4X);
+    	leftEncoder = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_A, RobotMap.DRIVE_ENCODER_LEFT_B, RobotMap.DRIVE_INVERT_LEFTENCODER, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "leftEncoder", leftEncoder);
         // leftEncoder.setPIDSourceType(PIDSourceType.kRate);
         // leftEncoder.setReverseDirection(invertLeftEncoder);
         leftEncoder.setDistancePerPulse(encoderDistancePerPulse / leftEncoderPulleyRatio);
         
-        rightEncoder = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_A, RobotMap.DRIVE_ENCODER_RIGHT_B, false, EncodingType.k4X);
+        rightEncoder = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_A, RobotMap.DRIVE_ENCODER_RIGHT_B, RobotMap.DRIVE_INVERT_RIGHTENCODER, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "rightEncoder", rightEncoder);
         // rightEncoder.setDistancePerPulse(1.0);
         // rightEncoder.setPIDSourceType(PIDSourceType.kRate);
@@ -94,8 +94,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-    	
-    	//setDefaultCommand(new TankDrive());
+    	setDefaultCommand(new TankDrive());
     }
     
     public void stop() {
@@ -104,12 +103,14 @@ public class DriveTrain extends Subsystem {
     
     public void arcadeDrive(double speed, double rotate) {
     	//updateShifterStatus();
+    	outputSensorData();
     	robotDrive.arcadeDrive(-speed, -rotate);
     }
     
     public void tankDrive(double left, double right) {
     	//updateShifterStatus();
-    	robotDrive.tankDrive(left, right);
+    	outputSensorData();
+    	robotDrive.tankDrive(-left, -right);
     }
     
     /**
@@ -131,11 +132,11 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftEncoderDistance() {
-    	return (RobotMap.DRIVE_INVERT_LEFTENCODER) ? -leftEncoder.getDistance() : leftEncoder.getDistance();
+    	return leftEncoder.getDistance();
     }
     
     public double getRightEncoderDistance() {
-    	return (RobotMap.DRIVE_INVERT_RIGHTENCODER) ? -rightEncoder.getDistance() : rightEncoder.getDistance();
+    	return rightEncoder.getDistance();
     }
     
    public void shiftLow() {
@@ -147,17 +148,21 @@ public class DriveTrain extends Subsystem {
     	shiftingSolenoid.set(Value.kReverse);
     	gearing = DriveTrainGearing.HIGH;
     }
-  /*  
-    void updateShifterStatus() {
-    	double avgEncoderRate = (leftEncoder.getRate() + rightEncoder.getRate()) / 2;
-    	
-    	if ((gearing == DriveTrainGearing.LOW) && (avgEncoderRate > RobotMap.shiftToHighPoint)) {
+    
+	void updateShifterStatus() {
+		/*double leftEncoderRate = getLeftEncoderRate();
+		double rightEncoderRate = getRightEncoderRate();
+		
+    	if ((gearing == DriveTrainGearing.LOW) &&
+    			(leftEncoderRate > RobotMap.shiftToHighLeftPoint) &&
+    			(rightEncoderRate > RobotMap.shiftToHighRightPoint)) {
     		shiftHigh();
-    	} else if ((gearing == DriveTrainGearing.HIGH) && (avgEncoderRate < RobotMap.shiftToLowPoint)) {
+    	} else if ((gearing == DriveTrainGearing.HIGH) &&
+    			((leftEncoderRate < RobotMap.shiftToLowLeftPoint) || (rightEncoderRate < RobotMap.shiftToLowRightPoint))) {
     		shiftLow();
-    	}
+    	}*/
     }
-   */ 
+     
     public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
     public double minRightEncoderRate = 999999, maxRightEncoderRate = -999999;
     public void outputSensorData() {    	
@@ -183,7 +188,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Left Encoder Distance", leftEncoderDistance);
     	SmartDashboard.putNumber("Right Encoder Distance", rightEncoderDistance);
     	
-    	SmartDashboard.putNumber("Robot Drift", leftEncoderDistance - rightEncoderDistance);
+    	SmartDashboard.putNumber("Avg Encoder Distance", (leftEncoderDistance + rightEncoderDistance) / 2);
     	
     	SmartDashboard.putNumber("Left Encoder Rate", leftEncoderRate);
     	SmartDashboard.putNumber("Right Encoder Rate", rightEncoderRate);

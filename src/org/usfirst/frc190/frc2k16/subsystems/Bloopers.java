@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class Bloopers extends PIDSubsystem {
 	public enum BlooperPosition{
-		BACKWARD, FORWARD, NEUTRAL
+		BACKWARD, FORWARD, UP
 	}
 
     private final AnalogPotentiometer potentiometer;
@@ -27,10 +27,12 @@ public class Bloopers extends PIDSubsystem {
     
     private final DigitalInput up_limit, down_limit;
     
+    BlooperPosition blooperPosition;
+    
     // Initialize your subsystem here
     public Bloopers() {
         super("Blooper", 4.0, 0.0, 0.0);
-        setAbsoluteTolerance(0.2);
+        setAbsoluteTolerance(0.05);
         getPIDController().setContinuous(false);
         LiveWindow.addActuator("Blooper", "PIDSubsystem Controller", getPIDController());
  
@@ -48,14 +50,35 @@ public class Bloopers extends PIDSubsystem {
         
     }
     
+    public BlooperPosition getBlooperPosition() {
+    	return blooperPosition;
+    }
+    
+    public void bloopForward() {
+    	setSetpoint(RobotMap.BLOOPERS_SETPOINT_FORWARD);
+    	blooperPosition = BlooperPosition.FORWARD;
+    }
+    
+    public void bloopUp() {
+    	setSetpoint(RobotMap.BLOOPERS_SETPOINT_UP);
+    	blooperPosition = BlooperPosition.UP;
+    }
+    
+    public void bloopBackward() {
+    	setSetpoint(RobotMap.BLOOPERS_SETPOINT_BACKWARD);
+    	blooperPosition = BlooperPosition.BACKWARD;
+    }
+    
     public void manualControl(double speed) {
-    	if(!(up_limit.get() && speed > 0) || (down_limit.get() && speed < 0)) actuationMotor.set(speed);
-    	System.out.println("Blooper: " + potentiometer.get());
+    	if ((up_limit.get() && speed < 0) || (down_limit.get() && speed > 0) || (!down_limit.get() && !up_limit.get())) {
+    		actuationMotor.set(speed);
+    	} else {
+    		actuationMotor.set(0);
+    	}
     }
 
     public void initDefaultCommand() {
-    	//setDefaultCommand(new BlooperBloopUp());
-    	setDefaultCommand(new ManualBloop(Robot.oi.getJoystick1()));
+    	setDefaultCommand(new BlooperAutoUpdate());
     }
 
     protected double returnPIDInput() {
