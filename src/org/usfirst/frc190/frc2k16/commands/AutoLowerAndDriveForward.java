@@ -12,7 +12,9 @@ public class AutoLowerAndDriveForward extends CommandGroup {
     public AutoLowerAndDriveForward() {
     	
     	addSequential(new PrepareForLowBar(), 3);
-    	addSequential(new DriveStraightForDistance(168, 0));	
+    	addSequential(new BlooperBloopForward(), 1);
+    	//addSequential(new DriveStraightForDistance(12, 0));	
+    	addSequential(new DriveStraightForTime(7));
  
     } 
 }

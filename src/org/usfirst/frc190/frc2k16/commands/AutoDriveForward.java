@@ -13,7 +13,8 @@ public class AutoDriveForward extends CommandGroup {
     	
     	addSequential(new StoreManipulators());
     	addSequential(new BlooperBloopForward(), 1);
-    	addSequential(new DriveStraightForDistance(180, 0));
- 
+    	//addSequential(new DriveStraightForDistance(13, 0), 7);
+    	addSequential(new DriveStraightForTime(7));
+    	
     } 
 }

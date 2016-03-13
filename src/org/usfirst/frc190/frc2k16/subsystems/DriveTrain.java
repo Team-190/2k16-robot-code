@@ -103,13 +103,11 @@ public class DriveTrain extends Subsystem {
     
     public void arcadeDrive(double speed, double rotate) {
     	//updateShifterStatus();
-    	outputSensorData();
     	robotDrive.arcadeDrive(-speed, -rotate);
     }
     
     public void tankDrive(double left, double right) {
     	//updateShifterStatus();
-    	outputSensorData();
     	robotDrive.tankDrive(-left, -right);
     }
     
@@ -132,11 +130,11 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftEncoderDistance() {
-    	return leftEncoder.getDistance();
+    	return (RobotMap.DRIVE_INVERT_LEFTENCODER) ? -leftEncoder.getDistance() : leftEncoder.getDistance();
     }
     
     public double getRightEncoderDistance() {
-    	return rightEncoder.getDistance();
+    	return (RobotMap.DRIVE_INVERT_RIGHTENCODER) ? -rightEncoder.getDistance() : rightEncoder.getDistance();
     }
     
    public void shiftLow() {
@@ -148,21 +146,17 @@ public class DriveTrain extends Subsystem {
     	shiftingSolenoid.set(Value.kReverse);
     	gearing = DriveTrainGearing.HIGH;
     }
-    
-	void updateShifterStatus() {
-		/*double leftEncoderRate = getLeftEncoderRate();
-		double rightEncoderRate = getRightEncoderRate();
-		
-    	if ((gearing == DriveTrainGearing.LOW) &&
-    			(leftEncoderRate > RobotMap.shiftToHighLeftPoint) &&
-    			(rightEncoderRate > RobotMap.shiftToHighRightPoint)) {
+  /*  
+    void updateShifterStatus() {
+    	double avgEncoderRate = (leftEncoder.getRate() + rightEncoder.getRate()) / 2;
+    	
+    	if ((gearing == DriveTrainGearing.LOW) && (avgEncoderRate > RobotMap.shiftToHighPoint)) {
     		shiftHigh();
-    	} else if ((gearing == DriveTrainGearing.HIGH) &&
-    			((leftEncoderRate < RobotMap.shiftToLowLeftPoint) || (rightEncoderRate < RobotMap.shiftToLowRightPoint))) {
+    	} else if ((gearing == DriveTrainGearing.HIGH) && (avgEncoderRate < RobotMap.shiftToLowPoint)) {
     		shiftLow();
-    	}*/
+    	}
     }
-     
+   */ 
     public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
     public double minRightEncoderRate = 999999, maxRightEncoderRate = -999999;
     public void outputSensorData() {    	
@@ -188,7 +182,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Left Encoder Distance", leftEncoderDistance);
     	SmartDashboard.putNumber("Right Encoder Distance", rightEncoderDistance);
     	
-    	SmartDashboard.putNumber("Avg Encoder Distance", (leftEncoderDistance + rightEncoderDistance) / 2);
+    	SmartDashboard.putNumber("Robot Drift", leftEncoderDistance - rightEncoderDistance);
     	
     	SmartDashboard.putNumber("Left Encoder Rate", leftEncoderRate);
     	SmartDashboard.putNumber("Right Encoder Rate", rightEncoderRate);
