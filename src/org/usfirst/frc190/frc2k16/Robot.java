@@ -4,6 +4,7 @@ package org.usfirst.frc190.frc2k16;
 import org.usfirst.frc190.frc2k16.commands.*;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -38,6 +39,8 @@ public class Robot extends IterativeRobot {
     Compressor compressor;
     DriverStation ds;
     
+    CameraServer server;
+    
     SendableChooser chooser;
     
     /**
@@ -61,6 +64,10 @@ public class Robot extends IterativeRobot {
     	
     	ds = DriverStation.getInstance();
     	autoSelect = SmartDashboard.getNumber("DB/Slider 0", 0.0);
+    	
+    	server = CameraServer.getInstance();
+    	server.setQuality(50);
+    	server.startAutomaticCapture("cam0");
 
 /***** Autonomous Selection *****/
     	
@@ -68,7 +75,12 @@ public class Robot extends IterativeRobot {
     	chooser.addDefault("No Auto", new AutoDoNothing());
     	chooser.addObject("Lower Arms and Drive Forward", new AutoLowerAndDriveForward());
     	chooser.addDefault("Raise arms & Drive Forward", new AutoDriveForward());
-    	SmartDashboard.putData("Auto mode chooser", chooser);
+    	chooser.addObject("Drive Forward & Back (Arms Raised)", new AutoForwardBack());
+       	chooser.addObject("Drive Forward & Back (Arms Down)", new AutoLowerForwardBack());
+    	chooser.addObject("Cross & Shoot (Arms Up)", new AutoCrossShoot());
+    	chooser.addObject("Cross & Shoot (Arms Down)", new AutoLowerCrossShoot());
+    	chooser.addObject("Drive From Spy and Shoot High", new AutoShootSpy());
+    	SmartDashboard.putData("Auto Mode Selector", chooser);
     	
     	autonomousCommand = new AutoDriveForward();
     	
