@@ -74,9 +74,12 @@ public class Robot extends IterativeRobot {
     	chooser = new SendableChooser();
     	chooser.addDefault("No Auto", new AutoDoNothing());
     	chooser.addObject("Lower Arms and Drive Forward", new AutoLowerAndDriveForward());
-    	chooser.addObject("Drive Forward & Back (Arms Raised)", new AutoForwardBack());
-    	chooser.addObject("Drive From Spy and Shoot High", new AutoShootSpy());
     	chooser.addDefault("Raise arms & Drive Forward", new AutoDriveForward());
+    	chooser.addObject("Drive Forward & Back (Arms Raised)", new AutoForwardBack());
+       	chooser.addObject("Drive Forward & Back (Arms Down)", new AutoLowerForwardBack());
+    	chooser.addObject("Cross & Shoot (Arms Up)", new AutoCrossShoot());
+    	chooser.addObject("Cross & Shoot (Arms Down)", new AutoLowerCrossShoot());
+    	chooser.addObject("Drive From Spy and Shoot High", new AutoShootSpy());
     	SmartDashboard.putData("Auto Mode Selector", chooser);
     	
     	autonomousCommand = new AutoDriveForward();
