@@ -4,6 +4,31 @@ package org.usfirst.frc190.frc2k16;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc190.frc2k16.commands.*;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoUpdate;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopBackward;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopForward;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopUp;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorCollect;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualActuation;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionDown;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionStore;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollIn;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollOut;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorUnload;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.AutoNavigationTest;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveManualControl;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveRotateDegrees;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.ShiftHigh;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.ShiftLow;
+import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorManualActuation;
+import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionDown;
+import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionStore;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterExtend;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterGoDown;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterGoUp;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterLatchToggle;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterRetract;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterShoot;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,27 +45,33 @@ public class OI {
     private Joystick panelA;
     private Joystick panelB;
     
+    // Positions
     JoystickButton lowBarPositionButton;
     JoystickButton chivalDeFrisePositionButton;
     JoystickButton stowArmsPositionButton;
     JoystickButton collectPositionButton;
+    
+    // Shooter
     JoystickButton shootHighGoalButton;
     JoystickButton shootLowGoalButton;
-    JoystickButton scalerButton;
+    JoystickButton shooterUpButton;
+    JoystickButton shooterDownButton;
     JoystickButton pistonLatchButton;
+    JoystickButton pistonExtendButton;
+    JoystickButton pistonRetractButton;
+    
+    // Scaler
+    JoystickButton scalerButton;
+    
+    // Manipulators & Collectors
     JoystickButton collectorUpButton;
     JoystickButton collectorDownButton;
     JoystickButton manipulatorUpBitton;
     JoystickButton manipulatorDownButton;
-    JoystickButton shooterUpButton;
-    JoystickButton shooterDownButton;
     JoystickButton rollersInButton;
     JoystickButton rollersOutButton;
-    JoystickButton pistonExtendButton;
-    JoystickButton pistonRetractButton;
     
-    JoystickButton lightButton;
-    
+    // Drive Train
     JoystickButton shiftHighButton;
     JoystickButton shiftLowButton; 
     
@@ -49,6 +80,12 @@ public class OI {
     JoystickButton bloopMiddleButton;
     
     JoystickButton bloopAutoButton;
+    
+    JoystickButton bloopManualSwitch;
+    JoystickButton shiftManualSwitch;
+    
+    // Misc
+    JoystickButton lightButton;
 
     public OI() { 
         joystick0 = new Joystick(0);
@@ -147,6 +184,11 @@ public class OI {
         
         rollersInButton = new JoystickButton(panelB, 9);
         rollersInButton.whileHeld(new CollectorRollIn());
+        
+        shiftManualSwitch = new JoystickButton(panelB, 10); // TODO Find correct button
+        //shiftManualSwitch.whileHeld(command);
+        
+        bloopManualSwitch = new JoystickButton(panelB, 11); // TODO Find correct button
         
 /******* SmartDashboard Buttons *******/
         

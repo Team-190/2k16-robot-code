@@ -3,6 +3,7 @@ package org.usfirst.frc190.frc2k16.subsystems;
 
 import org.usfirst.frc190.frc2k16.RobotMap;
 import org.usfirst.frc190.frc2k16.commands.*;
+import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorManualActuation;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;

@@ -1,5 +1,7 @@
 package org.usfirst.frc190.frc2k16.commands;
 
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollOut;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**

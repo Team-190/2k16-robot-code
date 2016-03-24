@@ -1,6 +1,8 @@
 package org.usfirst.frc190.frc2k16.commands;
 
 import org.usfirst.frc190.frc2k16.Robot;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterExtend;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterRetract;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

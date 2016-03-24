@@ -2,6 +2,8 @@ package org.usfirst.frc190.frc2k16.commands;
 
 import org.usfirst.frc190.frc2k16.Robot;
 import org.usfirst.frc190.frc2k16.RobotMap;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionCVF;
+import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionCVF;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
