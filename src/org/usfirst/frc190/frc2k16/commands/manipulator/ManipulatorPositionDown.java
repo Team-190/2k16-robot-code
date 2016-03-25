@@ -9,10 +9,13 @@ import org.usfirst.frc190.frc2k16.RobotMap;
  *
  */
 public class ManipulatorPositionDown extends Command {
-
- 
-    public ManipulatorPositionDown() {
+	
+	boolean returnFinished = false;
+	
+    public ManipulatorPositionDown(boolean returnFinished) {
     	requires(Robot.manipulator);
+    	
+    	this.returnFinished = returnFinished;
     }
 
     // Called just before this Command runs the first time
@@ -27,7 +30,8 @@ public class ManipulatorPositionDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        if (returnFinished) return Robot.manipulator.onTarget();
+        else return false;
     }
 
     // Called once after isFinished returns true

@@ -30,7 +30,7 @@ public class StoreManipulators extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addParallel(new CollectorPositionStore(), 1);
-    	addSequential(new ManipulatorPositionStore(), 1);
+    	addParallel(new CollectorPositionStore(true), 1);
+    	addSequential(new ManipulatorPositionStore(true), 1);
     }
 }

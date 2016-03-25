@@ -30,7 +30,7 @@ public class PrepareForCVF extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addParallel(new CollectorPositionCVF());
-    	addSequential(new ManipulatorPositionCVF());
+    	addParallel(new CollectorPositionCVF(true));
+    	addSequential(new ManipulatorPositionCVF(true));
     }
 }

@@ -14,8 +14,8 @@ public class PrepareForLowBar extends CommandGroup {
 	
     public PrepareForLowBar() {
 
-        addParallel(new CollectorPositionDown());
-        addSequential(new ManipulatorPositionDown());
+        addParallel(new CollectorPositionDown(true));
+        addSequential(new ManipulatorPositionDown(true));
 
     } 
 }

@@ -8,29 +8,25 @@ import org.usfirst.frc190.frc2k16.RobotMap;
 /**
  *
  */
-public class CollectorPositionUnload extends Command {
+public class CollectorManualUp extends Command {
     
-	boolean returnFinished = false;
-	
-    public CollectorPositionUnload(boolean returnFinished) {
+	public CollectorManualUp() {
         requires(Robot.collector);
-        this.returnFinished = returnFinished;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_UNLOAD);
-        Robot.collector.enable();
+    	Robot.collector.disable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.collector.move(-1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (returnFinished) return Robot.collector.onTarget();
-        else return false;
+        return false;
     }
 
     // Called once after isFinished returns true

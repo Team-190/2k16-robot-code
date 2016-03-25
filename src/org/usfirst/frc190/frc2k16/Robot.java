@@ -2,8 +2,10 @@
 package org.usfirst.frc190.frc2k16;
 
 import org.usfirst.frc190.frc2k16.commands.*;
-import org.usfirst.frc190.frc2k16.commands.auto.AutoDriveForward;
+import org.usfirst.frc190.frc2k16.commands.auto.AutoRaiseAndDriveForward;
+import org.usfirst.frc190.frc2k16.commands.auto.AutoRaiseDriveForwardAndReverse;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoLowerAndDriveForward;
+import org.usfirst.frc190.frc2k16.commands.auto.AutoLowerDriveForwardAndReverse;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -76,7 +78,9 @@ public class Robot extends IterativeRobot {
     	chooser = new SendableChooser();
     	chooser.addDefault("No Auto", null);
     	chooser.addObject("Lower Arms and Drive Forward", new AutoLowerAndDriveForward());
-    	chooser.addDefault("Raise arms & Drive Forward", new AutoDriveForward());
+    	chooser.addDefault("Raise arms & Drive Forward", new AutoRaiseAndDriveForward());
+    	chooser.addDefault("Drive Forward, and Drive Back", new AutoRaiseDriveForwardAndReverse());
+    	chooser.addDefault("Lower Arms, Drive Forward, and Drive Back", new AutoLowerDriveForwardAndReverse());
     	
     	// Enable these when we code the commands
     	//chooser.addObject("Drive Forward & Back (Arms Raised)", new AutoForwardBack());
@@ -86,7 +90,7 @@ public class Robot extends IterativeRobot {
     	//chooser.addObject("Drive From Spy and Shoot High", new AutoShootSpy());
     	SmartDashboard.putData("Auto Mode Selector", chooser);
     	
-    	autonomousCommand = new AutoDriveForward();
+    	autonomousCommand = new AutoRaiseAndDriveForward();
     	
     }
 

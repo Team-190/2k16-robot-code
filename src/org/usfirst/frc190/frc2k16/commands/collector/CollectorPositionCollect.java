@@ -10,8 +10,12 @@ import org.usfirst.frc190.frc2k16.RobotMap;
  */
 public class CollectorPositionCollect extends Command {
     
-    public CollectorPositionCollect() {
+	boolean returnFinished = false;
+	
+    public CollectorPositionCollect(boolean returnFinished) {
         requires(Robot.collector);
+        
+        this.returnFinished = returnFinished;
     }
 
     // Called just before this Command runs the first time
@@ -26,8 +30,10 @@ public class CollectorPositionCollect extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+        if (returnFinished) return Robot.collector.onTarget();
+        else return false;
     }
+
 
     // Called once after isFinished returns true
     protected void end() {

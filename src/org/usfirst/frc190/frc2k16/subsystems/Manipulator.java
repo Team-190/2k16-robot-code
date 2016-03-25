@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -61,6 +62,7 @@ public class Manipulator extends PIDSubsystem {
 
     protected void usePIDOutput(double output) {
     	
+    	SmartDashboard.putNumber("Manipulator POT", potentiometer.get());
     	actuationMotor.pidWrite(output);
 
     }

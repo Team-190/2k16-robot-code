@@ -9,9 +9,12 @@ import org.usfirst.frc190.frc2k16.RobotMap;
  *
  */
 public class CollectorPositionCVF extends Command {
-    
-    public CollectorPositionCVF() {
+
+	boolean returnFinished = false;
+	
+    public CollectorPositionCVF(boolean returnFinished) {
         requires(Robot.collector);
+        this.returnFinished = returnFinished;
     }
 
     // Called just before this Command runs the first time
@@ -26,8 +29,10 @@ public class CollectorPositionCVF extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+        if (returnFinished) return Robot.collector.onTarget();
+        else return false;
     }
+
 
     // Called once after isFinished returns true
     protected void end() {

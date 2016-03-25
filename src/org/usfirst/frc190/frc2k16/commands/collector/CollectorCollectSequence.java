@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CollectorCollectSequence extends CommandGroup {
     
     public CollectorCollectSequence() {
-    	addParallel(new CollectorPositionCollect());
+    	addParallel(new CollectorPositionCollect(true));
     	addSequential(new CollectorLoad());
-    	addSequential(new CollectorPositionStore(), 1);
+    	addSequential(new CollectorPositionStore(true));
     }
 }
