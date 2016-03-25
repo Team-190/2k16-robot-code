@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import org.usfirst.frc190.frc2k16.Robot;
 import org.usfirst.frc190.frc2k16.RobotMap;
 import org.usfirst.frc190.frc2k16.commands.*;
-import org.usfirst.frc190.frc2k16.commands.drivetrain.TankDrive;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveManualTank;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -43,6 +43,11 @@ public class DriveTrain extends Subsystem {
     
     private final ADXRS450_Gyro gyro;
     
+    public boolean autoShifting = true;
+    
+    double leftUnitsToFeet = 1 / (30.685/2);
+    double rightUnitsToFeet = 1 / (35.755/2);
+    
     private DriveTrainGearing gearing = DriveTrainGearing.LOW;
     
     public DriveTrain() {
@@ -64,12 +69,14 @@ public class DriveTrain extends Subsystem {
         // leftEncoder.setPIDSourceType(PIDSourceType.kRate);
         // leftEncoder.setReverseDirection(invertLeftEncoder);
         leftEncoder.setDistancePerPulse(encoderDistancePerPulse / leftEncoderPulleyRatio);
+        leftEncoder.setSamplesToAverage(32);
         
         rightEncoder = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_A, RobotMap.DRIVE_ENCODER_RIGHT_B, RobotMap.DRIVE_INVERT_RIGHTENCODER, EncodingType.k4X);
         LiveWindow.addSensor("Drive Train", "rightEncoder", rightEncoder);
         // rightEncoder.setDistancePerPulse(1.0);
         // rightEncoder.setPIDSourceType(PIDSourceType.kRate);
         rightEncoder.setDistancePerPulse(encoderDistancePerPulse / rightEncoderPulleyRatio);
+        rightEncoder.setSamplesToAverage(32);
         
     	leftMotor1 = new Talon(RobotMap.DRIVE_MOTOR_LEFT1);
         LiveWindow.addActuator("Drive Train", "leftMotor1", (Talon) leftMotor1);
@@ -95,7 +102,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new TankDrive());
+    	setDefaultCommand(new DriveManualTank());
     }
     
     public void stop() {
@@ -103,12 +110,14 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive(double speed, double rotate) {
-    	//updateShifterStatus();
+    	updateShifting();
+    	outputSensorData();
     	robotDrive.arcadeDrive(-speed, -rotate);
     }
     
     public void tankDrive(double left, double right) {
-    	//updateShifterStatus();
+    	updateShifting();
+    	outputSensorData();
     	robotDrive.tankDrive(-left, -right);
     }
     
@@ -131,33 +140,35 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftEncoderDistance() {
-    	return (RobotMap.DRIVE_INVERT_LEFTENCODER) ? -leftEncoder.getDistance() : leftEncoder.getDistance();
+    	return leftEncoder.getDistance() * leftUnitsToFeet;
     }
     
     public double getRightEncoderDistance() {
-    	return (RobotMap.DRIVE_INVERT_RIGHTENCODER) ? -rightEncoder.getDistance() : rightEncoder.getDistance();
+    	return rightEncoder.getDistance() * rightUnitsToFeet;
     }
     
    public void shiftLow() {
-    	shiftingSolenoid.set(Value.kForward);
+    	shiftingSolenoid.set(Value.kReverse);
     	gearing = DriveTrainGearing.LOW;
     }
     
     public void shiftHigh() {
-    	shiftingSolenoid.set(Value.kReverse);
+    	shiftingSolenoid.set(Value.kForward);
     	gearing = DriveTrainGearing.HIGH;
     }
-  /*  
-    void updateShifterStatus() {
-    	double avgEncoderRate = (leftEncoder.getRate() + rightEncoder.getRate()) / 2;
-    	
-    	if ((gearing == DriveTrainGearing.LOW) && (avgEncoderRate > RobotMap.shiftToHighPoint)) {
-    		shiftHigh();
-    	} else if ((gearing == DriveTrainGearing.HIGH) && (avgEncoderRate < RobotMap.shiftToLowPoint)) {
-    		shiftLow();
+    
+    public void updateShifting() {
+    	if (autoShifting) {
+        	double avgEncoderRate = (getLeftEncoderRate() + getRightEncoderRate()) / 2;
+        	
+        	if ((gearing == DriveTrainGearing.LOW) && (avgEncoderRate > RobotMap.shiftToHighPoint)) {
+        		shiftHigh();
+        	} else if ((gearing == DriveTrainGearing.HIGH) && (avgEncoderRate < RobotMap.shiftToLowPoint)) {
+        		shiftLow();
+        	}
     	}
     }
-   */ 
+    
     public double minLeftEncoderRate = 999999, maxLeftEncoderRate = -999999;
     public double minRightEncoderRate = 999999, maxRightEncoderRate = -999999;
     public void outputSensorData() {    	

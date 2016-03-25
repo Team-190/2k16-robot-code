@@ -32,22 +32,22 @@ public class Bloopers extends PIDSubsystem {
     
     // Initialize your subsystem here
     public Bloopers() {
-        super("Blooper", 4.0, 0.0, 0.0);
+        super("Bloopers", 4.0, 0.0, 0.0);
         setAbsoluteTolerance(0.05);
         getPIDController().setContinuous(false);
-        LiveWindow.addActuator("Blooper", "PIDSubsystem Controller", getPIDController());
+        LiveWindow.addActuator("Bloopers", "PIDSubsystem Controller", getPIDController());
  
         actuationMotor = new VictorSP(RobotMap.BLOOPERS_MOTOR);
-        LiveWindow.addActuator("Blooper", "PIDSubsystem", actuationMotor);
+        LiveWindow.addActuator("Bloopers", "Motor", actuationMotor);
         
         potentiometer = new AnalogPotentiometer(RobotMap.BLOOPERS_POT, 1, 0);
-        LiveWindow.addSensor("Blooper", "Potentiometer", potentiometer);
+        LiveWindow.addSensor("Bloopers", "Potentiometer", potentiometer);
         
         up_limit = new DigitalInput(RobotMap.BLOOP_UP_LIMIT);
-        LiveWindow.addSensor("Blooper", "PIDSubsystem Controller", up_limit);
+        LiveWindow.addSensor("Bloopers", "Up Limit", up_limit);
         
         down_limit = new DigitalInput(RobotMap.BLOOP_DOWN_LIMIT);
-        LiveWindow.addSensor("Blooper", "PIDSubsystem", down_limit);
+        LiveWindow.addSensor("Bloopers", "Down Limit", down_limit);
         
     }
     

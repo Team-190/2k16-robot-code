@@ -7,16 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CollectorReleaseBall extends Command {
+public class CollectorLoad extends Command {
 
-    public CollectorReleaseBall() {
+    public CollectorLoad() {
         // Use requires() here to declare subsystem dependencies
         //requires(Robot.collector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.collector.release();
+    	Robot.collector.collect();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,7 +25,7 @@ public class CollectorReleaseBall extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.collector.readLimitSwitch();
+        return Robot.collector.readLimitSwitch();
     }
 
     // Called once after isFinished returns true

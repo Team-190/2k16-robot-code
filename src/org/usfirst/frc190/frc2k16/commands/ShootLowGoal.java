@@ -1,5 +1,6 @@
 package org.usfirst.frc190.frc2k16.commands;
 
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionUnload;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollOut;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -27,7 +28,7 @@ public class ShootLowGoal extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new StoreManipulators());
+    	addSequential(new CollectorPositionUnload(), 1);
     	addSequential(new CollectorRollOut(), 1);
     }
 }

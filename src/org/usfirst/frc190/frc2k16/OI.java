@@ -4,22 +4,23 @@ package org.usfirst.frc190.frc2k16;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc190.frc2k16.commands.*;
+import org.usfirst.frc190.frc2k16.commands.auto.AutoNavigationTest;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoUpdate;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopBackward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopForward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopUp;
-import org.usfirst.frc190.frc2k16.commands.collector.CollectorCollect;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperManualControl;
+import org.usfirst.frc190.frc2k16.commands.collector.CollectorCollectSequence;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualActuation;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionDown;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionStore;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollIn;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollOut;
-import org.usfirst.frc190.frc2k16.commands.collector.CollectorUnload;
-import org.usfirst.frc190.frc2k16.commands.drivetrain.AutoNavigationTest;
-import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveManualControl;
 import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveRotateDegrees;
-import org.usfirst.frc190.frc2k16.commands.drivetrain.ShiftHigh;
-import org.usfirst.frc190.frc2k16.commands.drivetrain.ShiftLow;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveShiftAuto;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveShiftHigh;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveShiftLow;
+import org.usfirst.frc190.frc2k16.commands.drivetrain.DriveShiftManual;
 import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorManualActuation;
 import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionDown;
 import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionStore;
@@ -97,10 +98,10 @@ public class OI {
 /******* Joystick 0 *******/  
         
         shiftLowButton = new JoystickButton(joystick0, 4);
-        shiftLowButton.whenPressed(new ShiftLow());
+        shiftLowButton.whenPressed(new DriveShiftLow());
         
         shiftHighButton = new JoystickButton(joystick0, 5);
-        shiftHighButton.whenPressed(new ShiftHigh());
+        shiftHighButton.whenPressed(new DriveShiftHigh());
         
 /******* Joystick 1 *******/
   /*      
@@ -151,7 +152,7 @@ public class OI {
         shootHighGoalButton.whenPressed(new ShootHighGoal());
         
         collectPositionButton = new JoystickButton(panelA, 8);
-        collectPositionButton.whenPressed(new CollectorCollect());
+        collectPositionButton.whenPressed(new CollectorCollectSequence());
         
         stowArmsPositionButton = new JoystickButton(panelA, 9);
         stowArmsPositionButton.whenPressed(new StoreManipulators());
@@ -185,19 +186,20 @@ public class OI {
         rollersInButton = new JoystickButton(panelB, 9);
         rollersInButton.whileHeld(new CollectorRollIn());
         
-        shiftManualSwitch = new JoystickButton(panelB, 10); // TODO Find correct button
-        //shiftManualSwitch.whileHeld(command);
+        shiftManualSwitch = new JoystickButton(panelB, 10);
+        shiftManualSwitch.whileHeld(new DriveShiftManual());
+        shiftManualSwitch.whenReleased(new DriveShiftAuto());
         
-        bloopManualSwitch = new JoystickButton(panelB, 11); // TODO Find correct button
+        bloopManualSwitch = new JoystickButton(panelB, 11);
+        bloopManualSwitch.whileActive(new BlooperManualControl());
+        bloopManualSwitch.whenReleased(new BlooperAutoUpdate());
         
 /******* SmartDashboard Buttons *******/
         
-        SmartDashboard.putData("VisionAlignWithGoal", new VisionAlignWithGoal());
-        SmartDashboard.putData("DriveManualControl", new DriveManualControl());
-        //SmartDashboard.putData("BlooperBloopUp", new BlooperBloopUp());
-        //SmartDashboard.putData("BlooperBloopForward", new BlooperBloopForward());
-        //SmartDashboard.putData("BlooperBloopBackward", new BlooperBloopBackward());
-        //SmartDashboard.putData("ClooperAutomaticControl", new ClooperAutomaticControl());
+        /*SmartDashboard.putData("VisionAlignWithGoal", new VisionAlignWithGoal());
+        SmartDashboard.putData("BlooperBloopUp", new BlooperBloopUp());
+        SmartDashboard.putData("BlooperBloopForward", new BlooperBloopForward());
+        SmartDashboard.putData("BlooperBloopBackward", new BlooperBloopBackward());
         SmartDashboard.putData("CollectorPositionUp", new CollectorPositionStore());
         SmartDashboard.putData("CollectorPositionDown", new CollectorPositionDown());
         SmartDashboard.putData("CollectorManualControl", new CollectorManualActuation());
@@ -211,7 +213,7 @@ public class OI {
         SmartDashboard.putData("ShooterExtend", new ShooterExtend());
         SmartDashboard.putData("ShooterRetract", new ShooterRetract());
         SmartDashboard.putData("ShooterShoot", new ShooterShoot());
-        SmartDashboard.putData("LED On", new CameraLight());
+        SmartDashboard.putData("LED On", new CameraLight());*/
 
     }
 

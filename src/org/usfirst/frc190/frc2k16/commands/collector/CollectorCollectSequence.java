@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CollectorCollect extends CommandGroup {
+public class CollectorCollectSequence extends CommandGroup {
     
-    public CollectorCollect() {
+    public CollectorCollectSequence() {
     	addParallel(new CollectorPositionCollect());
-    	addSequential(new CollectorLoadBall());
+    	addSequential(new CollectorLoad());
     	addSequential(new CollectorPositionStore(), 1);
     }
 }

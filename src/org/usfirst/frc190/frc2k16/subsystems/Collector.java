@@ -25,12 +25,12 @@ public class Collector extends Manipulator {
 	private final DigitalInput limitSwitch;
 	
 	public Collector(int motorPort, int potentiometerPort) {
-		super(8.0, 0.0, 6.0, motorPort, potentiometerPort, "Collector");
+		super(12.0, 0.0, 10.0, motorPort, potentiometerPort, "Collector");
 		
 		rollersMotor = new VictorSP(RobotMap.COLLECTOR_ROLLER_MOTOR);
 		limitSwitch = new DigitalInput(RobotMap.COLLECTOR_BOULDER_SWITCH);
 		
-		actuationMotor.setInverted(true);
+		actuationMotor.setInverted(RobotMap.COLLECTOR_INVERT_MOTOR);
 		
 		LiveWindow.addActuator("Collector", "rollersMotor", rollersMotor);
 		LiveWindow.addSensor("Collector", "limitSwitch", limitSwitch);

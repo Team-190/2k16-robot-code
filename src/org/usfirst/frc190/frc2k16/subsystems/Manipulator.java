@@ -29,6 +29,7 @@ public class Manipulator extends PIDSubsystem {
         
         potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);
         actuationMotor = new CANTalon(motorPort);
+        actuationMotor.setInverted(RobotMap.MANIPULATOR_INVERT_MOTOR);
         
         LiveWindow.addActuator("Manipulator", "actuationMotor", actuationMotor);
         LiveWindow.addSensor("Manipulator", "potentiometer", potentiometer);

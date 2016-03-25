@@ -115,35 +115,34 @@ public class RobotMap {
 		DRIVE_INVERT_LEFTENCODER = true, 
 		DRIVE_INVERT_RIGHTENCODER = false;
 	
+	public static final boolean
+		MANIPULATOR_INVERT_MOTOR = true,
+		COLLECTOR_INVERT_MOTOR = true;
+	
 /***** Constants *****/
 	
-	public static final double
-			lowGearLeftMaxSpeed = 8.7,
-			lowGearRightMaxSpeed = 10.9;
-	
-	public static final double // 8.7 L, 10.9 R 
-		shiftToHighLeftPoint = lowGearLeftMaxSpeed * (0.90), 
-		shiftToLowLeftPoint = lowGearLeftMaxSpeed * (0.70),
-		shiftToHighRightPoint = lowGearRightMaxSpeed * (0.90),
-		shiftToLowRightPoint = lowGearRightMaxSpeed * (0.70);
+	public static final double 
+		shiftToHighPoint = 5.85,
+		shiftToLowPoint = 4.0;
 	
 /***** Setpoints *****/
 	
 	public static final double 
-		BLOOPERS_SETPOINT_UP = 0.412,
-		BLOOPERS_SETPOINT_FORWARD = 0.0555, 
-		BLOOPERS_SETPOINT_BACKWARD = 0.980;
+		BLOOPERS_SETPOINT_UP = 0.5,
+		BLOOPERS_SETPOINT_FORWARD = 0.23, 
+		BLOOPERS_SETPOINT_BACKWARD = 0.717;
 	
 	public static final double 
-		COLLECTOR_SETPOINT_STOW = 0.318,
-		COLLECTOR_SETPOINT_LOAD = 0.5575,
-		COLLECTOR_SETPOINT_CVF = 0.53,
-		COLLECTOR_SETPOINT_LOWBAR = 0.65;
+		COLLECTOR_SETPOINT_STOW = 0.21,
+		COLLECTOR_SETPOINT_LOAD = 0.485,
+		COLLECTOR_SETPOINT_UNLOAD = 0.288,
+		COLLECTOR_SETPOINT_CVF = 0.453,
+		COLLECTOR_SETPOINT_LOWBAR = 0.584;
 	
 	public static final double 
-		MANIPULATOR_SETPOINT_STOW = 0.72,
-		MANIPULATOR_SETPOINT_CVF = 0.53,
-		MANIPULATOR_SETPOINT_LOWBAR = 0.41;
+		MANIPULATOR_SETPOINT_STOW = 0.775,
+		MANIPULATOR_SETPOINT_CVF = 0.54,
+		MANIPULATOR_SETPOINT_LOWBAR = 0.39;
 	
 /***** Misc. *****/
 	
