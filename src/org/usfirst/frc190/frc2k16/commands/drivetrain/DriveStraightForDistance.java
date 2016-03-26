@@ -16,7 +16,7 @@ public class DriveStraightForDistance extends Command {
     private double m_heading;
     
     private double kP = 1;
-    double Kp = 0.03;
+    double kP_gyro = 0.03;
 
     public DriveStraightForDistance(double distance, double heading) {
 
@@ -41,12 +41,12 @@ public class DriveStraightForDistance extends Command {
     	
     	double error = (((Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2) - m_distance) * kP;
     	System.out.println("Error: " + error);
-    	Robot.driveTrain.arcadeDrive(error, -angle*Kp);
+    	Robot.driveTrain.arcadeDrive(error, -angle*kP_gyro);
    }
     	
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return ((Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2)>= m_distance;
+    	return ((Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2) >= Math.abs(m_distance);
     }
 
     // Called once after isFinished returns true
