@@ -23,7 +23,7 @@ public class Manipulator extends PIDSubsystem {
 
     public Manipulator(int motorPort, int potentiometerPort) {
         super("Manipulator", 12.0, 0.0, 10.0);
-        setAbsoluteTolerance(0.05);
+        setAbsoluteTolerance(0.01);
         getPIDController().setContinuous(false);
         
         LiveWindow.addActuator("Manipulator", "PIDSubsystem Controller", getPIDController());

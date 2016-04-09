@@ -14,72 +14,80 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
+enum ShooterPosition {
+	RAISED, LOWERED
+}
+
 public class Shooter extends Subsystem {
 	
     //private final DoubleSolenoid actuationSolenoid;
-    private final Victor actuationMotor;
-	private final DoubleSolenoid triggerSolenoid;
-    private final Solenoid airSpringSolenoid;
+    private final DoubleSolenoid latchSolenoid;
+    private final Solenoid actuationSolenoid;
+    private final Solenoid mainPistonSolenoid;
     
-    private final DigitalInput reedSensor;
     private final DigitalInput limitSwitch;
-    private final AnalogInput actuationPot;
     
     private boolean latchOn;
+    private boolean mainPistonOn;
+    private ShooterPosition position;
+    
     public Shooter() {
     	//actuationSolenoid = new DoubleSolenoid(RobotMap.SHOOTER_SOLENOID_ACTUATION_F, RobotMap.SHOOTER_SOLENOID_ACTUATION_B);
-    	actuationMotor = new Victor(RobotMap.SHOOTER_MOTOR);
-    	triggerSolenoid = new DoubleSolenoid(RobotMap.SHOOTER_SOLENOID_TRIGGER_F, RobotMap.SHOOTER_SOLENOID_TRIGGER_B);
-    	airSpringSolenoid = new Solenoid(RobotMap.SHOOTER_SOLENOID_AIRSPRING);
+    	latchSolenoid = new DoubleSolenoid(RobotMap.SHOOTER_SOLENOID_TRIGGER_F, RobotMap.SHOOTER_SOLENOID_TRIGGER_B);
+    	actuationSolenoid = new Solenoid(RobotMap.SHOOTER_SOLENOID_ACTUATION);
+    	mainPistonSolenoid = new Solenoid(RobotMap.SHOOTER_SOLENOID_MAINPISTON);
     	
-    	reedSensor = new DigitalInput(RobotMap.SHOOTER_REEDSENSOR);
     	limitSwitch = new DigitalInput(RobotMap.SHOOTER_LIMIT_SWITCH);
-    	actuationPot = new AnalogInput(RobotMap.SHOOTER_POT);
+    	
     	latchOn = true;
+    	mainPistonOn = false;
+    	position = ShooterPosition.LOWERED;
 	}
 
     public void initDefaultCommand() {
        
     }
     
-    public void extend(){
-    	airSpringSolenoid.set(true);
+    public void extendMainPiston() {
+    	mainPistonSolenoid.set(true);
+    	mainPistonOn = true;
     }
     
-    public void retract(){
-    	airSpringSolenoid.set(false);
+    public void retractMainPiston() {
+    	mainPistonSolenoid.set(false);
+    	mainPistonOn = false;
     }
     
     public void raise() {
-    	//actuationSolenoid.set(DoubleSolenoid.Value.kForward);
-    	actuationMotor.set(1);
+    	actuationSolenoid.set(true);
+    	position = ShooterPosition.RAISED;
     }
     
     public void lower() {
-    	//actuationSolenoid.set(DoubleSolenoid.Value.kReverse);
-    	actuationMotor.set(-1);
+    	actuationSolenoid.set(false);
+    	position = ShooterPosition.LOWERED;
     }
     
-    public void stop(){
-    	actuationMotor.set(0);
+    public boolean isStowed() {
+    	return position == ShooterPosition.LOWERED;
     }
     
-    public boolean isStowed(){
-    	return limitSwitch.get();
+    public void engageLatch(){
+    	latchSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	latchOn = true;
     }
     
-    public void release(){
-    	triggerSolenoid.set(DoubleSolenoid.Value.kForward);
+    public void disengageLatch(){
+    	latchSolenoid.set(DoubleSolenoid.Value.kForward);
     	latchOn = false;
     }
     
-    public void latch(){
-    	triggerSolenoid.set(DoubleSolenoid.Value.kReverse);
-    	latchOn = true;
-    }
     public void latchToggle(){
-    	if(latchOn)release();
-    	else latch();
+    	if (latchOn) {
+    		disengageLatch();
+    	} else {
+    		engageLatch();
+    	}
     }
 }
 

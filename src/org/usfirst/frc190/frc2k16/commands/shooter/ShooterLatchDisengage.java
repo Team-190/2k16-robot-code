@@ -1,22 +1,23 @@
-
 package org.usfirst.frc190.frc2k16.commands.shooter;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc190.frc2k16.Robot;
-import org.usfirst.frc190.frc2k16.RobotMap;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ShooterRetract extends Command {
+public class ShooterLatchDisengage extends Command {
 
-    public ShooterRetract() {
-        requires(Robot.shooter);
+    public ShooterLatchDisengage() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.retract();
+    	Robot.shooter.disengageLatch();
     }
 
     // Called repeatedly when this Command is scheduled to run

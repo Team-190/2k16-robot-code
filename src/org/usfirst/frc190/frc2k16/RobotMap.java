@@ -40,9 +40,6 @@ public class RobotMap {
 	
 	public static final int
 		COLLECTOR_ROLLER_MOTOR = 6;
-	
-	public static final int
-		SHOOTER_MOTOR = 8;
 
 /***** CAN *****/
 	
@@ -93,11 +90,10 @@ public class RobotMap {
 /***** PCM *****/
 	
 	public static final int 
-		SHOOTER_SOLENOID_ACTUATION_F = 0, 
-		SHOOTER_SOLENOID_ACTUATION_B = 1,
-		SHOOTER_SOLENOID_AIRSPRING = 2,
-		SHOOTER_SOLENOID_TRIGGER_F = 3, 
-		SHOOTER_SOLENOID_TRIGGER_B = 4;			
+		SHOOTER_SOLENOID_ACTUATION = 5,
+		SHOOTER_SOLENOID_MAINPISTON = 0,
+		SHOOTER_SOLENOID_TRIGGER_F = 1, 
+		SHOOTER_SOLENOID_TRIGGER_B = 2;			
 	
 	public static final int 
 		DRIVE_SOLENOID_SHIFTING_F = 6, 
@@ -125,6 +121,9 @@ public class RobotMap {
 		shiftToHighPoint = 5.85,
 		shiftToLowPoint = 4.0;
 	
+	public static final boolean
+		disableAutoShifting = true;
+	
 /***** Setpoints *****/
 	
 	public static final double 
@@ -133,22 +132,24 @@ public class RobotMap {
 		BLOOPERS_SETPOINT_BACKWARD = 0.717;
 	
 	public static final double 
-		COLLECTOR_SETPOINT_STOW = 0.21,
-		COLLECTOR_SETPOINT_LOAD = 0.48,
-		COLLECTOR_SETPOINT_UNLOAD = 0.288,
-		COLLECTOR_SETPOINT_CVF = 0.453,
-		COLLECTOR_SETPOINT_LOWBAR = 0.584;
+		COLLECTOR_SETPOINT_STOW = 0.136, // 0.21 all the way back, 0.288 for better shooting
+		COLLECTOR_SETPOINT_LOAD = 0.422,
+		COLLECTOR_SETPOINT_UNLOAD = 0.217,  //.288
+		COLLECTOR_SETPOINT_CVF = 0.394,
+		COLLECTOR_SETPOINT_LOWBAR = 0.526;
 	
 	public static final double 
-		MANIPULATOR_SETPOINT_STOW = 0.775,
-		MANIPULATOR_SETPOINT_CVF = 0.54,
-		MANIPULATOR_SETPOINT_LOWBAR = 0.39;
+		MANIPULATOR_SETPOINT_STOW = 0.564,
+		MANIPULATOR_SETPOINT_CVF = 0.296,
+		MANIPULATOR_SETPOINT_LOWBAR = 0.166;
 	
 /***** Misc. *****/
 	
 	public static String NETWORKTABLE_VISION = "GRIP/myContoursReport";
 	
 	public static final double ticksToInches = 10000/117.5;
+
+	public static final int PDP_ROLLER_CHANNEL = 0;
 	
     public static void init() {
     }

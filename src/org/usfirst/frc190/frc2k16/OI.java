@@ -11,7 +11,6 @@ import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopForward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopUp;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperManualControl;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorCollectSequence;
-import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualActuation;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualDown;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualUp;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionDown;
@@ -29,11 +28,11 @@ import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorManualDown;
 import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorManualUp;
 import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionDown;
 import org.usfirst.frc190.frc2k16.commands.manipulator.ManipulatorPositionStore;
-import org.usfirst.frc190.frc2k16.commands.shooter.ShooterExtend;
-import org.usfirst.frc190.frc2k16.commands.shooter.ShooterGoDown;
-import org.usfirst.frc190.frc2k16.commands.shooter.ShooterGoUp;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterMainPistonExtend;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterLower;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterRaise;
 import org.usfirst.frc190.frc2k16.commands.shooter.ShooterLatchToggle;
-import org.usfirst.frc190.frc2k16.commands.shooter.ShooterRetract;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterMainPistonRetract;
 import org.usfirst.frc190.frc2k16.commands.shooter.ShooterShoot;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
@@ -135,10 +134,10 @@ public class OI {
 /******* Panel A *******/
         
         pistonExtendButton = new JoystickButton(panelA, 1);
-        pistonExtendButton.whenPressed(new ShooterExtend());
+        pistonExtendButton.whenPressed(new ShooterMainPistonExtend());
         
         pistonRetractButton = new JoystickButton(panelA, 2);
-        pistonRetractButton.whenPressed(new ShooterRetract());
+        pistonRetractButton.whenPressed(new ShooterMainPistonRetract());
         
         manipulatorDownButton = new JoystickButton(panelA, 3);
         manipulatorDownButton.whileHeld(new ManipulatorManualDown());
@@ -180,10 +179,10 @@ public class OI {
         pistonLatchButton.whenPressed(new ShooterLatchToggle());
         
         shooterDownButton =  new JoystickButton(panelB, 6);
-        shooterDownButton.whileHeld(new ShooterGoDown());
+        shooterDownButton.whileHeld(new ShooterLower());
         
         shooterUpButton = new JoystickButton(panelB, 7);
-        shooterUpButton.whileHeld(new ShooterGoUp());
+        shooterUpButton.whileHeld(new ShooterRaise());
         
         rollersOutButton = new JoystickButton(panelB, 8);
         rollersOutButton.whileHeld(new CollectorRollOut());

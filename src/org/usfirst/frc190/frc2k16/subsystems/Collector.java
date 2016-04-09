@@ -3,7 +3,6 @@ package org.usfirst.frc190.frc2k16.subsystems;
 
 import org.usfirst.frc190.frc2k16.RobotMap;
 import org.usfirst.frc190.frc2k16.commands.*;
-import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualActuation;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -15,6 +14,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -37,12 +37,12 @@ public class Collector extends Manipulator {
 	}
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new CollectorManualActuation());
+    	//setDefaultCommand(new CollectorManualActuation());
     }
     
     @Override
     protected void usePIDOutput(double output) {
-    	System.out.println("C Pot: " + potentiometer.get());
+    	SmartDashboard.putNumber("Collector POT", potentiometer.get());
     	super.usePIDOutput(output);
     }
     

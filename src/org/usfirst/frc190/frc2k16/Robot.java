@@ -8,6 +8,9 @@ import org.usfirst.frc190.frc2k16.commands.auto.AutoLowerAndDriveForward;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoLowerDriveForwardAndReverse;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -47,6 +50,10 @@ public class Robot extends IterativeRobot {
     
     SendableChooser chooser;
     
+    // Camera stuff
+    Image frame;
+    int session;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -69,9 +76,12 @@ public class Robot extends IterativeRobot {
     	ds = DriverStation.getInstance();
     	autoSelect = SmartDashboard.getNumber("DB/Slider 0", 0.0);
     	
-    	server = CameraServer.getInstance();
-    	server.setQuality(50);
-    	server.startAutomaticCapture("cam1");
+    	// Camera stuff
+    	/*session = NIVision.IMAQdxOpenCamera("cam1",
+                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
+    	
+    	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);*/
 
 /***** Autonomous Selection *****/
     	
@@ -90,6 +100,8 @@ public class Robot extends IterativeRobot {
     	//chooser.addObject("Drive From Spy and Shoot High", new AutoShootSpy());
     	SmartDashboard.putData("Auto Mode Selector", chooser);
     	
+    	SmartDashboard.putData("Scheduler", Scheduler.getInstance());
+    	
     	autonomousCommand = new AutoRaiseAndDriveForward();
     	
     }
@@ -99,7 +111,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	
+    	//NIVision.IMAQdxStopAcquisition(session);
     }
 
     public void disabledPeriodic() {
@@ -110,6 +122,8 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
     	autonomousCommand = (Command) chooser.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
+        
+        //NIVision.IMAQdxStartAcquisition(session);
     }
 
     /**
@@ -126,6 +140,8 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         driveTrain.shiftLow();
+        
+        //NIVision.IMAQdxStartAcquisition(session);
     }
 
     /**
@@ -133,6 +149,9 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        //NIVision.IMAQdxGrab(session, frame, 1);
+        //CameraServer.getInstance().setImage(frame);
     }
 
     /**

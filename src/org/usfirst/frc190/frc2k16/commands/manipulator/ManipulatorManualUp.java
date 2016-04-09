@@ -17,11 +17,11 @@ public class ManipulatorManualUp extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.manipulator.disable();
+    	Robot.manipulator.move(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.manipulator.move(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

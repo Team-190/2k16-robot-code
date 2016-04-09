@@ -158,7 +158,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void updateShifting() {
-    	if (autoShifting) {
+    	if (autoShifting && !RobotMap.disableAutoShifting) {
         	double avgEncoderRate = (getLeftEncoderRate() + getRightEncoderRate()) / 2;
         	
         	if ((gearing == DriveTrainGearing.LOW) && (avgEncoderRate > RobotMap.shiftToHighPoint)) {
