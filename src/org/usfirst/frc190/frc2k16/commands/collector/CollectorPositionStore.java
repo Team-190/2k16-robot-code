@@ -31,7 +31,7 @@ public class CollectorPositionStore extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_STOW);
+    	Robot.collector.setSetpoint(RobotMap.COLLECTOR_SETPOINT_UNLOAD);
         Robot.collector.enable();
     }
 

@@ -118,22 +118,22 @@ public class RobotMap {
 /***** Constants *****/
 	
 	public static final double 
-		shiftToHighPoint = 5.85,
-		shiftToLowPoint = 4.0;
+		shiftToHighPoint = 3.51,
+		shiftToLowPoint = 2.4;
 	
 	public static final boolean
-		disableAutoShifting = true;
+		disableAutoShifting = false;
 	
 /***** Setpoints *****/
 	
 	public static final double 
 		BLOOPERS_SETPOINT_UP = 0.5,
-		BLOOPERS_SETPOINT_FORWARD = 0.23, 
-		BLOOPERS_SETPOINT_BACKWARD = 0.717;
+		BLOOPERS_SETPOINT_FORWARD = 0.1, 
+		BLOOPERS_SETPOINT_BACKWARD = 0.9;
 	
 	public static final double 
 		COLLECTOR_SETPOINT_STOW = 0.136, // 0.21 all the way back, 0.288 for better shooting
-		COLLECTOR_SETPOINT_LOAD = 0.422,
+		COLLECTOR_SETPOINT_LOAD = 0.44,
 		COLLECTOR_SETPOINT_UNLOAD = 0.217,  //.288
 		COLLECTOR_SETPOINT_CVF = 0.394,
 		COLLECTOR_SETPOINT_LOWBAR = 0.526;
@@ -149,7 +149,7 @@ public class RobotMap {
 	
 	public static final double ticksToInches = 10000/117.5;
 
-	public static final int PDP_ROLLER_CHANNEL = 0;
+	public static final int PDP_ROLLER_CHANNEL = 2;
 	
     public static void init() {
     }

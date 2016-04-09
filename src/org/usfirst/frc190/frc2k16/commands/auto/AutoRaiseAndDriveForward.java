@@ -23,7 +23,6 @@ public class AutoRaiseAndDriveForward extends CommandGroup {
     	
     	addSequential(new DriveShiftManual());
     	addSequential(new DriveShiftLow());
-    	addSequential(new StoreManipulators(), 2);
     	addSequential(new BlooperBloopForward(), 1);
     	addSequential(new DriveStraightForDistance(m_driveDistance, 0), 5);
     	addSequential(new DriveShiftAuto());

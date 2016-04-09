@@ -25,7 +25,6 @@ public class AutoRaiseDriveForwardAndReverse extends CommandGroup {
     	
     	addSequential(new DriveShiftManual());
     	addSequential(new DriveShiftLow());
-    	addSequential(new StoreManipulators(), 2);
     	addSequential(new BlooperBloopForward(), 1);
     	addSequential(new DriveStraightForDistance(m_driveForwardDistance, 0), 5);
     	addSequential(new BlooperBloopBackward(), 1);

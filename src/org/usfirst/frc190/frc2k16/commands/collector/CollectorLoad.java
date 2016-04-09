@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CollectorLoad extends Command {
 	
 	PowerDistributionPanel pdp = new PowerDistributionPanel();
-	double current_threshold = 0.0;
+	double current_threshold = 15.0;
 	
 	boolean currentDetected = false;
 	
 	Timer timer;
-	double startupTime = 0.02;
+	double startupTime = 0.5;
 	double shutdownTime = 0.0;
 
     public CollectorLoad() {
@@ -43,8 +43,8 @@ public class CollectorLoad extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.collector.readLimitSwitch();
-    	/*if (timer.get() > startupTime) {
+        //return Robot.collector.readLimitSwitch();
+    	if (timer.get() > startupTime) {
     		if (pdp.getCurrent(RobotMap.PDP_ROLLER_CHANNEL) > current_threshold) {
     			currentDetected = true;
     			shutdownTime = timer.get() + 0.5;
@@ -57,7 +57,7 @@ public class CollectorLoad extends Command {
     		}
     	} else {
     		return false;
-    	}*/
+    	}
     }
 
     // Called once after isFinished returns true

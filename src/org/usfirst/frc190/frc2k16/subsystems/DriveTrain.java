@@ -148,12 +148,12 @@ public class DriveTrain extends Subsystem {
     }
     
    public void shiftLow() {
-    	shiftingSolenoid.set(Value.kReverse);
+    	shiftingSolenoid.set(Value.kForward);
     	gearing = DriveTrainGearing.LOW;
     }
     
     public void shiftHigh() {
-    	shiftingSolenoid.set(Value.kForward);
+    	shiftingSolenoid.set(Value.kReverse);
     	gearing = DriveTrainGearing.HIGH;
     }
     

@@ -16,16 +16,25 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class ShootHighGoal extends CommandGroup {
     
-	double shootTimeout = 0;
+	double raiseTimeout = 1.5;
+	double shootTimeout = 1.0;
 	
     public  ShootHighGoal() {
     	
-    	addSequential(new ShooterRaise(), 0.25);
+    	addSequential(new ShooterRaise());
+    	addSequential(new WaitCommand(raiseTimeout));
+    	
     	addSequential(new ShooterMainPistonExtend());
+    	addSequential(new WaitCommand(0.75));
+    	
     	addSequential(new ShooterLatchDisengage());
     	addSequential(new WaitCommand(shootTimeout));
-    	addSequential(new ShooterMainPistonRetract(), 1);
+    	
+    	addSequential(new ShooterMainPistonRetract());
+    	addSequential(new WaitCommand(2.5));
+    	
     	addSequential(new ShooterLatchEngage());
+    	
     	addSequential(new ShooterLower());
     	
     }

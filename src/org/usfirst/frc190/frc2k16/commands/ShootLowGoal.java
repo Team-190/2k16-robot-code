@@ -2,8 +2,13 @@ package org.usfirst.frc190.frc2k16.commands;
 
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorPositionUnload;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorRollOut;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterLatchDisengage;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterLatchEngage;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterMainPistonExtend;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterMainPistonRetract;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -28,7 +33,16 @@ public class ShootLowGoal extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new CollectorPositionUnload(true), 1);
+    	addSequential(new ShooterLatchDisengage());
+    	
+    	addParallel(new ShooterMainPistonExtend());
     	addSequential(new CollectorRollOut(), 1);
+    	
+    	addSequential(new ShooterMainPistonRetract());
+    	
+    	addSequential(new WaitCommand(2.5));
+    	
+    	addSequential(new ShooterLatchEngage());
+    	
     }
 }

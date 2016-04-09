@@ -39,7 +39,7 @@ public class Manipulator extends PIDSubsystem {
     public Manipulator(double kP, double kI, double kD,
     		int motorPort, int potentiometerPort, String subsystemName) {
         super(subsystemName, kP, kI, kD);
-        setAbsoluteTolerance(0.01);
+        setAbsoluteTolerance(0.05);
         getPIDController().setContinuous(false);
         
         potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);

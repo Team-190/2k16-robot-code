@@ -133,10 +133,10 @@ public class OI {
 
 /******* Panel A *******/
         
-        pistonExtendButton = new JoystickButton(panelA, 1);
+        pistonExtendButton = new JoystickButton(panelA, 2);
         pistonExtendButton.whenPressed(new ShooterMainPistonExtend());
         
-        pistonRetractButton = new JoystickButton(panelA, 2);
+        pistonRetractButton = new JoystickButton(panelA, 1);
         pistonRetractButton.whenPressed(new ShooterMainPistonRetract());
         
         manipulatorDownButton = new JoystickButton(panelA, 3);

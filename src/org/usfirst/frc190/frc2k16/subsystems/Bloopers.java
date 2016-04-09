@@ -33,7 +33,7 @@ public class Bloopers extends PIDSubsystem {
     // Initialize your subsystem here
     public Bloopers() {
         super("Bloopers", 4.0, 0.0, 0.0);
-        setAbsoluteTolerance(0.05);
+        setAbsoluteTolerance(0.01);
         getPIDController().setContinuous(false);
         LiveWindow.addActuator("Bloopers", "PIDSubsystem Controller", getPIDController());
  

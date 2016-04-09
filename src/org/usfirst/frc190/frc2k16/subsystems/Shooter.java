@@ -2,6 +2,7 @@ package org.usfirst.frc190.frc2k16.subsystems;
 
 import org.usfirst.frc190.frc2k16.RobotMap;
 import org.usfirst.frc190.frc2k16.commands.*;
+import org.usfirst.frc190.frc2k16.commands.shooter.ShooterLatchEngage;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -45,7 +46,7 @@ public class Shooter extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-       
+       setDefaultCommand(new ShooterLatchEngage());
     }
     
     public void extendMainPiston() {
