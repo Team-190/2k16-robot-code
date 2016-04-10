@@ -20,26 +20,16 @@ public class Manipulator extends PIDSubsystem {
 	
     protected final AnalogPotentiometer potentiometer;
     protected final CANTalon actuationMotor;
+    protected final double tolerance = 0.01;
 
     public Manipulator(int motorPort, int potentiometerPort) {
-        super("Manipulator", 12.0, 0.0, 10.0);
-        setAbsoluteTolerance(0.01);
-        getPIDController().setContinuous(false);
-        
-        LiveWindow.addActuator("Manipulator", "PIDSubsystem Controller", getPIDController());
-        
-        potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);
-        actuationMotor = new CANTalon(motorPort);
-        actuationMotor.setInverted(RobotMap.MANIPULATOR_INVERT_MOTOR);
-        
-        LiveWindow.addActuator("Manipulator", "actuationMotor", actuationMotor);
-        LiveWindow.addSensor("Manipulator", "potentiometer", potentiometer);
+        this(15.0, 0.0, 0.0, motorPort, potentiometerPort, "Manipulator");
     }
     
     public Manipulator(double kP, double kI, double kD,
     		int motorPort, int potentiometerPort, String subsystemName) {
         super(subsystemName, kP, kI, kD);
-        setAbsoluteTolerance(0.05);
+        setAbsoluteTolerance(tolerance);
         getPIDController().setContinuous(false);
         
         potentiometer = new AnalogPotentiometer(potentiometerPort, 1, 0);
@@ -62,6 +52,7 @@ public class Manipulator extends PIDSubsystem {
 
     protected void usePIDOutput(double output) {
     	
+    	SmartDashboard.putBoolean("Manipulator OnTarget", this.onTarget());
     	SmartDashboard.putNumber("Manipulator POT", potentiometer.get());
     	actuationMotor.pidWrite(output);
 

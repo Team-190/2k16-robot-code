@@ -118,7 +118,7 @@ public class RobotMap {
 /***** Constants *****/
 	
 	public static final double 
-		shiftToHighPoint = 3.51,
+		shiftToHighPoint = 4.3,
 		shiftToLowPoint = 2.4;
 	
 	public static final boolean

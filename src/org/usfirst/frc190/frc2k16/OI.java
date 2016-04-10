@@ -200,26 +200,7 @@ public class OI {
         bloopManualSwitch.whileActive(new BlooperManualControl());
         bloopManualSwitch.whenReleased(new BlooperAutoUpdate());
         
-/******* SmartDashboard Buttons *******/
-        
-        /*SmartDashboard.putData("VisionAlignWithGoal", new VisionAlignWithGoal());
-        SmartDashboard.putData("BlooperBloopUp", new BlooperBloopUp());
-        SmartDashboard.putData("BlooperBloopForward", new BlooperBloopForward());
-        SmartDashboard.putData("BlooperBloopBackward", new BlooperBloopBackward());
-        SmartDashboard.putData("CollectorPositionUp", new CollectorPositionStore());
-        SmartDashboard.putData("CollectorPositionDown", new CollectorPositionDown());
-        SmartDashboard.putData("CollectorManualControl", new CollectorManualActuation());
-        SmartDashboard.putData("ManipulatorPositionUp", new ManipulatorPositionStore());
-        SmartDashboard.putData("ManipulatorPositionDown", new ManipulatorPositionDown());
-        SmartDashboard.putData("ManipulatorManualControl", new ManipulatorManualActuation());
-        SmartDashboard.putData("PrepareForLowBar", new PrepareForLowBar());
-        SmartDashboard.putData("CollectorUnload", new CollectorUnload());
-        SmartDashboard.putData("TestAutoNavigation", new AutoNavigationTest());
-        SmartDashboard.putData("DriveRotateDegrees", new DriveRotateDegrees(90));
-        SmartDashboard.putData("ShooterExtend", new ShooterExtend());
-        SmartDashboard.putData("ShooterRetract", new ShooterRetract());
-        SmartDashboard.putData("ShooterShoot", new ShooterShoot());
-        SmartDashboard.putData("LED On", new CameraLight());*/
+        SmartDashboard.putData("CollectorPositionDown", new CollectorPositionDown(true));
 
     }
 
