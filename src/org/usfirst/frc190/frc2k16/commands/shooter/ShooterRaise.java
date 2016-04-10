@@ -13,6 +13,7 @@ public class ShooterRaise extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooter);
+    	setTimeout(1.5);
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +27,7 @@ public class ShooterRaise extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

@@ -11,6 +11,9 @@ public class CollectorCollectSequence extends CommandGroup {
     public CollectorCollectSequence() {
     	addParallel(new CollectorPositionCollect(false));
     	addSequential(new CollectorLoad());
+    	
+    	addSequential(new CollectorRollIn(), 2);
+    	
     	addSequential(new CollectorPositionStore(true), 2);
     }
 }

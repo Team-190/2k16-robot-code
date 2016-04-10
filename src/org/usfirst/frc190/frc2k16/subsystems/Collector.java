@@ -48,7 +48,9 @@ public class Collector extends Manipulator {
     }
     
     public boolean readLimitSwitch() {
-		return limitSwitch.get();
+    	boolean hasBall = limitSwitch.get();
+    	SmartDashboard.putBoolean("Ball Collected", hasBall);
+		return hasBall;
 	}
     
     public void stopRollers(){
@@ -61,10 +63,6 @@ public class Collector extends Manipulator {
     
     public void release(){
     	rollersMotor.set(-1);
-    }
-    
-    public boolean hasBall(){
-    	return limitSwitch.get();
     }
 
 }

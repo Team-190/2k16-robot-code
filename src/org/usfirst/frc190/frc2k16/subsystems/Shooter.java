@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 /**
@@ -26,7 +27,8 @@ public class Shooter extends Subsystem {
     private final Solenoid actuationSolenoid;
     private final Solenoid mainPistonSolenoid;
     
-    private final DigitalInput limitSwitch;
+    private final DigitalInput shooterDownLimitSwitch;
+    private final DigitalInput pistonDownLimitSwitch;
     
     private boolean latchOn;
     private boolean mainPistonOn;
@@ -38,15 +40,31 @@ public class Shooter extends Subsystem {
     	actuationSolenoid = new Solenoid(RobotMap.SHOOTER_SOLENOID_ACTUATION);
     	mainPistonSolenoid = new Solenoid(RobotMap.SHOOTER_SOLENOID_MAINPISTON);
     	
-    	limitSwitch = new DigitalInput(RobotMap.SHOOTER_LIMIT_SWITCH);
+    	shooterDownLimitSwitch = new DigitalInput(RobotMap.SHOOTER_DOWN_LIMIT);
+    	pistonDownLimitSwitch = new DigitalInput(RobotMap.SHOOTER_PISTON_DOWN_LIMIT);
     	
     	latchOn = true;
     	mainPistonOn = false;
     	position = ShooterPosition.LOWERED;
+    	
+    	LiveWindow.addActuator("Shooter", "Latch Solenoid", latchSolenoid);
+    	LiveWindow.addActuator("Shooter", "Actuation Solenoid", actuationSolenoid);
+    	LiveWindow.addActuator("Shooter", "Main Piston Solenoid", mainPistonSolenoid);
+    	
+    	LiveWindow.addSensor("Shooter", "Shooter Down Switch", shooterDownLimitSwitch);
+    	LiveWindow.addSensor("Shooter", "Piston Down Switch", pistonDownLimitSwitch);
 	}
 
     public void initDefaultCommand() {
        setDefaultCommand(new ShooterLatchEngage());
+    }
+    
+    public boolean pistonDown() {
+    	return !pistonDownLimitSwitch.get();
+    }
+    
+    public boolean shooterDown() {
+    	return !shooterDownLimitSwitch.get();
     }
     
     public void extendMainPiston() {

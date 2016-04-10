@@ -61,8 +61,8 @@ public class RobotMap {
 		COLLECTOR_BOULDER_SWITCH = 6;
 	
 	public static final int 
-		SHOOTER_REEDSENSOR = 7,
-		SHOOTER_LIMIT_SWITCH = 8;
+		SHOOTER_DOWN_LIMIT = 8,
+		SHOOTER_PISTON_DOWN_LIMIT = 7;
 	
 	public static final int 
 		BLOOP_UP_LIMIT = 5,
@@ -133,8 +133,8 @@ public class RobotMap {
 	
 	public static final double 
 		COLLECTOR_SETPOINT_STOW = 0.136, // 0.21 all the way back, 0.288 for better shooting
-		COLLECTOR_SETPOINT_LOAD = 0.44,
-		COLLECTOR_SETPOINT_UNLOAD = 0.217,  //.288
+		COLLECTOR_SETPOINT_LOAD = 0.43,
+		COLLECTOR_SETPOINT_UNLOAD = 0.225,  //.288
 		COLLECTOR_SETPOINT_CVF = 0.394,
 		COLLECTOR_SETPOINT_LOWBAR = 0.526;
 	

@@ -19,14 +19,14 @@ public class ShooterLower extends Command {
     protected void initialize() {
     	Robot.shooter.lower();
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return Robot.shooter.shooterDown();
     }
 
     // Called once after isFinished returns true

@@ -16,54 +16,58 @@ public class CollectorLoad extends Command {
 	PowerDistributionPanel pdp = new PowerDistributionPanel();
 	double current_threshold = 15.0;
 	
-	boolean currentDetected = false;
-	
 	Timer timer;
-	double startupTime = 0.5;
-	double shutdownTime = 0.0;
+	boolean ballDetected = false;
 
     public CollectorLoad() {
         // Use requires() here to declare subsystem dependencies
         //requires(Robot.collector);
-    	timer = new Timer();
+    	//timer = new Timer();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.collector.collect();
     	
-    	timer.reset();
-    	timer.start();
+    	//timer.reset();
+    	//timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putBoolean("Ball Detected", ballDetected);
+    	SmartDashboard.putBoolean("Collector Limit Switch", Robot.collector.readLimitSwitch());
     	SmartDashboard.putNumber("Roller Current", pdp.getCurrent(RobotMap.PDP_ROLLER_CHANNEL));
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        //return Robot.collector.readLimitSwitch();
+    double startupTime = 0.5;
+	double shutdownTime = 0.0;
+    protected boolean isFinished() {	
+    	return Robot.collector.readLimitSwitch();
+    	
+    	/*boolean ballDetected = false;
+    	
     	if (timer.get() > startupTime) {
     		if (pdp.getCurrent(RobotMap.PDP_ROLLER_CHANNEL) > current_threshold) {
-    			currentDetected = true;
+    			ballDetected = true;
     			shutdownTime = timer.get() + 0.5;
     		}
     		
-    		if ((shutdownTime != 0) && (timer.get() > shutdownTime)) {
+    		if (ballDetected && (shutdownTime != 0) && (timer.get() > shutdownTime)) {
     			return true;
     		} else {
     			return false;
     		}
     	} else {
     		return false;
-    	}
+    	}*/
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.collector.stopRollers();
-    	timer.stop();
+    	//timer.stop();
     }
 
     // Called when another command which requires one or more of the same

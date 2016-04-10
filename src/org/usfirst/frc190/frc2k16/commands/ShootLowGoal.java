@@ -36,11 +36,11 @@ public class ShootLowGoal extends CommandGroup {
     	addSequential(new ShooterLatchDisengage());
     	
     	addParallel(new ShooterMainPistonExtend());
+    	addSequential(new WaitCommand(0.25));
+    	
     	addSequential(new CollectorRollOut(), 1);
     	
     	addSequential(new ShooterMainPistonRetract());
-    	
-    	addSequential(new WaitCommand(2.5));
     	
     	addSequential(new ShooterLatchEngage());
     	

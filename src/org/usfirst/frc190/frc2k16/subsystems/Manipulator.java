@@ -24,6 +24,8 @@ public class Manipulator extends PIDSubsystem {
 
     public Manipulator(int motorPort, int potentiometerPort) {
         this(15.0, 0.0, 0.0, motorPort, potentiometerPort, "Manipulator");
+        
+        actuationMotor.setInverted(RobotMap.MANIPULATOR_INVERT_MOTOR);
     }
     
     public Manipulator(double kP, double kI, double kD,

@@ -146,7 +146,7 @@ public class OI {
         manipulatorUpBitton.whileHeld(new ManipulatorManualUp());
         
         scalerButton = new JoystickButton(panelA, 5);
-        //scaler.whenPressed(new ScalerScale());
+        scalerButton.whenPressed(new PrepareForHighShot());
         //ADD COMMAND FOR SCALING
         
         shootLowGoalButton = new JoystickButton(panelA, 6);
