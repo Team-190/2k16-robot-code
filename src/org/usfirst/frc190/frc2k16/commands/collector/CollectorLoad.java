@@ -28,6 +28,7 @@ public class CollectorLoad extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.collector.collect();
+    	System.out.println("Starting Collect");
     	
     	//timer.reset();
     	//timer.start();
@@ -38,13 +39,19 @@ public class CollectorLoad extends Command {
     	SmartDashboard.putBoolean("Ball Detected", ballDetected);
     	SmartDashboard.putBoolean("Collector Limit Switch", Robot.collector.readLimitSwitch());
     	SmartDashboard.putNumber("Roller Current", pdp.getCurrent(RobotMap.PDP_ROLLER_CHANNEL));
+    	System.out.println("Collecting...");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     double startupTime = 0.5;
 	double shutdownTime = 0.0;
     protected boolean isFinished() {	
-    	return Robot.collector.readLimitSwitch();
+    	if (Robot.collector.readLimitSwitch()) {
+    		System.out.println("Finished Collecting");
+    		return true;
+    	} else {
+    		return false;
+    	}
     	
     	/*boolean ballDetected = false;
     	
