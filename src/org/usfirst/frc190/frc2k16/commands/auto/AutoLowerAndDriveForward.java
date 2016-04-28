@@ -17,9 +17,7 @@ import org.usfirst.frc190.frc2k16.subsystems.*;
  */
 public class AutoLowerAndDriveForward extends CommandGroup {
 	
-	final static double m_driveDistance = 15.0;
-	
-    public AutoLowerAndDriveForward() {
+    public AutoLowerAndDriveForward(double m_driveDistance) {
     	
     	addSequential(new DriveShiftManual());
     	addSequential(new DriveShiftLow());
@@ -28,5 +26,9 @@ public class AutoLowerAndDriveForward extends CommandGroup {
     	addSequential(new DriveStraightForDistance(m_driveDistance, 0), 5);	
     	addSequential(new DriveShiftAuto());
  
-    } 
+    }
+    
+    public AutoLowerAndDriveForward() {
+    	this(15.0);
+    }
 }

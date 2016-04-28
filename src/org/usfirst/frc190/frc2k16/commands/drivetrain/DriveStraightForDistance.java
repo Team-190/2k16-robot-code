@@ -37,11 +37,9 @@ public class DriveStraightForDistance extends Command {
     protected void execute() {
     	
     	double angle = Robot.driveTrain.getGyroAngle();
-    	System.out.println("Encoders: " + (Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2);
-    	
     	double error = (((Robot.driveTrain.getLeftEncoderDistance() + Robot.driveTrain.getRightEncoderDistance())/2) - m_distance) * kP;
-    	System.out.println("Error: " + error);
-    	Robot.driveTrain.arcadeDrive(error, -angle*kP_gyro);
+    	
+    	Robot.driveTrain.arcadeDrive(error, (m_heading-angle)*kP_gyro);
    }
     	
     // Make this return true when this Command no longer needs to run execute()

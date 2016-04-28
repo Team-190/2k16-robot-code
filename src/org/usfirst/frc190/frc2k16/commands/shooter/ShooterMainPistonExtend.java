@@ -12,7 +12,6 @@ public class ShooterMainPistonExtend extends Command {
     public ShooterMainPistonExtend() {
     	
         requires(Robot.shooter);
-        setTimeout(0.75);
 
     }
 
@@ -27,7 +26,7 @@ public class ShooterMainPistonExtend extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return true;
     }
 
     // Called once after isFinished returns true

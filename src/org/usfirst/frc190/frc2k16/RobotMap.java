@@ -133,7 +133,7 @@ public class RobotMap {
 	
 	public static final double 
 		COLLECTOR_SETPOINT_STOW = 0.136, // 0.21 all the way back, 0.288 for better shooting
-		COLLECTOR_SETPOINT_LOAD = 0.43,
+		COLLECTOR_SETPOINT_LOAD = 0.45,
 		COLLECTOR_SETPOINT_UNLOAD = 0.225,  //.288
 		COLLECTOR_SETPOINT_CVF = 0.394,
 		COLLECTOR_SETPOINT_LOWBAR = 0.526;

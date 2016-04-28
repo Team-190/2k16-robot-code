@@ -49,22 +49,24 @@ public class VisionAlignWithGoal extends Command {
 			Robot.driveTrain.stop();
 			System.out.println("Centered");
 		} else {
-			//double distance = (180 - height[0]) / 180;			
 			double angle = - (centerX[0] - 160) / 160;
+			
 			distance = ((180*actualHeight)/(2*height[0]))*fovMultiplier;
+			
 			double bound = 24;
 			double speed = (distance-bound)/120;
+			
 			System.out.println("Range(in): "+ distance);
 			System.out.println("Speed: "+ speed);
 			System.out.println("Angle" + angle);
-			//System.out.println("Distance: " + distance + "\nAngle: " + angle);
+			
 			Robot.driveTrain.arcadeDrive(speed, angle);
 		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return distance < desiredDistance;
+        return (distance < desiredDistance) || (centerX.length == 0 || height.length == 0);
     }
 
     // Called once after isFinished returns true

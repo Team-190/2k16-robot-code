@@ -13,16 +13,13 @@ import org.usfirst.frc190.frc2k16.subsystems.*;
 /**
  *
  */
-public class AutoNavigationTest extends CommandGroup {
+public class AutoVisionLowerAndHighGoal extends CommandGroup {
 
-    public AutoNavigationTest() {
+    public AutoVisionLowerAndHighGoal() {
 
-    	addParallel(new PrepareForLowBar());
-    	addParallel(new CameraLight());
-    	addSequential(new DriveStraightForDistance(1050, 0));	
-    	addSequential(new DriveRotateDegrees(90));
-    	addSequential(new DriveStraightForDistance(0, 0));
+    	addSequential(new AutoLowerAndDriveForward());
     	addSequential(new VisionAlignWithGoal());
+    	addSequential(new DriveStraightForDistance(2, 0));
  
     } 
 }

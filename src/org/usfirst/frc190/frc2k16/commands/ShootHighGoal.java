@@ -21,9 +21,9 @@ public class ShootHighGoal extends CommandGroup {
 	
     public  ShootHighGoal() {
     	
-    	addSequential(new ShooterRaise());
-    	
     	addSequential(new ShooterMainPistonExtend());
+    	
+    	addSequential(new ShooterRaise());
     	
     	addSequential(new ShooterLatchDisengage());
     	
