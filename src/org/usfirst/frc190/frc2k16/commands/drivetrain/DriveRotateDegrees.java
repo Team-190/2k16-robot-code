@@ -13,7 +13,7 @@ public class DriveRotateDegrees extends Command {
     private double m_heading;
     private double threshold = 3;
     private final double maxRotationalSpeed = 0.75;
-	private final double Kp = 0.04;
+	private final double Kp = 0.03;
 
     public DriveRotateDegrees(double heading) {
 

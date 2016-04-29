@@ -3,6 +3,7 @@ package org.usfirst.frc190.frc2k16;
 
 import org.usfirst.frc190.frc2k16.commands.*;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoRaiseAndDriveForward;
+import org.usfirst.frc190.frc2k16.commands.auto.AutoRaiseCrossAndHighGoal;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoLowerAndDriveForward;
 import org.usfirst.frc190.frc2k16.subsystems.*;
 
@@ -85,8 +86,10 @@ public class Robot extends IterativeRobot {
     	
     	chooser = new SendableChooser();
     	chooser.addDefault("No Auto", null);
-    	chooser.addObject("Lower Arms and Drive Forward", new AutoLowerAndDriveForward());
-    	chooser.addDefault("Raise arms & Drive Forward", new AutoRaiseAndDriveForward());
+    	chooser.addObject("Lower Arms & Drive Forward", new AutoLowerAndDriveForward());
+    	chooser.addObject("Raise Arms & Drive Forward", new AutoRaiseAndDriveForward());
+    	chooser.addObject("Raise Arms, Drive Forward, & Shoot", new AutoRaiseCrossAndHighGoal());
+    	
     	//chooser.addDefault("Drive Forward, and Drive Back", new AutoRaiseDriveForwardAndReverse());
     	//chooser.addDefault("Lower Arms, Drive Forward, and Drive Back", new AutoLowerDriveForwardAndReverse());
     	

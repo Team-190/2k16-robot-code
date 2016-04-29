@@ -4,7 +4,7 @@ package org.usfirst.frc190.frc2k16;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc190.frc2k16.commands.*;
-import org.usfirst.frc190.frc2k16.commands.auto.AutoDistanceLowerAndHighGoal;
+import org.usfirst.frc190.frc2k16.commands.auto.AutoRaiseCrossAndHighGoal;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoVisionLowerAndHighGoal;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoUpdate;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopBackward;
@@ -201,7 +201,7 @@ public class OI {
         bloopManualSwitch.whileActive(new BlooperManualControl());
         bloopManualSwitch.whenReleased(new BlooperAutoUpdate());
         
-        SmartDashboard.putData("Test Auto Navigation", new AutoDistanceLowerAndHighGoal());
+        SmartDashboard.putData("Test Auto Navigation", new AutoRaiseCrossAndHighGoal());
 
     }
 

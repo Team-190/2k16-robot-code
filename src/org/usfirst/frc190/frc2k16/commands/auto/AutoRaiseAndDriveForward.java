@@ -17,15 +17,17 @@ import org.usfirst.frc190.frc2k16.subsystems.*;
  */
 public class AutoRaiseAndDriveForward extends CommandGroup {
 	
-	final static double m_driveDistance = 15.0;
-	
-    public AutoRaiseAndDriveForward() {
+    public AutoRaiseAndDriveForward(double m_driveDistance) {
     	
     	addSequential(new DriveShiftManual());
     	addSequential(new DriveShiftLow());
     	addSequential(new BlooperBloopForward(), 1);
-    	addSequential(new DriveStraightForDistance(m_driveDistance, 0), 5);
+    	addSequential(new DriveStraightForDistance(m_driveDistance, 0));
     	addSequential(new DriveShiftAuto());
     	
     } 
+    
+    public AutoRaiseAndDriveForward() {
+    	this(15.0);
+    }
 }
