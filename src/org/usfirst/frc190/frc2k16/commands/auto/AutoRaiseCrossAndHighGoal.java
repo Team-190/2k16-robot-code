@@ -31,35 +31,39 @@ public class AutoRaiseCrossAndHighGoal extends CommandGroup {
     	// 10.8, 21.5
     	
     	addSequential(new AutoRaiseAndDriveForward(10));
-    	addSequential(new PrepareForHighShot());
-    	
-    	switch (number) {
-		case THREE: {
-			
-			addSequential(new DriveStraightForDistance(5, 33));
-					
-			break;
-		}
-					
-		case FOUR: {
-			
-			addSequential(new DriveStraightForDistance(5, 0));
+		
+		if (number != DefenceNumber.ONE && number != DefenceNumber.TWO) {
+	    	addSequential(new PrepareForHighShot());
 	    	
-			break;
-		}
-			
-		case FIVE: {
-			
-			addSequential(new DriveStraightForDistance(5, -45));
-			
-			break;
-		}
-
-		default:
-			break;
-		}
+	    	switch (number) {
+			case THREE: {
+				
+				addSequential(new DriveStraightForDistance(5, 33));
+						
+				break;
+			}
+						
+			case FOUR: {
+				
+				addSequential(new DriveStraightForDistance(5, 0));
+		    	
+				break;
+			}
+				
+			case FIVE: {
+				
+				addSequential(new DriveStraightForDistance(5, -45));
+				
+				break;
+			}
+	
+			default:
+				break;
+			}
     	
-    	addSequential(new ShootHighGoal());
+    	
+    		addSequential(new ShootHighGoal());
+    	}
  
     }
     

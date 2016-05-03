@@ -17,6 +17,8 @@ public class DriveStraightForDistance extends Command {
     private double m_heading;
     private double m_threshold;
     
+    private double m_speedlimit;
+    
     private double kP = 1;
     double kP_gyro = 0.03;
 
@@ -28,6 +30,12 @@ public class DriveStraightForDistance extends Command {
         
         requires(Robot.driveTrain);
 
+    }
+    
+    public DriveStraightForDistance(double distance, double heading, double speedlimit) {
+    	this(distance, heading);
+    	
+    	m_speedlimit = speedlimit;
     }
 
     // Called just before this Command runs the first time
@@ -45,7 +53,10 @@ public class DriveStraightForDistance extends Command {
     	
     	SmartDashboard.putNumber("Distance Error", distanceError);
     	
-    	Robot.driveTrain.arcadeDrive(distanceError * kP, angleError * kP_gyro);
+    	double speed = distanceError * kP;
+    	double angle = angleError * kP_gyro;
+    	
+    	Robot.driveTrain.arcadeDrive((speed > m_speedlimit) ? m_speedlimit : speed, angle);
     }
     	
     // Make this return true when this Command no longer needs to run execute()
