@@ -24,7 +24,5 @@ public class PrepareForHighShot extends CommandGroup {
     	
     	addSequential(new ShooterRaise());
     	
-        addParallel(new CollectorPositionStore(true), 1);
-        addSequential(new ManipulatorPositionCVF(true), 1);
     }
 }
