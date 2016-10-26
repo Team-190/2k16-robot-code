@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc190.frc2k16.commands.*;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoRaiseCrossAndHighGoal;
 import org.usfirst.frc190.frc2k16.commands.auto.AutoVisionLowerAndHighGoal;
-import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoUpdate;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoBloop;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoBloopStop;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopBackward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopForward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopUp;
@@ -119,16 +120,17 @@ public class OI {
         unload.toggleWhenPressed(new CollectorUnload());
         */
         
-        bloopAutoButton = new JoystickButton(joystick1, 2);
-        bloopAutoButton.whenPressed(new BlooperAutoUpdate());
+        bloopAutoButton = new JoystickButton(joystick1, 1);
+        bloopAutoButton.whenPressed(new BlooperAutoBloop());
+        bloopAutoButton.whenReleased(new BlooperAutoBloopStop());
         
-        bloopMiddleButton = new JoystickButton(joystick1, 3);
+        bloopMiddleButton = new JoystickButton(joystick1, 5);
         bloopMiddleButton.whenPressed(new BlooperBloopUp());
         
-        bloopBackButton = new JoystickButton(joystick1, 4);
+        bloopBackButton = new JoystickButton(joystick1, 2);
         bloopBackButton.whenPressed(new BlooperBloopBackward());
         
-        bloopForwardButton = new JoystickButton(joystick1, 5);
+        bloopForwardButton = new JoystickButton(joystick1, 3);
         bloopForwardButton.whenPressed(new BlooperBloopForward());
 
 /******* Panel A *******/
@@ -199,7 +201,7 @@ public class OI {
         bloopManualSwitch = new JoystickButton(panelB, 11);
         bloopManualSwitch.whenActive(new BlooperEnableManualControl());
         bloopManualSwitch.whenReleased(new BlooperDisableManualControl());
-        bloopManualSwitch.whenReleased(new BlooperAutoUpdate());
+        bloopManualSwitch.whenReleased(new BlooperAutoBloop());
         
         SmartDashboard.putData("Test Auto Navigation", new AutoRaiseCrossAndHighGoal());
 

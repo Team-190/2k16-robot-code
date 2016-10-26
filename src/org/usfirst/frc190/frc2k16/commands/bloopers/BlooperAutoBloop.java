@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class BlooperAutoUpdate extends Command {
+public class BlooperAutoBloop extends Command {
 
 	private double mBackwardsThreshold = -3;
 	private double mForwardsThreshold = 3;
 
-    public BlooperAutoUpdate() {
+    public BlooperAutoBloop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.blooper);
