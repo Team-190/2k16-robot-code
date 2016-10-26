@@ -30,6 +30,9 @@ public class Bloopers extends PIDSubsystem {
     
     BlooperPosition blooperPosition;
     
+    public boolean manualBloopEnabled = false;
+    public boolean autoBloop = true;
+    
     // Initialize your subsystem here
     public Bloopers() {
         super("Bloopers", 4.0, 0.0, 0.0);

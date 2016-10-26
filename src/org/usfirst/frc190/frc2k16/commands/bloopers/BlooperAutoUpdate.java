@@ -23,8 +23,9 @@ public class BlooperAutoUpdate extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.blooper.autoBloop = true;
     	Robot.blooper.enable();
-    	Robot.blooper.setSetpoint(RobotMap.BLOOPERS_SETPOINT_UP);
+    	Robot.blooper.bloopUp();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -47,7 +48,7 @@ public class BlooperAutoUpdate extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.blooper.autoBloop;
     }
 
     // Called once after isFinished returns true

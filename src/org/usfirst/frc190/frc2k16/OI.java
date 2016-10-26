@@ -10,7 +10,8 @@ import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperAutoUpdate;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopBackward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopForward;
 import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperBloopUp;
-import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperManualControl;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperDisableManualControl;
+import org.usfirst.frc190.frc2k16.commands.bloopers.BlooperEnableManualControl;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorCollectSequence;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualDown;
 import org.usfirst.frc190.frc2k16.commands.collector.CollectorManualUp;
@@ -196,7 +197,8 @@ public class OI {
         shiftManualSwitch.whenReleased(new DriveShiftAuto());
         
         bloopManualSwitch = new JoystickButton(panelB, 11);
-        bloopManualSwitch.whileActive(new BlooperManualControl());
+        bloopManualSwitch.whenActive(new BlooperEnableManualControl());
+        bloopManualSwitch.whenReleased(new BlooperDisableManualControl());
         bloopManualSwitch.whenReleased(new BlooperAutoUpdate());
         
         SmartDashboard.putData("Test Auto Navigation", new AutoRaiseCrossAndHighGoal());
