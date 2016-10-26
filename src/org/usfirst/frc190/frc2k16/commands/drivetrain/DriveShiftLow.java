@@ -16,7 +16,9 @@ public class DriveShiftLow extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (!Robot.driveTrain.autoShifting) Robot.driveTrain.shiftLow();
+    	if (!Robot.driveTrain.autoShifting){
+    		Robot.driveTrain.shiftLow();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

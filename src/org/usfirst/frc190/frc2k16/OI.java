@@ -102,11 +102,9 @@ public class OI {
         
 /******* Joystick 0 *******/  
         
-        shiftLowButton = new JoystickButton(joystick0, 4);
-        shiftLowButton.whenPressed(new DriveShiftLow());
-        
-        shiftHighButton = new JoystickButton(joystick0, 5);
+        shiftHighButton = new JoystickButton(joystick0, 1);
         shiftHighButton.whenPressed(new DriveShiftHigh());
+        shiftHighButton.whenReleased(new DriveShiftLow());
         
 /******* Joystick 1 *******/
   /*      
